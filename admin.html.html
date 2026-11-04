@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | EBELTECHS GRAPHIX</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- html2pdf Library for downloading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-black': '#050505', 'charcoal': '#121418', 'electric-blue': '#087EFF', 'metallic-silver': '#C9D0D8', 'neon-purple': '#7000FF'
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #050505; color: white; overflow-x: hidden; }
+        .glass-panel { background: rgba(18, 20, 24, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
+        .mesh-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: radial-gradient(circle at 50% 50%, #1a1d26 0%, #050505 100%); }
+        .chart-container { position: relative; height: 300px; width: 100%; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #121418; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        
+        @media print {
+            body * { visibility: hidden; }
+            #printable-invoice, #printable-invoice * { visibility: visible; }
+            body { background-color: #121418 !important; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            #printable-invoice { position: absolute; left: 0; top: 0; width: 100%; max-width: 100%; margin: 0; padding: 20px; border: none !important; box-shadow: none !important; background: #121418 !important; page-break-inside: avoid; }
+            #printable-invoice * { color: white !important; }
+            #printable-invoice .text-gray-400 { color: #9ca3af !important; }
+            #printable-invoice .text-gray-500 { color: #6b7280 !important; }
+            #printable-invoice .text-gray-600 { color: #4b5563 !important; }
+            #printable-invoice .bg-white\/5 { background-color: rgba(255,255,255,0.05) !important; }
+            #printable-invoice .border-white\/10 { border-color: rgba(255,255,255,0.1) !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-electric-blue selection:text-white">
+
+    <div class="mesh-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 top-0 glass-panel border-b-0 border-white/5 no-print">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-4 cursor-pointer" onclick="window.location.href='index.html'">
+                    <span class="font-display font-bold text-xl text-white tracking-widest">EBELTECHS</span>
+                    <span class="bg-electric-blue text-xs px-2 py-1 rounded text-white font-bold">ADMIN</span>
+                </div>
+                <div>
+                    <button onclick="window.location.href='index.html'" class="text-sm font-medium text-gray-400 hover:text-white flex items-center gap-2">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Website
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10 pt-20 min-h-screen">
+
+        <!-- 1. LOGIN SECTION -->
+        <section id="login" class="py-32 flex items-center justify-center min-h-[80vh] no-print">
+            <div class="glass-panel p-8 md:p-12 rounded-3xl w-full max-w-md">
+                <div class="text-center mb-8">
+                    <i data-lucide="shield-check" class="w-12 h-12 text-electric-blue mx-auto mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-2">Admin Portal</h2>
+                    <p class="text-gray-400 text-sm">Secure access to EBELTECHS management</p>
+                </div>
+                
+                <form onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-500 uppercase mb-1 block">Admin Email</label>
+                        <input id="login-email" type="email" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="admin@ebeltechs.com">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-500 uppercase mb-1 block">Password</label>
+                        <input type="password" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full bg-electric-blue py-3 rounded-lg font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-electric-blue/25 mt-4">Access Dashboard</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 2. DASHBOARD SECTION -->
+        <section id="dashboard" class="py-24 hidden no-print">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                
+                <!-- Header -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+                    <div>
+                        <h2 class="text-3xl font-bold">Welcome back, <span class="text-electric-blue">Admin</span></h2>
+                        <p class="text-gray-400 text-sm mt-1">Here is an overview of business activity.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="logout()" class="border border-white/20 px-4 py-2 rounded-lg text-sm hover:bg-red-500/10 hover:text-red-400 transition-colors">Logout</button>
+                    </div>
+                </div>
+
+                <!-- Dashboard Tabs -->
+                <div class="flex gap-4 mb-8 border-b border-white/10 pb-4 overflow-x-auto">
+                    <button onclick="switchTab('overview')" id="btn-overview" class="tab-btn text-electric-blue font-bold border-b-2 border-electric-blue pb-4 px-2 whitespace-nowrap transition-all">Overview</button>
+                    <button onclick="switchTab('orders')" id="btn-orders" class="tab-btn text-gray-400 hover:text-white pb-4 px-2 whitespace-nowrap transition-all">Manage Orders</button>
+                    <button onclick="switchTab('projects')" id="btn-projects" class="tab-btn text-gray-400 hover:text-white pb-4 px-2 whitespace-nowrap transition-all">Active Projects</button>
+                    <button onclick="switchTab('invoices')" id="btn-invoices" class="tab-btn text-gray-400 hover:text-white pb-4 px-2 whitespace-nowrap transition-all">Invoices</button>
+                    <button onclick="switchTab('pricing')" id="btn-pricing" class="tab-btn text-gray-400 hover:text-white pb-4 px-2 whitespace-nowrap transition-all">Pricing & Settings</button>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TAB 1: OVERVIEW                            -->
+                <!-- ========================================== -->
+                <div id="tab-overview" class="tab-content block animate-fade-in">
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-electric-blue flex items-center gap-4">
+                            <div class="w-12 h-12 bg-electric-blue/20 rounded-full flex items-center justify-center text-electric-blue"><i data-lucide="layers" class="w-6 h-6"></i></div>
+                            <div><p class="text-gray-400 text-sm">Active Projects</p><h3 class="text-2xl font-bold">3</h3></div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-yellow-500 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500"><i data-lucide="shopping-bag" class="w-6 h-6"></i></div>
+                            <div><p class="text-gray-400 text-sm">Pending Orders</p><h3 class="text-2xl font-bold">4</h3></div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-green-500 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center text-green-500"><i data-lucide="trending-up" class="w-6 h-6"></i></div>
+                            <div><p class="text-gray-400 text-sm">Revenue (YTD)</p><h3 class="text-2xl font-bold">KSH 145,500</h3></div>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-6 mb-8">
+                        <div class="glass-panel p-6 rounded-xl">
+                            <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i data-lucide="activity" class="w-5 h-5 text-electric-blue"></i> Revenue Trend</h3>
+                            <div class="chart-container"><canvas id="revenueChart"></canvas></div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl">
+                            <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i data-lucide="pie-chart" class="w-5 h-5 text-neon-purple"></i> Sales Breakdown</h3>
+                            <div class="chart-container flex justify-center"><canvas id="categoryChart"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TAB 2: MANAGE ORDERS                       -->
+                <!-- ========================================== -->
+                <div id="tab-orders" class="tab-content hidden animate-fade-in">
+                    <div class="glass-panel rounded-xl overflow-hidden">
+                        <div class="p-6 border-b border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <h3 class="font-bold text-lg">All Orders</h3>
+                            <div class="flex gap-2 w-full md:w-auto">
+                                <input type="text" placeholder="Search Order ID..." class="bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm text-white outline-none w-full md:w-64">
+                                <button class="bg-electric-blue text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-600">Filter</button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-gray-400">
+                                <thead class="bg-white/5 text-gray-300">
+                                    <tr>
+                                        <th class="px-6 py-3 font-medium">Order ID</th>
+                                        <th class="px-6 py-3 font-medium">Customer</th>
+                                        <th class="px-6 py-3 font-medium">Item</th>
+                                        <th class="px-6 py-3 font-medium">Date</th>
+                                        <th class="px-6 py-3 font-medium">Amount</th>
+                                        <th class="px-6 py-3 font-medium">Status</th>
+                                        <th class="px-6 py-3 font-medium">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-white/5">
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="px-6 py-4 font-mono">#ORD-2026-001</td>
+                                        <td class="px-6 py-4 text-white">John Doe</td>
+                                        <td class="px-6 py-4">Tech Hoodie</td>
+                                        <td class="px-6 py-4">28 Oct 2026</td>
+                                        <td class="px-6 py-4">KES 1,500</td>
+                                        <td class="px-6 py-4"><span class="text-yellow-500 bg-yellow-500/10 px-2 py-1 rounded text-xs">Processing</span></td>
+                                        <td class="px-6 py-4"><select class="bg-black/40 border border-white/10 rounded px-2 py-1 text-xs text-white outline-none"><option>Processing</option><option>Shipped</option><option>Delivered</option></select></td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="px-6 py-4 font-mono">#ORD-2026-089</td>
+                                        <td class="px-6 py-4 text-white">Jane Smith</td>
+                                        <td class="px-6 py-4">Branded Cap</td>
+                                        <td class="px-6 py-4">15 Oct 2026</td>
+                                        <td class="px-6 py-4">KES 650</td>
+                                        <td class="px-6 py-4"><span class="text-green-500 bg-green-500/10 px-2 py-1 rounded text-xs">Delivered</span></td>
+                                        <td class="px-6 py-4"><button class="text-gray-500 hover:text-white text-xs">View Details</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TAB 3: ACTIVE PROJECTS                     -->
+                <!-- ========================================== -->
+                <div id="tab-projects" class="tab-content hidden animate-fade-in">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-lg">Current Projects</h3>
+                        <button class="bg-electric-blue text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-600 flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i> New Project</button>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="glass-panel p-6 rounded-xl border-t-4 border-electric-blue">
+                            <div class="flex justify-between items-start mb-4">
+                                <div><h4 class="font-bold text-white text-lg">TechStart Branding</h4><p class="text-xs text-gray-400">Client: TechStart Ltd</p></div>
+                                <span class="bg-blue-500/20 text-electric-blue text-xs px-2 py-1 rounded font-bold">DESIGN</span>
+                            </div>
+                            <div class="mb-2 flex justify-between text-xs text-gray-400 mt-6"><span>Progress</span><span>65%</span></div>
+                            <div class="w-full bg-gray-800 rounded-full h-2 mb-4"><div class="bg-electric-blue h-2 rounded-full" style="width: 65%"></div></div>
+                            <div class="flex justify-between items-center text-xs text-gray-500"><span>Due: 15 Nov 2026</span><button class="text-white hover:text-electric-blue">Update</button></div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-t-4 border-yellow-500">
+                            <div class="flex justify-between items-start mb-4">
+                                <div><h4 class="font-bold text-white text-lg">E-Commerce Website</h4><p class="text-xs text-gray-400">Client: Shoe Palace</p></div>
+                                <span class="bg-yellow-500/20 text-yellow-500 text-xs px-2 py-1 rounded font-bold">DEV</span>
+                            </div>
+                            <div class="mb-2 flex justify-between text-xs text-gray-400 mt-6"><span>Progress</span><span>30%</span></div>
+                            <div class="w-full bg-gray-800 rounded-full h-2 mb-4"><div class="bg-yellow-500 h-2 rounded-full" style="width: 30%"></div></div>
+                            <div class="flex justify-between items-center text-xs text-gray-500"><span>Due: 10 Dec 2026</span><button class="text-white hover:text-electric-blue">Update</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TAB 4: INVOICES (Visible)                  -->
+                <!-- ========================================== -->
+                <div id="tab-invoices" class="tab-content hidden animate-fade-in">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-4 gap-4 no-print">
+                        <div>
+                            <h3 class="font-bold text-xl text-white flex items-center gap-2"><i data-lucide="receipt" class="w-6 h-6 text-electric-blue"></i> Invoice Preview (#INV-2026-045)</h3>
+                        </div>
+                        <div class="flex gap-3 w-full md:w-auto">
+                            <button onclick="downloadInvoicePDF()" id="btn-download" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-[#121418] border border-white/20 text-white hover:bg-white/10 flex items-center justify-center gap-2"><i data-lucide="download" class="w-4 h-4"></i> Download PDF</button>
+                            <button onclick="window.print()" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-electric-blue text-white hover:bg-blue-600 flex items-center justify-center gap-2"><i data-lucide="printer" class="w-4 h-4"></i> Print</button>
+                        </div>
+                    </div>
+
+                    <!-- Actual Invoice Preview -->
+                    <div id="printable-invoice" class="w-full bg-[#121418] border border-white/10 rounded-2xl shadow-2xl p-8 md:p-12 relative overflow-visible">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-white/10 pb-8 mb-8">
+                            <div class="mb-4 md:mb-0">
+                                <svg viewBox="0 0 340 80" class="h-20 w-auto mb-2 overflow-visible" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="blueMetallicInv" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#087EFF" /><stop offset="40%" stop-color="#00D4FF" /><stop offset="100%" stop-color="#C9D0D8" /></linearGradient>
+                                        <linearGradient id="silverMetallicInv" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFFFFF" /><stop offset="100%" stop-color="#8A95A5" /></linearGradient>
+                                    </defs>
+                                    <g transform="translate(10, 5)">
+                                        <path d="M 15 25 L 50 5 L 85 25 L 70 25 L 50 14 L 30 25 Z" fill="url(#blueMetallicInv)"/>
+                                        <path d="M 15 45 L 50 65 L 85 45 L 70 45 L 50 56 L 30 45 Z" fill="url(#silverMetallicInv)"/>
+                                        <path d="M 40 30 L 50 25 L 60 30 L 50 35 Z" fill="url(#blueMetallicInv)" />
+                                    </g>
+                                    <text x="105" y="38" font-family="'Outfit', sans-serif" font-weight="800" font-size="26" fill="url(#silverMetallicInv)" letter-spacing="2">EBELTECHS</text>
+                                    <text x="108" y="58" font-family="'Inter', sans-serif" font-weight="600" font-size="14" fill="url(#blueMetallicInv)" letter-spacing="8">GRAPHIX</text>
+                                </svg>
+                                <p class="text-xs text-gray-400 tracking-widest uppercase mt-2">Where Innovation Meets Design</p>
+                            </div>
+                            <div class="text-left md:text-right">
+                                <h1 class="text-5xl font-display font-bold text-white mb-2">INVOICE</h1>
+                                <p class="text-gray-400 font-mono text-sm">#INV-2026-045</p>
+                                <div class="mt-3 inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-500 px-4 py-1.5 rounded-full font-bold text-sm"><i data-lucide="check-circle" class="w-4 h-4"></i> PAID IN FULL</div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">From</h3>
+                                <p class="text-white font-bold text-lg">EBELTECHS GRAPHIX</p>
+                                <p class="text-gray-400 text-sm mt-1">Kenya</p><p class="text-gray-400 text-sm">+254 758 992 636</p><p class="text-gray-400 text-sm">ebeltravour@gmail.com</p>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Billed To</h3>
+                                <p class="text-white font-bold text-lg">TechStart Ltd</p>
+                                <p class="text-gray-400 text-sm mt-1">Attn: Accounts Dept</p><p class="text-gray-400 text-sm">Nairobi, Kenya</p><p class="text-gray-400 text-sm">billing@techstart.co.ke</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-8 mb-8 bg-white/5 p-4 rounded-lg border border-white/5">
+                            <div><p class="text-xs text-gray-500 uppercase">Issue Date</p><p class="text-white font-medium">01 Oct 2026</p></div>
+                            <div><p class="text-xs text-gray-500 uppercase">Due Date</p><p class="text-white font-medium">15 Oct 2026</p></div>
+                            <div><p class="text-xs text-gray-500 uppercase">Payment Method</p><p class="text-white font-medium">Bank Transfer (M-Pesa)</p></div>
+                        </div>
+
+                        <div class="mb-8 overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead><tr class="border-b border-white/10 text-xs font-bold text-gray-500 uppercase"><th class="py-3 px-2">Description</th><th class="py-3 px-2 text-center">Qty</th><th class="py-3 px-2 text-right">Rate</th><th class="py-3 px-2 text-right">Amount</th></tr></thead>
+                                <tbody class="text-sm">
+                                    <tr class="border-b border-white/5">
+                                        <td class="py-4 px-2"><p class="text-white font-bold">Brand Identity Design</p><p class="text-gray-400 text-xs mt-1">Complete logo suite, brand guidelines, and stationery design.</p></td>
+                                        <td class="py-4 px-2 text-center text-white">1</td><td class="py-4 px-2 text-right text-gray-400">KES 40,000</td><td class="py-4 px-2 text-right text-white font-mono">KES 40,000</td>
+                                    </tr>
+                                    <tr class="border-b border-white/5">
+                                        <td class="py-4 px-2"><p class="text-white font-bold">Business Card Printing</p><p class="text-gray-400 text-xs mt-1">Premium matte finish, double-sided.</p></td>
+                                        <td class="py-4 px-2 text-center text-white">500</td><td class="py-4 px-2 text-right text-gray-400">KES 10</td><td class="py-4 px-2 text-right text-white font-mono">KES 5,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="flex justify-end border-t border-white/10 pt-6">
+                            <div class="w-full md:w-1/2">
+                                <div class="flex justify-between text-sm mb-2"><span class="text-gray-400">Subtotal</span><span class="text-white font-mono">KES 45,000</span></div>
+                                <div class="flex justify-between text-sm mb-2"><span class="text-gray-400">Tax (0%)</span><span class="text-white font-mono">KES 0</span></div>
+                                <div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-white/10"><span class="text-white">Total</span><span class="text-electric-blue font-mono">KES 45,000</span></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-16 pt-8 border-t border-white/10">
+                            <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
+                                <div>
+                                    <h4 class="font-bold text-white mb-3 text-sm uppercase tracking-wider">Contact Us</h4>
+                                    <ul class="space-y-2 text-sm text-gray-400">
+                                        <li class="flex items-center justify-center md:justify-start gap-2"><i data-lucide="message-circle" class="w-4 h-4 text-green-500"></i> +254 758 992 636</li>
+                                        <li class="flex items-center justify-center md:justify-start gap-2"><i data-lucide="mail" class="w-4 h-4 text-red-400"></i> ebeltravour@gmail.com</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-3 text-sm uppercase tracking-wider">Follow Us</h4>
+                                    <ul class="space-y-2 text-sm text-gray-400">
+                                        <li class="flex items-center justify-center md:justify-start gap-2"><i data-lucide="instagram" class="w-4 h-4 text-pink-500"></i> Ebeltechs_graphix</li>
+                                        <li class="flex items-center justify-center md:justify-start gap-2"><i data-lucide="music" class="w-4 h-4 text-white"></i> ebel.ebel5</li>
+                                    </ul>
+                                </div>
+                                <div class="flex flex-col justify-end items-center md:items-end">
+                                    <p class="text-lg font-display font-bold text-white mb-1">Thank you!</p><p class="text-xs text-gray-500">We appreciate your business.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TAB 5: PRICING & SETTINGS (NEW)            -->
+                <!-- ========================================== -->
+                <div id="tab-pricing" class="tab-content hidden animate-fade-in">
+                    <div class="glass-panel p-8 rounded-xl max-w-3xl">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold mb-2">Merchandise Pricing</h3>
+                            <p class="text-sm text-gray-400">Update the prices below. These will automatically sync to the main website's shop.</p>
+                        </div>
+                        
+                        <form id="pricing-form" onsubmit="savePrices(event)" class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div><label class="text-xs font-bold text-gray-500 uppercase block mb-1">Polo T-Shirt (KSH)</label><input type="number" id="price-polo" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none"></div>
+                                <div><label class="text-xs font-bold text-gray-500 uppercase block mb-1">Classic T-Shirt (KSH)</label><input type="number" id="price-tshirt" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none"></div>
+                                <div><label class="text-xs font-bold text-gray-500 uppercase block mb-1">Turtleneck (KSH)</label><input type="number" id="price-turtleneck" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none"></div>
+                                <div><label class="text-xs font-bold text-gray-500 uppercase block mb-1">Tech Hoodie (KSH)</label><input type="number" id="price-hoodie" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none"></div>
+                                <div><label class="text-xs font-bold text-gray-500 uppercase block mb-1">Sweatshirt (KSH)</label><input type="number" id="price-sweatshirt" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none"></div>
+                                <div><label class="text-xs font-bold text-gray-500 uppercase block mb-1">Zip Jacket (KSH)</label><input type="number" id="price-jacket" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none"></div>
+                                <div><label class="text-xs font-bold text-gray-500 uppercase block mb-1">Branded Cap (KSH)</label><input type="number" id="price-cap" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none"></div>
+                            </div>
+                            <button type="submit" class="bg-electric-blue text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-600 mt-6 flex items-center gap-2">
+                                <i data-lucide="save" class="w-5 h-5"></i> Save Prices
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Default Prices
+        const defaultPrices = { polo: 1000, tshirt: 750, turtleneck: 2000, hoodie: 1500, sweatshirt: 1800, jacket: 2200, cap: 650 };
+
+        function handleLogin(e) {
+            e.preventDefault();
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            initCharts();
+            loadPricesIntoForm();
+        }
+
+        function logout() {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('login').classList.remove('hidden');
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('block', 'animate-fade-in'));
+            
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('text-electric-blue', 'font-bold', 'border-b-2', 'border-electric-blue');
+                el.classList.add('text-gray-400');
+            });
+            
+            const targetContent = document.getElementById('tab-' + tabName);
+            targetContent.classList.remove('hidden');
+            targetContent.classList.add('block', 'animate-fade-in');
+
+            const targetBtn = document.getElementById('btn-' + tabName);
+            targetBtn.classList.remove('text-gray-400');
+            targetBtn.classList.add('text-electric-blue', 'font-bold', 'border-b-2', 'border-electric-blue');
+        }
+
+        // --- PRICING LOGIC ---
+        function loadPricesIntoForm() {
+            const saved = JSON.parse(localStorage.getItem('ebeltechs_prices')) || defaultPrices;
+            document.getElementById('price-polo').value = saved.polo;
+            document.getElementById('price-tshirt').value = saved.tshirt;
+            document.getElementById('price-turtleneck').value = saved.turtleneck;
+            document.getElementById('price-hoodie').value = saved.hoodie;
+            document.getElementById('price-sweatshirt').value = saved.sweatshirt;
+            document.getElementById('price-jacket').value = saved.jacket;
+            document.getElementById('price-cap').value = saved.cap;
+        }
+
+        function savePrices(e) {
+            e.preventDefault();
+            const newPrices = {
+                polo: document.getElementById('price-polo').value,
+                tshirt: document.getElementById('price-tshirt').value,
+                turtleneck: document.getElementById('price-turtleneck').value,
+                hoodie: document.getElementById('price-hoodie').value,
+                sweatshirt: document.getElementById('price-sweatshirt').value,
+                jacket: document.getElementById('price-jacket').value,
+                cap: document.getElementById('price-cap').value
+            };
+            localStorage.setItem('ebeltechs_prices', JSON.stringify(newPrices));
+            alert('Prices updated successfully! The main website will now reflect these changes.');
+        }
+
+        // --- INVOICE PDF DOWNLOAD LOGIC ---
+        function downloadInvoicePDF() {
+            const element = document.getElementById('printable-invoice');
+            const btn = document.getElementById('btn-download');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = 'DOWNLOADING... <i class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></i>';
+            btn.disabled = true;
+
+            const opt = {
+                margin: 0.2, filename: 'EBELTECHS_Invoice_INV-2026-045.pdf',
+                image: { type: 'jpeg', quality: 1.0 }, 
+                html2canvas: { scale: 2, useCORS: true, backgroundColor: '#121418', logging: false, scrollY: 0, windowWidth: element.scrollWidth },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                lucide.createIcons();
+            }).catch(err => {
+                console.error("PDF Error: ", err);
+                alert("There was an error downloading the PDF.");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                lucide.createIcons();
+            });
+        }
+
+        // --- CHARTS ---
+        let revChart, catChart;
+        function initCharts() {
+            if(revChart) revChart.destroy();
+            if(catChart) catChart.destroy();
+
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            let gradient = ctxRev.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, 'rgba(8, 126, 255, 0.5)');
+            gradient.addColorStop(1, 'rgba(8, 126, 255, 0.0)');
+
+            revChart = new Chart(ctxRev, {
+                type: 'line',
+                data: { labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'], datasets: [{ label: 'Revenue', data: [15000, 22500, 18000, 35000, 32000, 45000], borderColor: '#087EFF', backgroundColor: gradient, tension: 0.4, fill: true }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#6b7280' } }, x: { ticks: { color: '#6b7280' } } } }
+            });
+
+            const ctxCat = document.getElementById('categoryChart').getContext('2d');
+            catChart = new Chart(ctxCat, {
+                type: 'doughnut',
+                data: { labels: ['Graphic Design', 'Video', 'Merch', 'Web'], datasets: [{ data: [40, 25, 20, 15], backgroundColor: ['#087EFF', '#7000FF', '#25D366', '#C9D0D8'], borderWidth: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { position: 'bottom', labels: { color: '#9ca3af' } } } }
+            });
+        }
+    </script>
+</body>
+</html>
