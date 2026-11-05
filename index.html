@@ -14,9 +14,6 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- html2pdf for Invoice Generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <!-- Brand Configuration -->
     <script>
         tailwind.config = {
@@ -62,15 +59,7 @@
 
     <style>
         /* --- PREMIUM INTERFACE STYLES --- */
-        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
-        body {
-            background-color: #050505;
-            background-image: radial-gradient(ellipse at 50% 0%, rgba(8, 126, 255, 0.06), transparent 55%);
-            color: white;
-            overflow-x: hidden;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-        }
+        body { background-color: #050505; color: white; overflow-x: hidden; }
         
         /* Noise Texture */
         .noise-overlay {
@@ -82,10 +71,7 @@
         /* Animated Background */
         .mesh-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            background:
-                radial-gradient(circle at 18% 20%, rgba(216, 137, 11, 0.14), transparent 32%),
-                radial-gradient(circle at 82% 72%, rgba(245, 176, 65, 0.09), transparent 29%),
-                radial-gradient(circle at 50% 50%, #1a1d26 0%, #050505 100%);
+            background: radial-gradient(circle at 50% 50%, #1a1d26 0%, #050505 100%);
         }
         .orb {
             position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4;
@@ -94,26 +80,9 @@
 
         /* Glassmorphism */
         .glass-panel {
-            background: linear-gradient(145deg, rgba(28, 31, 38, 0.76), rgba(13, 15, 19, 0.74));
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.035);
-            transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+            background: rgba(18, 20, 24, 0.6); backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
-        .glass-panel:hover {
-            border-color: rgba(245, 176, 65, 0.2);
-            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.25), 0 0 24px rgba(245, 176, 65, 0.035);
-        }
-        button:not(:disabled) { transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease; }
-        button:not(:disabled):hover { filter: brightness(1.08); }
-        button:not(:disabled):active { transform: scale(0.98); }
-        :where(button, a, input, textarea, select):focus-visible {
-            outline: 2px solid rgba(8, 126, 255, 0.8);
-            outline-offset: 3px;
-        }
-        :where(input, textarea, select) { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
-        :where(input, textarea, select):focus { box-shadow: 0 0 0 3px rgba(8, 126, 255, 0.12); }
 
         /* Smooth Page Transitions */
         .page-section { 
@@ -130,17 +99,16 @@
         .img-zoom-container img { transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .img-zoom-container:hover img { transform: scale(1.1); }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #087EFF; }
+        /* Custom Scrollbar for Service Lists */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #087EFF; border-radius: 4px; }
 
         /* Logo Hover Effect */
         .nav-logo-container svg { transition: all 0.3s ease; }
         .nav-logo-container:hover svg {
             transform: scale(1.05);
-            filter: drop-shadow(0 0 18px rgba(245, 176, 65, 0.65)) drop-shadow(0 0 10px rgba(8, 126, 255, 0.55));
+            filter: drop-shadow(0 0 20px rgba(8, 126, 255, 0.9));
         }
 
         /* --- CAROUSEL STYLES --- */
@@ -189,36 +157,6 @@
             background-color: rgba(8, 126, 255, 0.1);
             border-left-color: #087EFF;
             color: #087EFF;
-        }
-
-        /* Chat Bubbles */
-        .chat-bubble-ai {
-            background: linear-gradient(145deg, rgba(8, 126, 255, 0.14), rgba(8, 126, 255, 0.07));
-            border: 1px solid rgba(8, 126, 255, 0.22);
-            border-radius: 4px 18px 18px 18px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            overflow-wrap: anywhere;
-        }
-        .chat-bubble-user {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.045));
-            border: 1px solid rgba(255, 255, 255, 0.11);
-            border-radius: 18px 4px 18px 18px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            overflow-wrap: anywhere;
-        }
-        #chat-messages { scroll-behavior: smooth; overscroll-behavior: contain; }
-        #chat-messages > div { animation: chatMessageIn 0.24s ease-out both; }
-        @keyframes chatMessageIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                scroll-behavior: auto !important;
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
         }
     </style>
 </head>
@@ -270,14 +208,14 @@
                     <button onclick="router('shop')" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Shop</button>
                     
                     <div class="flex items-center gap-6 pl-6 border-l border-gray-800">
-                        <!-- Guest Links -->
+                        <!-- Guest Links (Added) -->
                         <div id="guest-nav" class="flex items-center gap-4">
                             <button onclick="router('login')" class="text-sm font-bold text-electric-blue hover:text-white transition-colors">Client Portal</button>
                             <button onclick="router('quote')" class="bg-electric-blue text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(8,126,255,0.3)] hover:shadow-[0_0_25px_rgba(8,126,255,0.6)]">
                                 Get a Quote
                             </button>
                         </div>
-                        <!-- Logged In Links -->
+                        <!-- User Links (Added) -->
                         <div id="user-nav" class="hidden items-center gap-4">
                             <button onclick="router('workspace')" class="text-sm font-bold text-white flex items-center gap-2 hover:text-electric-blue transition-colors">
                                 <i data-lucide="layout-dashboard" class="w-4 h-4"></i> My Workspace
@@ -536,6 +474,9 @@
                             <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Business Cards & Stationery</li>
                             <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Banners & Billboards</li>
                             <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Social Media Graphics</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Presentation & Certificate Design</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Packaging & Label Design</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Photo Editing & Retouching</li>
                         </ul>
                         <div class="mt-auto flex gap-3">
                             <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white">Request Service</button>
@@ -551,6 +492,10 @@
                             <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Corporate Identity Development</li>
                             <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Brand Colour & Typography</li>
                             <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Brand Guidelines & Manuals</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Letterheads & Envelopes</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Company Profiles</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Brand Strategy & Positioning</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Rebranding & Modernization</li>
                         </ul>
                         <div class="mt-auto flex gap-3">
                             <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white">Request Service</button>
@@ -565,7 +510,68 @@
                         <ul class="space-y-2 text-gray-400 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
                             <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Business & Portfolio Websites</li>
                             <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> E-commerce Websites</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Landing Pages</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Website Redesign</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Responsive Web Design</li>
                             <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> UI/UX Design</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Website Maintenance & SEO</li>
+                        </ul>
+                        <div class="mt-auto flex gap-3">
+                            <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white">Request Service</button>
+                        </div>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="glass-panel p-8 rounded-2xl hover:border-electric-blue/50 transition-all flex flex-col">
+                        <div class="w-14 h-14 bg-electric-blue/20 rounded-xl flex items-center justify-center text-2xl mb-6">🎬</div>
+                        <h3 class="text-xl font-bold mb-4">04. Multimedia Production</h3>
+                        <p class="text-gray-400 text-sm mb-4">Engaging visual and audio content to help brands communicate effectively.</p>
+                        <ul class="space-y-2 text-gray-400 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Video Editing & Post-Production</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Promotional Videos</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Motion Graphics & Animation</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Logo Animation & Intros</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Social Media Reels</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Lyric Videos & Visualizers</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Event Highlight Videos</li>
+                        </ul>
+                        <div class="mt-auto flex gap-3">
+                            <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white">Request Service</button>
+                        </div>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="glass-panel p-8 rounded-2xl hover:border-electric-blue/50 transition-all flex flex-col">
+                        <div class="w-14 h-14 bg-electric-blue/20 rounded-xl flex items-center justify-center text-2xl mb-6">📱</div>
+                        <h3 class="text-xl font-bold mb-4">05. Digital & Social Media</h3>
+                        <p class="text-gray-400 text-sm mb-4">Consistent digital presence through creative content and visual marketing materials.</p>
+                        <ul class="space-y-2 text-gray-400 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Social Media Page Branding</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Facebook, IG, TikTok, LinkedIn Designs</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Promotional Ads & Campaigns</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Content Planning & Design</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Product Promotion Graphics</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> YouTube Thumbnails</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Brand Consistency & Templates</li>
+                        </ul>
+                        <div class="mt-auto flex gap-3">
+                            <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white">Request Service</button>
+                        </div>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="glass-panel p-8 rounded-2xl hover:border-electric-blue/50 transition-all flex flex-col">
+                        <div class="w-14 h-14 bg-electric-blue/20 rounded-xl flex items-center justify-center text-2xl mb-6">🖨️</div>
+                        <h3 class="text-xl font-bold mb-4">06. Printing & Merch</h3>
+                        <p class="text-gray-400 text-sm mb-4">Creative materials intended for physical presentation, promotion and brand visibility.</p>
+                        <ul class="space-y-2 text-gray-400 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Business Cards & Stationery</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Flyers, Posters & Brochures</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Banners & Roll-up Displays</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Stickers & Product Labels</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Certificates & Invitations</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Branded T-shirts, Hoodies & Caps</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Packaging & Presentation Materials</li>
                         </ul>
                         <div class="mt-auto flex gap-3">
                             <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white">Request Service</button>
@@ -588,12 +594,18 @@
                         <button onclick="filterPortfolio('logo')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Logo Design</button>
                         <button onclick="filterPortfolio('poster')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Posters</button>
                         <button onclick="filterPortfolio('web')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Web Design</button>
+                        <button onclick="filterPortfolio('video')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Video</button>
+                        <button onclick="filterPortfolio('merch')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Merchandise</button>
                     </div>
                 </div>
 
                 <!-- Gallery Grid -->
                 <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Items injected via JS -->
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button class="border border-white/20 px-8 py-3 rounded-full hover:bg-white/10 transition-all text-sm font-bold">Load More Projects</button>
                 </div>
             </div>
         </section>
@@ -663,6 +675,80 @@
                                 <span class="text-xs bg-white/10 px-2 py-1 rounded">XL</span>
                             </div>
                             <button onclick="openCheckout('Turtleneck', 2000)" class="w-full bg-mpesa-green text-white py-2 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.3)]">
+                                <i data-lucide="smartphone" class="w-4 h-4"></i> Pay via M-Pesa
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 4: Hoodie -->
+                    <div class="glass-panel rounded-2xl overflow-hidden group">
+                        <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hoodie" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-lg mb-1">Hoodie</h3>
+                            <p class="text-electric-blue font-bold mb-3">KSH 1,500</p>
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">M</span>
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">L</span>
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">XL</span>
+                            </div>
+                            <button onclick="openCheckout('Hoodie', 1500)" class="w-full bg-mpesa-green text-white py-2 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.3)]">
+                                <i data-lucide="smartphone" class="w-4 h-4"></i> Pay via M-Pesa
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 5: Sweatshirt -->
+                    <div class="glass-panel rounded-2xl overflow-hidden group">
+                        <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1578587018452-892bacefd3f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sweatshirt" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-lg mb-1">Sweatshirt</h3>
+                            <p class="text-electric-blue font-bold mb-3">KSH 1,800</p>
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">M</span>
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">L</span>
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">XL</span>
+                            </div>
+                            <button onclick="openCheckout('Sweatshirt', 1800)" class="w-full bg-mpesa-green text-white py-2 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.3)]">
+                                <i data-lucide="smartphone" class="w-4 h-4"></i> Pay via M-Pesa
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 6: Zip Jacket -->
+                    <div class="glass-panel rounded-2xl overflow-hidden group">
+                        <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Zip Jacket" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-lg mb-1">Zip Jacket</h3>
+                            <p class="text-electric-blue font-bold mb-3">KSH 2,200</p>
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">M</span>
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">L</span>
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">XL</span>
+                            </div>
+                            <button onclick="openCheckout('Zip Jacket', 2200)" class="w-full bg-mpesa-green text-white py-2 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.3)]">
+                                <i data-lucide="smartphone" class="w-4 h-4"></i> Pay via M-Pesa
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 7: Cap -->
+                    <div class="glass-panel rounded-2xl overflow-hidden group">
+                        <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1576871337622-98d48d1cf531?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cap" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-lg mb-1">Cap</h3>
+                            <p class="text-electric-blue font-bold mb-3">KSH 650</p>
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-xs bg-white/10 px-2 py-1 rounded">One Size</span>
+                            </div>
+                            <button onclick="openCheckout('Cap', 650)" class="w-full bg-mpesa-green text-white py-2 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.3)]">
                                 <i data-lucide="smartphone" class="w-4 h-4"></i> Pay via M-Pesa
                             </button>
                         </div>
@@ -760,7 +846,7 @@
                             <div id="drop-zone" class="drop-zone border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-electric-blue transition-colors cursor-pointer relative">
                                 <i data-lucide="upload-cloud" class="w-8 h-8 mx-auto mb-2 text-gray-400 pointer-events-none"></i>
                                 <p class="text-sm text-gray-400 pointer-events-none">Click to upload or drag files here</p>
-                                <p class="text-xs text-gray-600 mt-1 pointer-events-none">(Max 4MB per file)</p>
+                                <p class="text-xs text-gray-600 mt-1 pointer-events-none">(Max 4MB per file. Attached automatically if using Email)</p>
                             </div>
                             <div id="file-list" class="mt-3 space-y-2 text-sm text-gray-300"></div>
                         </div>
@@ -788,49 +874,69 @@
             </div>
         </section>
 
-        <!-- 6. CLIENT LOGIN SECTION -->
+        <!-- 6. CLIENT LOGIN / SIGNUP SECTION (NEW) -->
         <section id="login" class="page-section py-32 flex items-center justify-center min-h-[80vh]">
-            <div class="glass-panel p-8 md:p-12 rounded-3xl w-full max-w-md animate-fade-in">
-                <div class="text-center mb-8">
-                    <i data-lucide="lock" class="w-12 h-12 text-electric-blue mx-auto mb-4"></i>
-                    <h2 id="customer-auth-title" class="text-2xl font-bold mb-2">Client Portal Login</h2>
-                    <p id="customer-auth-description" class="text-gray-400 text-sm">Access your projects, invoices, and messages.</p>
-                </div>
+            <div class="glass-panel p-8 md:p-12 rounded-3xl w-full max-w-md animate-fade-in relative overflow-hidden">
                 
-                <form onsubmit="handleCustomerAuth(event)" class="space-y-4">
-                    <div id="signup-name-field" class="hidden">
-                        <label for="cust-name" class="text-xs font-bold text-gray-500 uppercase mb-1 block">Full Name</label>
-                        <input id="cust-name" type="text" autocomplete="name" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="Your name">
+                <!-- Tabs -->
+                <div class="flex border-b border-white/10 mb-8">
+                    <button id="tab-login" onclick="toggleAuthTab('login')" class="flex-1 pb-3 text-center font-bold text-electric-blue border-b-2 border-electric-blue transition-all">Login</button>
+                    <button id="tab-signup" onclick="toggleAuthTab('signup')" class="flex-1 pb-3 text-center font-bold text-gray-500 hover:text-white border-b-2 border-transparent transition-all">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="form-login">
+                    <div class="text-center mb-8">
+                        <i data-lucide="lock" class="w-12 h-12 text-electric-blue mx-auto mb-4"></i>
+                        <h2 class="text-2xl font-bold mb-2">Welcome Back</h2>
+                        <p class="text-gray-400 text-sm">Log in to access your client portal.</p>
                     </div>
-                    <div>
-                        <label for="cust-email" class="text-xs font-bold text-gray-500 uppercase mb-1 block">Email Address</label>
-                        <input id="cust-email" type="email" autocomplete="email" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="you@example.com">
+                    <form onsubmit="handleCustomerLogin(event)" class="space-y-4">
+                        <div>
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 block">Email Address</label>
+                            <input id="login-email" type="email" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="you@example.com">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 block">Password</label>
+                            <input id="login-password" type="password" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="w-full bg-electric-blue py-3 rounded-lg font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-electric-blue/25 mt-4 flex justify-center items-center gap-2">
+                            Login <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="form-signup" class="hidden">
+                    <div class="text-center mb-8">
+                        <i data-lucide="user-plus" class="w-12 h-12 text-neon-purple mx-auto mb-4"></i>
+                        <h2 class="text-2xl font-bold mb-2">Create Account</h2>
+                        <p class="text-gray-400 text-sm">Join EBELTECHS to manage your projects.</p>
                     </div>
-                    <div>
-                        <label for="cust-password" class="text-xs font-bold text-gray-500 uppercase mb-1 block">Password</label>
-                        <input id="cust-password" type="password" autocomplete="current-password" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="Enter your password">
-                    </div>
-                    <div id="signup-confirm-field" class="hidden">
-                        <label for="cust-password-confirm" class="text-xs font-bold text-gray-500 uppercase mb-1 block">Confirm Password</label>
-                        <input id="cust-password-confirm" type="password" autocomplete="new-password" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="Re-enter your password">
-                    </div>
-                    <p id="customer-auth-feedback" role="status" aria-live="polite" class="hidden text-sm"></p>
-                    <button id="customer-auth-submit" type="submit" class="w-full bg-electric-blue py-3 rounded-lg font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-electric-blue/25 mt-4 flex justify-center items-center gap-2">
-                        Login to Workspace <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </button>
-                    <p class="text-center text-sm text-gray-400">
-                        <span id="customer-auth-switch-prompt">Don't have an account?</span>
-                        <button id="customer-auth-switch" type="button" onclick="toggleCustomerAuthMode()" class="ml-1 font-bold text-electric-blue hover:text-white transition-colors">Sign up</button>
-                    </p>
-                    <p class="text-center text-xs text-gray-500">Demo account details are stored in this browser only.</p>
-                </form>
+                    <form onsubmit="handleCustomerSignup(event)" class="space-y-4">
+                        <div>
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 block">Full Name</label>
+                            <input id="signup-name" type="text" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 block">Email Address</label>
+                            <input id="signup-email" type="email" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="you@example.com">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 block">Password</label>
+                            <input id="signup-password" type="password" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-electric-blue outline-none transition-colors" placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="w-full bg-neon-purple py-3 rounded-lg font-bold hover:bg-purple-700 transition-colors shadow-lg shadow-neon-purple/25 mt-4 flex justify-center items-center gap-2 text-white">
+                            Create Account <i data-lucide="user-plus" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
 
-        <!-- 7. CUSTOMER WORKSPACE -->
+        <!-- 7. CUSTOMER WORKSPACE (NEW) -->
         <section id="workspace" class="page-section py-24">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                
                 <div class="flex flex-col md:flex-row gap-8">
                     
                     <!-- Sidebar Navigation -->
@@ -844,26 +950,14 @@
                                 <p class="text-xs text-gray-400">Premium Member</p>
                             </div>
                             <nav class="space-y-1">
-                                <button onclick="switchWorkspaceTab('dashboard')" class="workspace-nav-btn active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
+                                <button class="workspace-nav-btn active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
                                     <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
                                 </button>
-                                <button onclick="switchWorkspaceTab('projects')" class="workspace-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
-                                    <i data-lucide="folder" class="w-4 h-4"></i> My Projects
+                                <button onclick="router('quote')" class="workspace-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
+                                    <i data-lucide="plus-circle" class="w-4 h-4"></i> New Project
                                 </button>
-                                <button onclick="switchWorkspaceTab('request')" class="workspace-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
-                                    <i data-lucide="plus-circle" class="w-4 h-4"></i> Request a Service
-                                </button>
-                                <button onclick="switchWorkspaceTab('payments')" class="workspace-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
-                                    <i data-lucide="credit-card" class="w-4 h-4"></i> Payments & Invoices
-                                </button>
-                                <button onclick="switchWorkspaceTab('chat')" class="workspace-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
-                                    <i data-lucide="bot" class="w-4 h-4"></i> AI Support Chat
-                                </button>
-                                <button onclick="switchWorkspaceTab('files')" class="workspace-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
-                                    <i data-lucide="download-cloud" class="w-4 h-4"></i> Files & Downloads
-                                </button>
-                                <button onclick="switchWorkspaceTab('profile')" class="workspace-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
-                                    <i data-lucide="settings" class="w-4 h-4"></i> My Profile
+                                <button onclick="logoutCustomer()" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-red-400 hover:text-red-300 transition-all">
+                                    <i data-lucide="log-out" class="w-4 h-4"></i> Logout
                                 </button>
                             </nav>
                         </div>
@@ -871,282 +965,49 @@
 
                     <!-- Main Content Area -->
                     <div class="flex-1">
-                        
-                        <!-- Workspace Tab: Dashboard -->
-                        <div id="ws-dashboard" class="workspace-tab block animate-fade-in">
-                            <div class="mb-8">
-                                <h2 class="text-3xl font-bold mb-2">Welcome back, <span class="text-electric-blue" id="welcome-name">Client</span>!</h2>
-                                <p class="text-gray-400">Here is an overview of your recent activity.</p>
-                            </div>
+                        <div class="mb-8">
+                            <h2 class="text-3xl font-bold mb-2">Welcome back, <span class="text-electric-blue" id="welcome-name">Client</span>!</h2>
+                            <p class="text-gray-400">Here is an overview of your recent activity.</p>
+                        </div>
 
-                            <!-- Stats -->
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                                <div class="glass-panel p-4 rounded-xl border-l-4 border-electric-blue">
-                                    <p class="text-xs text-gray-400 mb-1">Total Projects</p>
-                                    <h3 class="text-2xl font-bold text-white">8</h3>
-                                </div>
-                                <div class="glass-panel p-4 rounded-xl border-l-4 border-yellow-500">
-                                    <p class="text-xs text-gray-400 mb-1">Active Projects</p>
-                                    <h3 class="text-2xl font-bold text-white">2</h3>
-                                </div>
-                                <div class="glass-panel p-4 rounded-xl border-l-4 border-green-500">
-                                    <p class="text-xs text-gray-400 mb-1">Completed</p>
-                                    <h3 class="text-2xl font-bold text-white">5</h3>
-                                </div>
-                                <div class="glass-panel p-4 rounded-xl border-l-4 border-red-500">
-                                    <p class="text-xs text-gray-400 mb-1">Pending Payments</p>
-                                    <h3 class="text-2xl font-bold text-white">1</h3>
-                                </div>
+                        <!-- Stats -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            <div class="glass-panel p-4 rounded-xl border-l-4 border-electric-blue">
+                                <p class="text-xs text-gray-400 mb-1">Total Projects</p>
+                                <h3 class="text-2xl font-bold text-white">0</h3>
                             </div>
-
-                            <!-- Quick Actions -->
-                            <h3 class="text-lg font-bold mb-4">Quick Actions</h3>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                                <button onclick="switchWorkspaceTab('request')" class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors text-center group">
-                                    <i data-lucide="pen-tool" class="w-8 h-8 text-electric-blue mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                                    <span class="text-sm font-bold text-white">Request Service</span>
-                                </button>
-                                <button onclick="switchWorkspaceTab('chat')" class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors text-center group">
-                                    <i data-lucide="bot" class="w-8 h-8 text-neon-purple mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                                    <span class="text-sm font-bold text-white">AI Chat Support</span>
-                                </button>
-                                <button onclick="switchWorkspaceTab('projects')" class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors text-center group">
-                                    <i data-lucide="folder-open" class="w-8 h-8 text-green-500 mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                                    <span class="text-sm font-bold text-white">View Projects</span>
-                                </button>
-                                <a href="https://wa.me/254758992636" target="_blank" class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors text-center group">
-                                    <i data-lucide="headphones" class="w-8 h-8 text-yellow-500 mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                                    <span class="text-sm font-bold text-white">Contact Support</span>
-                                </a>
+                            <div class="glass-panel p-4 rounded-xl border-l-4 border-yellow-500">
+                                <p class="text-xs text-gray-400 mb-1">Active Projects</p>
+                                <h3 class="text-2xl font-bold text-white">0</h3>
+                            </div>
+                            <div class="glass-panel p-4 rounded-xl border-l-4 border-green-500">
+                                <p class="text-xs text-gray-400 mb-1">Completed</p>
+                                <h3 class="text-2xl font-bold text-white">0</h3>
+                            </div>
+                            <div class="glass-panel p-4 rounded-xl border-l-4 border-red-500">
+                                <p class="text-xs text-gray-400 mb-1">Pending Payments</p>
+                                <h3 class="text-2xl font-bold text-white">0</h3>
                             </div>
                         </div>
 
-                        <!-- Workspace Tab: Request a Service -->
-                        <div id="ws-request" class="workspace-tab hidden animate-fade-in">
-                            <div class="mb-8">
-                                <h2 class="text-2xl font-bold mb-2">Select a Service to Begin</h2>
-                                <p class="text-gray-400 text-sm">Choose from our comprehensive range of creative and digital services.</p>
-                            </div>
-                            
-                            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <!-- Service Cards -->
-                                <div class="glass-panel p-5 rounded-xl border border-white/10 hover:border-electric-blue/50 transition-colors cursor-pointer group" onclick="router('quote')">
-                                    <div class="w-10 h-10 bg-electric-blue/10 rounded-lg flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition-transform">✒️</div>
-                                    <h4 class="font-bold text-white text-sm mb-1">Logo Design</h4>
-                                    <p class="text-xs text-gray-400">Unique & memorable brand marks.</p>
-                                </div>
-                                <div class="glass-panel p-5 rounded-xl border border-white/10 hover:border-electric-blue/50 transition-colors cursor-pointer group" onclick="router('quote')">
-                                    <div class="w-10 h-10 bg-electric-blue/10 rounded-lg flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition-transform">🖼️</div>
-                                    <h4 class="font-bold text-white text-sm mb-1">Flyer & Poster</h4>
-                                    <p class="text-xs text-gray-400">Event promos and campaigns.</p>
-                                </div>
-                                <div class="glass-panel p-5 rounded-xl border border-white/10 hover:border-electric-blue/50 transition-colors cursor-pointer group" onclick="router('quote')">
-                                    <div class="w-10 h-10 bg-electric-blue/10 rounded-lg flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition-transform">🏢</div>
-                                    <h4 class="font-bold text-white text-sm mb-1">Business Branding</h4>
-                                    <p class="text-xs text-gray-400">Complete identity systems.</p>
-                                </div>
-                                <div class="glass-panel p-5 rounded-xl border border-white/10 hover:border-electric-blue/50 transition-colors cursor-pointer group" onclick="router('quote')">
-                                    <div class="w-10 h-10 bg-electric-blue/10 rounded-lg flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition-transform">💻</div>
-                                    <h4 class="font-bold text-white text-sm mb-1">Website Development</h4>
-                                    <p class="text-xs text-gray-400">Modern, responsive web presence.</p>
-                                </div>
-                                <div class="glass-panel p-5 rounded-xl border border-white/10 hover:border-electric-blue/50 transition-colors cursor-pointer group" onclick="router('quote')">
-                                    <div class="w-10 h-10 bg-electric-blue/10 rounded-lg flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition-transform">🎬</div>
-                                    <h4 class="font-bold text-white text-sm mb-1">Video Editing</h4>
-                                    <p class="text-xs text-gray-400">Promos, reels, and post-production.</p>
-                                </div>
-                                <div class="glass-panel p-5 rounded-xl border border-dashed border-white/20 hover:border-electric-blue/50 transition-colors cursor-pointer group flex flex-col items-center justify-center" onclick="router('quote')">
-                                    <i data-lucide="plus-circle" class="w-8 h-8 text-gray-500 group-hover:text-electric-blue mb-2 transition-colors"></i>
-                                    <h4 class="font-bold text-white text-sm">Other Custom Projects</h4>
-                                </div>
-                            </div>
+                        <!-- Quick Actions -->
+                        <h3 class="text-lg font-bold mb-4">Quick Actions</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            <button onclick="router('quote')" class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors text-center group">
+                                <i data-lucide="pen-tool" class="w-8 h-8 text-electric-blue mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
+                                <span class="text-sm font-bold text-white">Request Service</span>
+                            </button>
+                            <a href="https://wa.me/254758992636" target="_blank" class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors text-center group">
+                                <i data-lucide="headphones" class="w-8 h-8 text-yellow-500 mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
+                                <span class="text-sm font-bold text-white">Contact Support</span>
+                            </a>
                         </div>
 
-                        <!-- Workspace Tab: My Projects -->
-                        <div id="ws-projects" class="workspace-tab hidden animate-fade-in">
-                            <h2 class="text-2xl font-bold mb-6">My Projects</h2>
-                            <div class="glass-panel rounded-xl overflow-hidden">
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-left text-sm text-gray-400">
-                                        <thead class="bg-white/5 text-gray-300">
-                                            <tr>
-                                                <th class="px-6 py-3 font-medium">Project Name</th>
-                                                <th class="px-6 py-3 font-medium">Service</th>
-                                                <th class="px-6 py-3 font-medium">Status</th>
-                                                <th class="px-6 py-3 font-medium">Progress</th>
-                                                <th class="px-6 py-3 font-medium">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y divide-white/5">
-                                            <tr class="hover:bg-white/5 transition-colors">
-                                                <td class="px-6 py-4">
-                                                    <p class="text-white font-bold">TechStart Brand Identity</p>
-                                                    <p class="text-xs text-gray-500">Ref: #PRJ-001</p>
-                                                </td>
-                                                <td class="px-6 py-4">Logo & Branding</td>
-                                                <td class="px-6 py-4"><span class="text-yellow-500 bg-yellow-500/10 px-2 py-1 rounded text-xs font-bold">In Progress</span></td>
-                                                <td class="px-6 py-4 w-48">
-                                                    <div class="w-full bg-gray-800 rounded-full h-1.5 mb-1">
-                                                        <div class="bg-electric-blue h-1.5 rounded-full" style="width: 65%"></div>
-                                                    </div>
-                                                    <span class="text-xs text-right block">65%</span>
-                                                </td>
-                                                <td class="px-6 py-4"><button class="text-electric-blue hover:underline text-xs">View Details</button></td>
-                                            </tr>
-                                            <tr class="hover:bg-white/5 transition-colors">
-                                                <td class="px-6 py-4">
-                                                    <p class="text-white font-bold">Event Flyer Design</p>
-                                                    <p class="text-xs text-gray-500">Ref: #PRJ-045</p>
-                                                </td>
-                                                <td class="px-6 py-4">Poster Design</td>
-                                                <td class="px-6 py-4"><span class="text-green-500 bg-green-500/10 px-2 py-1 rounded text-xs font-bold">Completed</span></td>
-                                                <td class="px-6 py-4 w-48">
-                                                    <div class="w-full bg-gray-800 rounded-full h-1.5 mb-1">
-                                                        <div class="bg-green-500 h-1.5 rounded-full" style="width: 100%"></div>
-                                                    </div>
-                                                    <span class="text-xs text-right block">100%</span>
-                                                </td>
-                                                <td class="px-6 py-4"><button class="text-white bg-white/10 hover:bg-white/20 px-3 py-1 rounded text-xs flex items-center gap-1"><i data-lucide="download" class="w-3 h-3"></i> Download</button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div class="glass-panel p-8 rounded-xl text-center text-gray-400">
+                            <i data-lucide="inbox" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
+                            <p>You don't have any active projects yet.</p>
+                            <button onclick="router('quote')" class="text-electric-blue font-bold hover:underline mt-2">Start your first project</button>
                         </div>
-
-                        <!-- Workspace Tab: Payments -->
-                        <div id="ws-payments" class="workspace-tab hidden animate-fade-in">
-                            <h2 class="text-2xl font-bold mb-6">Payments & Invoices</h2>
-                            <div class="glass-panel rounded-xl overflow-hidden mb-6">
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-left text-sm text-gray-400">
-                                        <thead class="bg-white/5 text-gray-300">
-                                            <tr>
-                                                <th class="px-6 py-3 font-medium">Invoice ID</th>
-                                                <th class="px-6 py-3 font-medium">Project</th>
-                                                <th class="px-6 py-3 font-medium">Amount</th>
-                                                <th class="px-6 py-3 font-medium">Status</th>
-                                                <th class="px-6 py-3 font-medium">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y divide-white/5">
-                                            <tr class="hover:bg-white/5 transition-colors">
-                                                <td class="px-6 py-4 font-mono text-white">#INV-2026-045</td>
-                                                <td class="px-6 py-4">TechStart Brand Identity</td>
-                                                <td class="px-6 py-4 text-white font-bold">KES 45,000</td>
-                                                <td class="px-6 py-4"><span class="text-green-500 bg-green-500/10 px-2 py-1 rounded text-xs font-bold">PAID</span></td>
-                                                <td class="px-6 py-4"><button class="text-electric-blue hover:underline text-xs">Download Receipt</button></td>
-                                            </tr>
-                                            <tr class="hover:bg-white/5 transition-colors">
-                                                <td class="px-6 py-4 font-mono text-white">#INV-2026-046</td>
-                                                <td class="px-6 py-4">Website Development</td>
-                                                <td class="px-6 py-4 text-white font-bold">KES 80,000</td>
-                                                <td class="px-6 py-4"><span class="text-yellow-500 bg-yellow-500/10 px-2 py-1 rounded text-xs font-bold">PENDING</span></td>
-                                                <td class="px-6 py-4">
-                                                    <button onclick="openCheckout('Website Development Balance', 80000)" class="text-white bg-electric-blue hover:bg-blue-600 px-3 py-1 rounded text-xs font-bold transition-colors">Pay Now</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="bg-electric-blue/10 border border-electric-blue/20 p-4 rounded-xl flex items-start gap-3">
-                                <i data-lucide="info" class="w-5 h-5 text-electric-blue shrink-0 mt-0.5"></i>
-                                <div>
-                                    <h4 class="text-sm font-bold text-white mb-1">Payment Instructions</h4>
-                                    <p class="text-xs text-gray-400">You can pay pending invoices using M-Pesa (Send Money to <strong>0758992636</strong>). After payment, an invoice will be generated automatically.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Workspace Tab: AI Support Chat -->
-                        <div id="ws-chat" class="workspace-tab hidden animate-fade-in min-h-[420px] h-[72vh] max-h-[680px] flex flex-col">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4">
-                                <div>
-                                    <h2 class="text-2xl font-bold">AI Support Chat</h2>
-                                    <p class="text-xs text-gray-400">Chat here, then send the full transcript to our WhatsApp for follow-up.</p>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <button onclick="forwardChatToWhatsApp()" class="bg-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white px-4 py-2 rounded-full text-xs font-bold transition-colors flex items-center gap-2">
-                                        <i data-lucide="message-circle" class="w-4 h-4"></i> Send chat to WhatsApp
-                                    </button>
-                                    <button onclick="forwardChatToEmail()" class="bg-electric-blue/20 text-electric-blue hover:bg-electric-blue hover:text-white px-4 py-2 rounded-full text-xs font-bold transition-colors flex items-center gap-2">
-                                        <i data-lucide="mail" class="w-4 h-4"></i> Email transcript
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="glass-panel flex-1 rounded-xl flex flex-col overflow-hidden">
-                                <!-- Chat Messages Area -->
-                                <div id="chat-messages" aria-live="polite" aria-label="Chat messages" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4">
-                                    <!-- Initial AI Message -->
-                                    <div class="flex gap-3">
-                                        <div class="w-8 h-8 bg-electric-blue/20 rounded-full flex items-center justify-center shrink-0">
-                                            <i data-lucide="bot" class="w-4 h-4 text-electric-blue"></i>
-                                        </div>
-                                        <div class="chat-bubble-ai p-3 text-sm text-gray-300 max-w-[80%]">
-                                            Hello! I am the EBELTECHS AI assistant. How can I help you today? You can ask about our services, pricing, or project status.
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Chat Input Area -->
-                                <div class="p-4 border-t border-white/10 bg-black/20">
-                                    <form onsubmit="sendChatMessage(event)" class="flex gap-2">
-                                        <input type="text" id="chat-input" aria-label="Type your message" placeholder="Type your message..." class="flex-1 bg-black/40 border border-white/10 rounded-full px-5 py-3 text-sm text-white focus:border-electric-blue outline-none">
-                                        <button type="submit" aria-label="Send message" class="bg-electric-blue text-white p-3 rounded-full hover:bg-blue-600 transition-colors shadow-lg shadow-electric-blue/20">
-                                            <i data-lucide="send" class="w-5 h-5"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Workspace Tab: Files (Placeholder) -->
-                        <div id="ws-files" class="workspace-tab hidden animate-fade-in">
-                            <h2 class="text-2xl font-bold mb-6">Files & Downloads</h2>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div class="glass-panel p-4 rounded-xl flex items-center gap-4 hover:border-electric-blue/30 transition-colors">
-                                    <div class="w-10 h-10 bg-electric-blue/20 rounded-lg flex items-center justify-center shrink-0"><i data-lucide="file-image" class="w-5 h-5 text-electric-blue"></i></div>
-                                    <div class="flex-1">
-                                        <p class="text-sm font-bold text-white">TechStart_Logo_Final.zip</p>
-                                        <p class="text-xs text-gray-500">2.4 MB • 12 Oct 2026</p>
-                                    </div>
-                                    <button class="text-gray-400 hover:text-white"><i data-lucide="download" class="w-4 h-4"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Workspace Tab: Profile (Placeholder) -->
-                        <div id="ws-profile" class="workspace-tab hidden animate-fade-in">
-                            <h2 class="text-2xl font-bold mb-6">My Profile</h2>
-                            <div class="glass-panel p-8 rounded-xl max-w-2xl">
-                                <div class="flex items-center gap-6 mb-8">
-                                    <div class="w-20 h-20 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                                        <span class="text-3xl font-bold text-electric-blue" id="profile-initial-large">C</span>
-                                    </div>
-                                    <div>
-                                        <h3 class="text-xl font-bold text-white" id="profile-name-large">Client Name</h3>
-                                        <p class="text-sm text-gray-400" id="profile-email">client@example.com</p>
-                                        <button class="text-xs text-electric-blue hover:underline mt-2">Change Profile Picture</button>
-                                    </div>
-                                </div>
-                                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Profile updated successfully!');">
-                                    <div class="grid md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label class="text-xs font-bold text-gray-500 uppercase block mb-1">Full Name</label>
-                                            <input type="text" value="Client Name" class="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-electric-blue outline-none">
-                                        </div>
-                                        <div>
-                                            <label class="text-xs font-bold text-gray-500 uppercase block mb-1">Email Address</label>
-                                            <input type="email" value="client@example.com" class="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-electric-blue outline-none">
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="bg-electric-blue text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-blue-600 transition-colors mt-4">Save Changes</button>
-                                </form>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -1155,7 +1016,7 @@
     </main>
 
     <!-- ========================================== -->
-    <!-- M-PESA CHECKOUT MODAL (UPDATED STK PUSH)   -->
+    <!-- M-PESA CHECKOUT MODAL                      -->
     <!-- ========================================== -->
     <div id="mpesa-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
         <div class="glass-panel w-full max-w-md rounded-2xl shadow-2xl relative animate-fade-in my-8 overflow-hidden">
@@ -1166,108 +1027,50 @@
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
                 <i data-lucide="smartphone" class="w-10 h-10 mx-auto mb-2 text-white"></i>
-                <h3 class="text-xl font-bold text-white">M-Pesa Payment</h3>
-                <p class="text-white/80 text-sm mt-1">Send Money to 0758992636</p>
+                <h3 class="text-xl font-bold text-white">M-Pesa Checkout</h3>
+                <p class="text-white/80 text-sm mt-1">Secure payment via Safaricom</p>
             </div>
 
-            <!-- Initial Payment View -->
-            <div id="mpesa-initial-view" class="p-6 space-y-6">
+            <div class="p-6 space-y-6">
                 <!-- Order Summary -->
-                <div class="bg-black/30 rounded-lg p-4 border border-white/5 text-center">
+                <div class="bg-black/30 rounded-lg p-4 border border-white/5">
                     <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Item</p>
                     <p id="modal-item-name" class="text-white font-bold text-lg">EBELTECHS Polo</p>
                     <p class="text-xs text-gray-400 uppercase tracking-wider mt-3 mb-1">Amount to Pay</p>
                     <p id="modal-item-price" class="text-electric-blue font-bold text-2xl">KSH 1,000</p>
                 </div>
 
-                <!-- Form to collect Phone -->
-                <form id="mpesa-form" onsubmit="triggerStkPush(event)" class="space-y-4">
+                <!-- Instructions -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                        <i data-lucide="info" class="w-4 h-4 text-electric-blue"></i> Payment Instructions
+                    </h4>
+                    <ol class="text-sm text-gray-400 space-y-2 list-decimal list-inside bg-white/5 p-4 rounded-lg">
+                        <li>Go to <strong>M-Pesa</strong> on your phone.</li>
+                        <li>Select <strong>Lipa na M-Pesa</strong> > <strong>Buy Goods & Services</strong>.</li>
+                        <li>Enter Till Number: <strong class="text-white select-all">123456</strong> <em>(Update with your actual Till)</em></li>
+                        <li>Enter Amount: <strong id="modal-instruction-amount" class="text-white">1,000</strong>.</li>
+                        <li>Enter your M-Pesa PIN and confirm.</li>
+                    </ol>
+                </div>
+
+                <!-- Form to collect details -->
+                <form onsubmit="confirmMpesaOrder(event)" class="space-y-4">
                     <div>
-                        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Your M-Pesa Phone Number *</label>
-                        <input type="tel" id="mpesa-phone" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-mpesa-green outline-none transition-all" placeholder="e.g., 0758992636">
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Your Full Name *</label>
+                        <input type="text" id="mpesa-name" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-mpesa-green outline-none transition-all" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">M-Pesa Confirmation Code *</label>
+                        <input type="text" id="mpesa-code" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-mpesa-green outline-none transition-all uppercase" placeholder="e.g., QAB123XYZ">
+                        <p class="text-xs text-gray-500 mt-1">Check your SMS for the confirmation code.</p>
                     </div>
                     
                     <button type="submit" class="w-full bg-mpesa-green text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-500/25 flex items-center justify-center gap-2 mt-4">
-                        <i data-lucide="send" class="w-5 h-5"></i> Send Prompt to Phone
+                        <i data-lucide="check-circle" class="w-5 h-5"></i> Confirm Order
                     </button>
                 </form>
             </div>
-
-            <!-- Loading View -->
-            <div id="mpesa-loading-view" class="hidden p-12 text-center space-y-4">
-                <div class="w-16 h-16 border-4 border-mpesa-green border-t-transparent rounded-full animate-spin mx-auto"></div>
-                <h3 class="text-xl font-bold text-white">Prompt Sent!</h3>
-                <p class="text-sm text-gray-400">Please check your phone for the M-Pesa STK push prompt and enter your PIN to complete the payment.</p>
-            </div>
-
-            <!-- Success View (Auto Invoice) -->
-            <div id="mpesa-success-view" class="hidden p-8 text-center space-y-4">
-                <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto text-green-500 mb-2">
-                    <i data-lucide="check-circle" class="w-10 h-10"></i>
-                </div>
-                <h3 class="text-2xl font-bold text-white">Payment Successful!</h3>
-                <p class="text-sm text-gray-400 mb-4">Thank you, <span id="success-name" class="text-white font-bold">Client</span>. Your payment has been confirmed.</p>
-                
-                <div class="bg-electric-blue/10 border border-electric-blue/20 p-4 rounded-xl text-sm text-electric-blue mb-6">
-                    <i data-lucide="file-text" class="w-5 h-5 mx-auto mb-2"></i>
-                    Generating your official invoice...
-                </div>
-                
-                <button onclick="closeCheckout()" class="w-full bg-electric-blue text-white py-3 rounded-lg font-bold hover:bg-blue-600 transition-all shadow-lg shadow-electric-blue/25">
-                    Done
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hidden Invoice Template for Auto-Generation -->
-    <div id="invoice-template" class="hidden bg-[#121418] text-white p-10 w-[800px] mx-auto border border-gray-700">
-        <div class="flex justify-between items-center border-b border-gray-700 pb-6 mb-6">
-            <div>
-                <h1 class="text-3xl font-bold text-white mb-1">EBELTECHS GRAPHIX</h1>
-                <p class="text-sm text-gray-400">Where Innovation Meets Design</p>
-            </div>
-            <div class="text-right">
-                <h2 class="text-2xl font-bold text-electric-blue">INVOICE</h2>
-                <p class="text-sm text-gray-400">#INV-AUTO</p>
-            </div>
-        </div>
-        <div class="grid grid-cols-2 gap-8 mb-8">
-            <div>
-                <p class="text-xs font-bold text-gray-500 uppercase mb-1">Billed To</p>
-                <p class="text-white font-bold text-lg" id="inv-client-name">Client</p>
-                <p class="text-sm text-gray-400" id="inv-client-phone">Phone</p>
-            </div>
-            <div class="text-right">
-                <p class="text-xs font-bold text-gray-500 uppercase mb-1">Date</p>
-                <p class="text-white text-sm" id="inv-date">Date</p>
-            </div>
-        </div>
-        <table class="w-full text-left mb-8">
-            <thead>
-                <tr class="border-b border-gray-700 text-xs text-gray-500 uppercase">
-                    <th class="py-2">Description</th>
-                    <th class="py-2 text-right">Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="border-b border-gray-700">
-                    <td class="py-4 text-white" id="inv-item-name">Item</td>
-                    <td class="py-4 text-right text-white font-mono" id="inv-item-price">KSH 0</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="flex justify-end">
-            <div class="w-1/2">
-                <div class="flex justify-between text-lg font-bold">
-                    <span class="text-white">Total Paid</span>
-                    <span class="text-electric-blue font-mono" id="inv-total">KSH 0</span>
-                </div>
-            </div>
-        </div>
-        <div class="mt-12 text-center text-sm text-gray-500">
-            <p>Thank you for your business!</p>
-            <p>ebeltravour@gmail.com | +254 758 992 636</p>
         </div>
     </div>
 
@@ -1276,7 +1079,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 
-                <!-- Brand Info -->
+                <!-- Brand Info (CUSTOM SVG LOGO) -->
                 <div>
                     <div class="flex items-center mb-4">
                         <svg viewBox="0 0 340 80" class="h-14 w-auto" xmlns="http://www.w3.org/2000/svg">
@@ -1326,17 +1129,23 @@
                             <i data-lucide="mail" class="w-4 h-4 text-red-400"></i>
                             <a href="mailto:ebeltravour@gmail.com" class="hover:text-electric-blue">ebeltravour@gmail.com</a>
                         </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-gray-500"></i>
+                            <span>Kenya</span>
+                        </li>
                     </ul>
                 </div>
 
-                <!-- Social Media Links -->
+                <!-- Social Media Links with Icons -->
                 <div>
                     <h4 class="font-bold mb-4 text-white">Follow Us</h4>
                     <ul class="space-y-3 text-sm text-gray-400">
+                        <!-- Instagram -->
                         <li class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-500"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                             <a href="https://instagram.com/Ebeltechs_graphix" target="_blank" class="hover:text-electric-blue">Ebeltechs_graphix</a>
                         </li>
+                        <!-- TikTok -->
                         <li class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
                             <a href="https://tiktok.com/@ebel.ebel5" target="_blank" class="hover:text-electric-blue">ebel.ebel5</a>
@@ -1364,288 +1173,6 @@
     <script>
         lucide.createIcons();
 
-        // --- AI CHAT LOGIC ---
-        let chatHistory = [];
-
-        function sendChatMessage(e) {
-            e.preventDefault();
-            const input = document.getElementById('chat-input');
-            const message = input.value.trim();
-            if(!message) return;
-
-            // Append user message
-            appendChatBubble('user', message);
-            input.value = '';
-
-            // Simulate AI thinking and replying
-            setTimeout(() => {
-                let aiReply = "Thanks for reaching out! A member of our team will review this. In the meantime, feel free to check our Services page or ask me about pricing.";
-                
-                const lowerMsg = message.toLowerCase();
-                if(lowerMsg.includes('price') || lowerMsg.includes('cost')) {
-                    aiReply = "Our pricing varies depending on the scope of the project. You can use the 'Request a Service' tab to get a custom quotation, or contact us directly on WhatsApp!";
-                } else if(lowerMsg.includes('logo')) {
-                    aiReply = "We create unique and memorable logos! A basic logo package starts at KES 5,000. Would you like to request a service?";
-                } else if(lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
-                    aiReply = "Hello! How can I assist you with your design or digital needs today?";
-                }
-
-                appendChatBubble('ai', aiReply);
-            }, 1000);
-        }
-
-        function appendChatBubble(sender, text) {
-            const chatContainer = document.getElementById('chat-messages');
-            const isAI = sender === 'ai';
-            
-            // Save to history for forwarding
-            chatHistory.push({ sender: isAI ? 'AI' : 'You', text: text });
-
-            const div = document.createElement('div');
-            div.className = `flex gap-3 ${isAI ? '' : 'flex-row-reverse'}`;
-            const avatar = document.createElement('div');
-            avatar.className = `w-8 h-8 ${isAI ? 'bg-electric-blue/20' : 'bg-gray-600'} rounded-full flex items-center justify-center shrink-0`;
-            const icon = document.createElement('i');
-            icon.setAttribute('data-lucide', isAI ? 'bot' : 'user');
-            icon.className = `w-4 h-4 ${isAI ? 'text-electric-blue' : 'text-white'}`;
-            avatar.appendChild(icon);
-
-            const bubble = document.createElement('div');
-            bubble.className = `${isAI ? 'chat-bubble-ai' : 'chat-bubble-user'} p-3 text-sm text-gray-300 max-w-[80%]`;
-            bubble.textContent = text;
-            div.append(avatar, bubble);
-
-            chatContainer.appendChild(div);
-            chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
-            lucide.createIcons();
-        }
-
-        function forwardChatToWhatsApp() {
-            if (!chatHistory.some(chat => chat.sender === 'You')) {
-                return alert("Send a message first, then you can share the chat transcript on WhatsApp.");
-            }
-
-            const transcript = [
-                '*EBELTECHS AI CHAT TRANSCRIPT*',
-                '',
-                ...chatHistory.map(chat => `*${chat.sender}:* ${chat.text}`)
-            ].join('\n');
-            const waUrl = new URL('https://wa.me/254758992636');
-            waUrl.searchParams.set('text', transcript);
-            window.open(waUrl.toString(), '_blank', 'noopener,noreferrer');
-        }
-
-        function forwardChatToEmail() {
-            if(chatHistory.length === 0) return alert("No chat history to forward.");
-            
-            let body = `AI Chat Transcript:\n\n`;
-            chatHistory.forEach(chat => {
-                body += `${chat.sender}: ${chat.text}\n`;
-            });
-            
-            const mailtoUrl = `mailto:ebeltravour@gmail.com?subject=AI Chat Transcript&body=${encodeURIComponent(body)}`;
-            window.open(mailtoUrl, '_blank');
-        }
-
-        // --- CUSTOMER AUTHENTICATION STATE ---
-        function checkCustomerAuth() {
-            const isLoggedIn = localStorage.getItem('ebeltechs_customer');
-            const guestNav = document.getElementById('guest-nav');
-            const userNav = document.getElementById('user-nav');
-            
-            if (isLoggedIn) {
-                if(guestNav) guestNav.classList.add('hidden');
-                if(userNav) {
-                    userNav.classList.remove('hidden');
-                    userNav.classList.add('flex');
-                }
-                
-                const savedName = localStorage.getItem('ebeltechs_customer_name') || 'Valued Client';
-                const savedEmail = localStorage.getItem('ebeltechs_customer_email') || 'client@example.com';
-                
-                document.querySelectorAll('#welcome-name, #profile-name, #profile-name-large').forEach(el => el.innerText = savedName);
-                document.querySelectorAll('#profile-initial, #profile-initial-large').forEach(el => el.innerText = savedName.charAt(0).toUpperCase());
-                document.getElementById('profile-email').innerText = savedEmail;
-                
-            } else {
-                if(guestNav) guestNav.classList.remove('hidden');
-                if(userNav) {
-                    userNav.classList.add('hidden');
-                    userNav.classList.remove('flex');
-                }
-            }
-        }
-
-        let isCustomerSignupMode = false;
-
-        function toggleCustomerAuthMode() {
-            isCustomerSignupMode = !isCustomerSignupMode;
-            const nameField = document.getElementById('signup-name-field');
-            const confirmField = document.getElementById('signup-confirm-field');
-            const nameInput = document.getElementById('cust-name');
-            const passwordInput = document.getElementById('cust-password');
-            const confirmInput = document.getElementById('cust-password-confirm');
-            const feedback = document.getElementById('customer-auth-feedback');
-
-            nameField.classList.toggle('hidden', !isCustomerSignupMode);
-            confirmField.classList.toggle('hidden', !isCustomerSignupMode);
-            nameInput.required = isCustomerSignupMode;
-            confirmInput.required = isCustomerSignupMode;
-            passwordInput.autocomplete = isCustomerSignupMode ? 'new-password' : 'current-password';
-            passwordInput.minLength = isCustomerSignupMode ? 8 : 0;
-            document.getElementById('customer-auth-title').textContent = isCustomerSignupMode ? 'Create Your Account' : 'Client Portal Login';
-            document.getElementById('customer-auth-description').textContent = isCustomerSignupMode
-                ? 'Sign up to access your projects, invoices, and messages.'
-                : 'Access your projects, invoices, and messages.';
-            document.getElementById('customer-auth-submit').innerHTML = isCustomerSignupMode
-                ? 'Create Account <i data-lucide="user-plus" class="w-4 h-4"></i>'
-                : 'Login to Workspace <i data-lucide="arrow-right" class="w-4 h-4"></i>';
-            document.getElementById('customer-auth-switch-prompt').textContent = isCustomerSignupMode
-                ? 'Already have an account?'
-                : "Don't have an account?";
-            document.getElementById('customer-auth-switch').textContent = isCustomerSignupMode ? 'Log in' : 'Sign up';
-            feedback.classList.add('hidden');
-            feedback.textContent = '';
-            lucide.createIcons();
-        }
-
-        function setCustomerAuthFeedback(message, isError) {
-            const feedback = document.getElementById('customer-auth-feedback');
-            feedback.textContent = message;
-            feedback.classList.toggle('hidden', !message);
-            feedback.classList.toggle('text-red-400', isError);
-            feedback.classList.toggle('text-green-400', !isError);
-        }
-
-        function encodeCustomerSalt(bytes) {
-            return btoa(String.fromCharCode(...bytes));
-        }
-
-        async function hashCustomerPassword(password, salt) {
-            if (!window.crypto || !window.crypto.subtle) {
-                throw new Error('Secure password storage is unavailable in this browser. Open the website through HTTPS or localhost and try again.');
-            }
-
-            const saltBytes = salt
-                ? Uint8Array.from(atob(salt), character => character.charCodeAt(0))
-                : window.crypto.getRandomValues(new Uint8Array(16));
-            const key = await window.crypto.subtle.importKey(
-                'raw',
-                new TextEncoder().encode(password),
-                'PBKDF2',
-                false,
-                ['deriveBits']
-            );
-            const bits = await window.crypto.subtle.deriveBits({
-                name: 'PBKDF2',
-                salt: saltBytes,
-                iterations: 120000,
-                hash: 'SHA-256'
-            }, key, 256);
-
-            return {
-                salt: salt || encodeCustomerSalt(saltBytes),
-                hash: encodeCustomerSalt(new Uint8Array(bits))
-            };
-        }
-
-        function getCustomerAccounts() {
-            const savedAccounts = localStorage.getItem('ebeltechs_customer_accounts');
-            return savedAccounts ? JSON.parse(savedAccounts) : {};
-        }
-
-        async function handleCustomerAuth(e) {
-            e.preventDefault();
-            const form = e.currentTarget;
-            const submitButton = document.getElementById('customer-auth-submit');
-            const email = document.getElementById('cust-email').value.trim().toLowerCase();
-            const password = document.getElementById('cust-password').value;
-
-            if (!form.reportValidity()) return;
-
-            submitButton.disabled = true;
-            setCustomerAuthFeedback('', false);
-
-            try {
-                const accounts = getCustomerAccounts();
-
-                if (isCustomerSignupMode) {
-                    const name = document.getElementById('cust-name').value.trim();
-                    const confirmPassword = document.getElementById('cust-password-confirm').value;
-                    if (password !== confirmPassword) {
-                        setCustomerAuthFeedback('Passwords do not match.', true);
-                        return;
-                    }
-                    if (accounts[email]) {
-                        setCustomerAuthFeedback('An account with this email already exists. Please log in instead.', true);
-                        return;
-                    }
-
-                    const credentials = await hashCustomerPassword(password);
-                    accounts[email] = { name, ...credentials };
-                    localStorage.setItem('ebeltechs_customer_accounts', JSON.stringify(accounts));
-                    localStorage.setItem('ebeltechs_customer_name', name);
-                } else {
-                    const account = accounts[email];
-                    if (!account) {
-                        setCustomerAuthFeedback('No account was found for this email. Please sign up first.', true);
-                        return;
-                    }
-                    const credentials = await hashCustomerPassword(password, account.salt);
-                    if (credentials.hash !== account.hash) {
-                        setCustomerAuthFeedback('Incorrect email or password.', true);
-                        return;
-                    }
-                    localStorage.setItem('ebeltechs_customer_name', account.name);
-                }
-
-                localStorage.setItem('ebeltechs_customer', 'true');
-                localStorage.setItem('ebeltechs_customer_email', email);
-                checkCustomerAuth();
-                router('workspace');
-            } catch (error) {
-                console.error('Client account error:', error);
-                setCustomerAuthFeedback(error instanceof SyntaxError
-                    ? 'Saved account data could not be read. Clear this website’s local storage and try again.'
-                    : error.message || 'Unable to save or verify your account. Check browser storage and try again.', true);
-            } finally {
-                submitButton.disabled = false;
-            }
-        }
-
-        function logoutCustomer() {
-            localStorage.removeItem('ebeltechs_customer');
-            localStorage.removeItem('ebeltechs_customer_name');
-            localStorage.removeItem('ebeltechs_customer_email');
-            checkCustomerAuth();
-            router('home');
-        }
-
-        // --- WORKSPACE TAB SWITCHING ---
-        function switchWorkspaceTab(tabName) {
-            document.querySelectorAll('.workspace-tab').forEach(el => {
-                el.classList.add('hidden');
-                el.classList.remove('block', 'animate-fade-in');
-            });
-            
-            document.querySelectorAll('.workspace-nav-btn').forEach(el => {
-                el.classList.remove('active');
-                el.classList.add('text-gray-400');
-            });
-            
-            const targetTab = document.getElementById('ws-' + tabName);
-            if(targetTab) {
-                targetTab.classList.remove('hidden');
-                targetTab.classList.add('block', 'animate-fade-in');
-            }
-            
-            const targetBtn = Array.from(document.querySelectorAll('.workspace-nav-btn')).find(btn => btn.innerText.toLowerCase().includes(tabName.substring(0, 4)));
-            if(targetBtn) {
-                targetBtn.classList.add('active');
-                targetBtn.classList.remove('text-gray-400');
-            }
-        }
-
         // --- ROUTER & TRANSITIONS ---
         function router(sectionId) {
             document.querySelectorAll('.page-section').forEach(el => {
@@ -1665,6 +1192,105 @@
 
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // --- AUTHENTICATION LOGIC (NEW) ---
+        function toggleAuthTab(tab) {
+            const loginForm = document.getElementById('form-login');
+            const signupForm = document.getElementById('form-signup');
+            const loginTab = document.getElementById('tab-login');
+            const signupTab = document.getElementById('tab-signup');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+                loginTab.classList.add('text-electric-blue', 'border-electric-blue');
+                loginTab.classList.remove('text-gray-500', 'border-transparent');
+                signupTab.classList.remove('text-electric-blue', 'border-electric-blue');
+                signupTab.classList.add('text-gray-500', 'border-transparent');
+            } else {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+                signupTab.classList.add('text-electric-blue', 'border-electric-blue');
+                signupTab.classList.remove('text-gray-500', 'border-transparent');
+                loginTab.classList.remove('text-electric-blue', 'border-electric-blue');
+                loginTab.classList.add('text-gray-500', 'border-transparent');
+            }
+        }
+
+        function checkCustomerAuth() {
+            const isLoggedIn = localStorage.getItem('ebeltechs_customer_session');
+            const guestNav = document.getElementById('guest-nav');
+            const userNav = document.getElementById('user-nav');
+            
+            if (isLoggedIn) {
+                if(guestNav) guestNav.classList.add('hidden');
+                if(userNav) {
+                    userNav.classList.remove('hidden');
+                    userNav.classList.add('flex');
+                }
+                
+                const savedName = localStorage.getItem('ebeltechs_customer_name') || 'Valued Client';
+                document.querySelectorAll('#welcome-name, #profile-name').forEach(el => { if(el) el.innerText = savedName; });
+                document.querySelectorAll('#profile-initial').forEach(el => { if(el) el.innerText = savedName.charAt(0).toUpperCase(); });
+            } else {
+                if(guestNav) guestNav.classList.remove('hidden');
+                if(userNav) {
+                    userNav.classList.add('hidden');
+                    userNav.classList.remove('flex');
+                }
+            }
+        }
+
+        function handleCustomerSignup(e) {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            let users = JSON.parse(localStorage.getItem('ebeltechs_users')) || [];
+            
+            if (users.find(u => u.email === email)) {
+                alert('An account with this email already exists. Please log in.');
+                toggleAuthTab('login');
+                return;
+            }
+
+            users.push({ name, email, password });
+            localStorage.setItem('ebeltechs_users', JSON.stringify(users));
+
+            // Auto login after signup
+            localStorage.setItem('ebeltechs_customer_session', 'true');
+            localStorage.setItem('ebeltechs_customer_name', name);
+            
+            alert('Account created successfully! Welcome to EBELTECHS.');
+            checkCustomerAuth();
+            router('workspace');
+        }
+
+        function handleCustomerLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            let users = JSON.parse(localStorage.getItem('ebeltechs_users')) || [];
+            const validUser = users.find(u => u.email === email && u.password === password);
+
+            if (validUser) {
+                localStorage.setItem('ebeltechs_customer_session', 'true');
+                localStorage.setItem('ebeltechs_customer_name', validUser.name);
+                checkCustomerAuth();
+                router('workspace');
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
+        }
+
+        function logoutCustomer() {
+            localStorage.removeItem('ebeltechs_customer_session');
+            localStorage.removeItem('ebeltechs_customer_name');
+            checkCustomerAuth();
+            router('home');
         }
 
         // --- CAROUSEL LOGIC ---
@@ -1701,7 +1327,10 @@
         const portfolioItems = [
             { id: 1, cat: 'logo', title: 'TechStart Logo', img: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80' },
             { id: 2, cat: 'poster', title: 'Music Festival', img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80' },
-            { id: 3, cat: 'web', title: 'E-Commerce Site', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80' }
+            { id: 3, cat: 'web', title: 'E-Commerce Site', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80' },
+            { id: 4, cat: 'video', title: 'Lyrics Video', img: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80' },
+            { id: 5, cat: 'merch', title: 'Brand Hoodie', img: 'https://images.unsplash.com/photo-1556821840-3a63f9565ba0?w=600&q=80' },
+            { id: 6, cat: 'logo', title: 'Church Brand', img: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?w=600&q=80' },
         ];
 
         function renderPortfolio(filter = 'all') {
@@ -1739,7 +1368,91 @@
 
         renderPortfolio();
 
+        // --- FILE UPLOAD LOGIC ---
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('file-list');
+        let selectedFiles = new DataTransfer(); 
+
+        if (dropZone) {
+            dropZone.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+
+            dropZone.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+        }
+
+        function handleFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].size > 4 * 1024 * 1024) {
+                    alert(`File ${files[i].name} is too large. Max size is 4MB.`);
+                    continue;
+                }
+                selectedFiles.items.add(files[i]);
+            }
+            updateFileList();
+            fileInput.files = selectedFiles.files;
+        }
+
+        function updateFileList() {
+            fileList.innerHTML = '';
+            Array.from(selectedFiles.files).forEach((file, index) => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between bg-white/5 p-2 rounded border border-white/10';
+                div.innerHTML = `
+                    <span class="truncate pr-2 flex items-center gap-2">
+                        <i data-lucide="file" class="w-4 h-4 text-electric-blue"></i>
+                        ${file.name} <span class="text-xs text-gray-500">(${(file.size/1024/1024).toFixed(2)} MB)</span>
+                    </span>
+                    <button type="button" onclick="removeFile(${index})" class="text-red-400 hover:text-red-300 p-1">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                `;
+                fileList.appendChild(div);
+            });
+            lucide.createIcons();
+        }
+
+        function removeFile(index) {
+            const dt = new DataTransfer();
+            const files = Array.from(selectedFiles.files);
+            files.splice(index, 1);
+            files.forEach(file => dt.items.add(file));
+            selectedFiles = dt;
+            fileInput.files = selectedFiles.files;
+            updateFileList();
+        }
+
         // --- DUAL SUBMISSION LOGIC (QUOTE) ---
+        
+        function showQuoteSuccess(message) {
+            const form = document.getElementById('quote-form');
+            const success = document.getElementById('quote-success');
+            document.getElementById('success-message-text').innerHTML = message;
+            form.classList.add('hidden');
+            success.classList.remove('hidden');
+            window.scrollTo({ top: document.getElementById('quote').offsetTop, behavior: 'smooth' });
+        }
+
         function submitViaWhatsApp(e) {
             e.preventDefault();
             const form = document.getElementById('quote-form');
@@ -1751,6 +1464,8 @@
             const service = document.getElementById('q-service').value;
             const title = document.getElementById('q-title').value;
             const desc = document.getElementById('q-desc').value;
+            const budget = document.getElementById('q-budget').value;
+            const deadline = document.getElementById('q-deadline').value;
 
             let msg = `*NEW PROJECT QUOTATION REQUEST*%0A%0A`;
             msg += `*Name:* ${name}%0A`;
@@ -1759,19 +1474,64 @@
             msg += `*Service:* ${service}%0A`;
             msg += `*Project Title:* ${title}%0A`;
             msg += `*Description:* ${desc}%0A`;
+            msg += `*Budget:* KSH ${budget || 'Not specified'}%0A`;
+            msg += `*Deadline:* ${deadline || 'Not specified'}%0A%0A`;
+
+            if (selectedFiles.files.length > 0) {
+                msg += `*Note:* I have ${selectedFiles.files.length} reference file(s) to send. I will attach them next.`;
+            }
 
             const phoneNumber = '254758992636'; 
             const waUrl = `https://wa.me/${phoneNumber}?text=${msg}`;
             window.open(waUrl, '_blank');
-            alert('WhatsApp opened! Please hit send to submit your request.');
+
+            showQuoteSuccess(`Your request has been pre-filled in a new WhatsApp window.<br><br><strong class="text-yellow-400">Important:</strong> If you attached files, please drag and drop them into the WhatsApp chat now before hitting send!`);
         }
 
         function submitViaEmail(e) {
             e.preventDefault();
-            alert('Simulated: Email sent to ebeltravour@gmail.com');
+            const form = document.getElementById('quote-form');
+            if (!form.reportValidity()) return;
+
+            const btn = document.getElementById('btn-email');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = 'SENDING... <i class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></i>';
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            const endpoint = 'https://formsubmit.co/ajax/ebeltravour@gmail.com';
+
+            fetch(endpoint, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                if (data.success === "true" || data.success === true) {
+                    showQuoteSuccess(`Your project enquiry has been sent directly to our team at <strong>ebeltravour@gmail.com</strong>.<br>We will review your requirements and get back to you within 24 hours.`);
+                } else {
+                    throw new Error('Submission failed');
+                }
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                lucide.createIcons();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Email delivery failed. (Note: You must activate FormSubmit on first use). Would you like to send via WhatsApp instead?");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                lucide.createIcons();
+                submitViaWhatsApp(e);
+            });
         }
 
-        // --- M-PESA STK PUSH SIMULATION & AUTO INVOICE ---
+        // --- M-PESA CHECKOUT LOGIC ---
         let currentProduct = { name: '', price: 0 };
 
         function openCheckout(productName, price) {
@@ -1780,12 +1540,9 @@
 
             document.getElementById('modal-item-name').innerText = productName;
             document.getElementById('modal-item-price').innerText = `KSH ${price.toLocaleString()}`;
-            
-            // Reset views
-            document.getElementById('mpesa-initial-view').classList.remove('hidden');
-            document.getElementById('mpesa-loading-view').classList.add('hidden');
-            document.getElementById('mpesa-success-view').classList.add('hidden');
-            document.getElementById('mpesa-phone').value = '';
+            document.getElementById('modal-instruction-amount').innerText = price.toLocaleString();
+            document.getElementById('mpesa-name').value = '';
+            document.getElementById('mpesa-code').value = '';
 
             const modal = document.getElementById('mpesa-modal');
             modal.classList.remove('hidden');
@@ -1800,51 +1557,32 @@
             document.body.style.overflow = 'auto';
         }
 
-        function triggerStkPush(e) {
+        function confirmMpesaOrder(e) {
             e.preventDefault();
-            const phone = document.getElementById('mpesa-phone').value;
-            const customerName = localStorage.getItem('ebeltechs_customer_name') || 'Valued Client';
+            
+            const customerName = document.getElementById('mpesa-name').value;
+            const mpesaCode = document.getElementById('mpesa-code').value.toUpperCase();
 
-            // Switch to loading view
-            document.getElementById('mpesa-initial-view').classList.add('hidden');
-            document.getElementById('mpesa-loading-view').classList.remove('hidden');
+            // Format WhatsApp Message
+            let msg = `*NEW M-PESA ORDER*%0A%0A`;
+            msg += `*Product:* ${currentProduct.name}%0A`;
+            msg += `*Price:* KSH ${currentProduct.price}%0A`;
+            msg += `*Customer Name:* ${customerName}%0A`;
+            msg += `*M-Pesa Code:* ${mpesaCode}%0A%0A`;
+            msg += `Please verify the payment and confirm my order.`;
 
-            // Simulate STK Push delay (3 seconds)
-            setTimeout(() => {
-                // Switch to success view
-                document.getElementById('mpesa-loading-view').classList.add('hidden');
-                document.getElementById('mpesa-success-view').classList.remove('hidden');
-                document.getElementById('success-name').innerText = customerName;
-
-                // Trigger Auto-Invoice Generation
-                generateAutoInvoice(customerName, phone, currentProduct.name, currentProduct.price);
-
-            }, 3500);
+            const phoneNumber = '254758992636'; 
+            const waUrl = `https://wa.me/${phoneNumber}?text=${msg}`;
+            
+            // Open WhatsApp
+            window.open(waUrl, '_blank');
+            
+            // Close modal and alert
+            closeCheckout();
+            alert(`Thank you, ${customerName}! Your order details have been sent to our team for verification. We will process your order once the M-Pesa code (${mpesaCode}) is confirmed.`);
         }
 
-        function generateAutoInvoice(clientName, clientPhone, itemName, itemPrice) {
-            // Populate hidden template
-            document.getElementById('inv-client-name').innerText = clientName;
-            document.getElementById('inv-client-phone').innerText = clientPhone;
-            document.getElementById('inv-date').innerText = new Date().toLocaleDateString();
-            document.getElementById('inv-item-name').innerText = itemName;
-            document.getElementById('inv-item-price').innerText = `KSH ${itemPrice.toLocaleString()}`;
-            document.getElementById('inv-total').innerText = `KSH ${itemPrice.toLocaleString()}`;
-
-            // Generate PDF
-            const element = document.getElementById('invoice-template');
-            const opt = {
-                margin:       0.5,
-                filename:     `EBELTECHS_Invoice_${itemName.replace(/\s+/g, '_')}.pdf`,
-                image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#121418' },
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-
-            html2pdf().set(opt).from(element).save();
-        }
-
-        // Init Auth Check on Load
+        // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             checkCustomerAuth();
         });
