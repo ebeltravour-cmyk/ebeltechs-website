@@ -853,12 +853,15 @@
                         </div>
 
                         <!-- DUAL SUBMISSION BUTTONS -->
-                        <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                            <button type="button" onclick="submitViaEmail(event)" id="btn-email" class="w-full bg-electric-blue text-white py-4 rounded-lg font-bold hover:bg-blue-600 transition-all shadow-lg shadow-electric-blue/25 flex items-center justify-center gap-2">
-                                <i data-lucide="mail" class="w-5 h-5"></i> SEND VIA EMAIL
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4">
+                            <button type="button" onclick="submitViaEmail(event)" id="btn-email" class="w-full bg-electric-blue text-white py-4 rounded-lg font-bold hover:bg-blue-600 transition-all shadow-lg shadow-electric-blue/25 flex items-center justify-center gap-2 text-sm">
+                                <i data-lucide="mail" class="w-4 h-4"></i> Email
                             </button>
-                            <button type="button" onclick="submitViaWhatsApp(event)" class="w-full bg-[#25D366] text-white py-4 rounded-lg font-bold hover:bg-[#128C7E] transition-all shadow-lg shadow-green-500/25 flex items-center justify-center gap-2">
-                                <i data-lucide="message-circle" class="w-5 h-5"></i> SEND VIA WHATSAPP
+                            <button type="button" onclick="submitViaWhatsApp(event)" class="w-full bg-[#25D366] text-white py-4 rounded-lg font-bold hover:bg-[#128C7E] transition-all shadow-lg shadow-green-500/25 flex items-center justify-center gap-2 text-sm">
+                                <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+                            </button>
+                            <button type="button" onclick="submitViaInstagram(event)" class="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-white py-4 rounded-lg font-bold hover:opacity-90 transition-all shadow-lg shadow-pink-500/25 flex items-center justify-center gap-2 text-sm">
+                                <i data-lucide="instagram" class="w-4 h-4"></i> Instagram
                             </button>
                         </div>
                     </form>
@@ -1529,6 +1532,47 @@
                 btn.disabled = false;
                 lucide.createIcons();
                 submitViaWhatsApp(e);
+            });
+        }
+
+        // --- NEW INSTAGRAM SUBMISSION LOGIC ---
+        function submitViaInstagram(e) {
+            e.preventDefault();
+            const form = document.getElementById('quote-form');
+            if (!form.reportValidity()) return;
+
+            const name = document.getElementById('q-name').value;
+            const email = document.getElementById('q-email').value;
+            const phone = document.getElementById('q-phone').value;
+            const service = document.getElementById('q-service').value;
+            const title = document.getElementById('q-title').value;
+            const desc = document.getElementById('q-desc').value;
+            const budget = document.getElementById('q-budget').value;
+            const deadline = document.getElementById('q-deadline').value;
+
+            // Instagram doesn't support rich formatting, so we use clean plain text
+            let msg = `NEW PROJECT QUOTATION REQUEST\n\n`;
+            msg += `Name: ${name}\n`;
+            msg += `Email: ${email}\n`;
+            msg += `Phone: ${phone}\n`;
+            msg += `Service: ${service}\n`;
+            msg += `Project Title: ${title}\n`;
+            msg += `Description: ${desc}\n`;
+            msg += `Budget: KSH ${budget || 'Not specified'}\n`;
+            msg += `Deadline: ${deadline || 'Not specified'}\n\n`;
+
+            if (selectedFiles.files.length > 0) {
+                msg += `Note: I have ${selectedFiles.files.length} reference file(s) to send.`;
+            }
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(msg).then(() => {
+                // Open Instagram DM
+                window.open('https://ig.me/m/Ebeltechs_graphix', '_blank');
+                showQuoteSuccess(`Your project details have been <strong class="text-white">copied to your clipboard</strong>.<br><br><strong class="text-pink-400">Important:</strong> We have opened our Instagram DM for you. Simply <strong>Paste (Ctrl+V / Cmd+V)</strong> the message into the chat and hit send! You can also attach your reference files directly there.`);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy text automatically. Please copy your details manually and send to @Ebeltechs_graphix');
             });
         }
 
