@@ -4,18 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EBELTECHS GRAPHIX | Where Innovation Meets Design</title>
-          <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Brand Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -27,23 +20,18 @@
                         'metallic-silver': '#C9D0D8',
                         'neon-purple': '#7000FF',
                         'mpesa-green': '#25D366',
-                        /* Master Prompt Hub Colors */
                         'hub-bg': '#05070B',
                         'hub-panel': '#0B1019',
                         'hub-blue': '#087BFF',
                         'hub-silver': '#C8D1DA',
                         'hub-gold': '#D4AF37',
                         'hub-text': '#929BA8',
-                        /* Dashboard Colors */
                         'dash-bg': '#0D0E12',
                         'dash-panel': '#1A1C23',
                         'dash-border': '#2C2E36',
                         'dash-text': '#8B8D98'
                     },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'] },
                     animation: {
                         'blob': 'blob 7s infinite',
                         'fade-in': 'fadeIn 0.5s ease-out forwards',
@@ -71,17 +59,14 @@
     </script>
 
     <style>
-        /* --- PREMIUM INTERFACE STYLES --- */
         body { background-color: #050505; color: white; overflow-x: hidden; }
-        
-        /* Noise Texture */
+
         .noise-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 50; opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* Animated Background */
         .mesh-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
             background: radial-gradient(circle at 50% 50%, #1a1d26 0%, #050505 100%);
@@ -91,23 +76,20 @@
             animation: blob 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Glassmorphism */
         .glass-panel {
             background: rgba(18, 20, 24, 0.6); backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
-        /* Smooth Page Transitions */
-        .page-section { 
+        .page-section {
             display: none; opacity: 0; transform: translateY(10px);
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
-        .page-section.active { 
-            display: block; opacity: 1; transform: translateY(0); 
+        .page-section.active {
+            display: block; opacity: 1; transform: translateY(0);
             animation: fadeIn 0.5s ease-out forwards;
         }
-        
-        /* Specific overrides for full screen apps */
+
         #workspace.active, #creative-hub.active {
             display: flex;
             height: 100vh;
@@ -117,24 +99,20 @@
             opacity: 1;
         }
 
-        /* Image Hover Zoom */
         .img-zoom-container { overflow: hidden; }
         .img-zoom-container img { transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .img-zoom-container:hover img { transform: scale(1.1); }
 
-        /* Custom Scrollbar */
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #087BFF; border-radius: 4px; }
 
-        /* Logo Hover Effect */
         .nav-logo-container svg { transition: all 0.3s ease; }
         .nav-logo-container:hover svg {
             transform: scale(1.05);
             filter: drop-shadow(0 0 20px rgba(8, 126, 255, 0.9));
         }
 
-        /* --- CAROUSEL STYLES --- */
         .carousel-container {
             position: relative;
             width: 100%;
@@ -155,7 +133,7 @@
             object-fit: cover;
         }
         .carousel-slide.active { opacity: 1; z-index: 10; }
-        
+
         .carousel-dot {
             width: 10px; height: 10px;
             border-radius: 50%;
@@ -168,14 +146,12 @@
             width: 24px;
             border-radius: 5px;
         }
-        
-        /* Drag and Drop Zone */
+
         .drop-zone.dragover {
             border-color: #087EFF !important;
             background-color: rgba(8, 126, 255, 0.05) !important;
         }
 
-        /* --- CREATIVE HUB SPECIFIC STYLES --- */
         .hub-nav-item {
             display: flex; align-items: center; gap: 12px; padding: 12px 16px;
             border-radius: 12px; color: #929BA8; font-size: 14px; font-weight: 500;
@@ -183,11 +159,10 @@
         }
         .hub-nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
         .hub-nav-item.active { background: rgba(8, 123, 255, 0.15); color: #087BFF; border-left: 3px solid #087BFF; }
-        
+
         .hub-tab { display: none; }
         .hub-tab.active { display: block; animation: fadeIn 0.3s ease-out forwards; }
 
-        /* Range Slider Styling */
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
@@ -198,7 +173,6 @@
             width: 100%; height: 4px; cursor: pointer; background: #1A1C23; border-radius: 2px;
         }
 
-        /* --- FOOTER CAROUSEL SPECIFIC STYLES --- */
         .footer-carousel {
             position: relative;
             width: 100%;
@@ -217,16 +191,14 @@
             opacity: 0;
             transition: opacity 1.5s ease-in-out, transform 6s linear;
             object-fit: cover;
-            /* Dim the images slightly and add contrast */
             filter: brightness(0.6) contrast(1.1);
             transform: scale(1);
         }
         .footer-slide.active {
             opacity: 1;
             z-index: 10;
-            transform: scale(1.05); /* Slow zoom effect */
+            transform: scale(1.05);
         }
-        /* Dark gradient overlay to ensure it blends with the dark theme */
         .footer-overlay {
             position: absolute;
             inset: 0;
@@ -238,19 +210,16 @@
 </head>
 <body class="font-sans antialiased selection:bg-electric-blue selection:text-white">
 
-    <!-- Visual Effects -->
     <div class="noise-overlay"></div>
     <div class="mesh-bg">
         <div class="orb w-96 h-96 bg-electric-blue/20 top-0 left-1/4 animate-blob"></div>
         <div class="orb w-96 h-96 bg-neon-purple/10 bottom-0 right-1/4 animate-blob" style="animation-delay: 2s"></div>
     </div>
 
-    <!-- Navigation -->
+    <!-- NAV -->
     <nav id="main-nav" class="fixed w-full z-40 top-0 glass-panel border-b-0 border-white/5">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                
-                <!-- CUSTOM METALLIC SVG LOGO -->
                 <div class="nav-logo-container flex items-center cursor-pointer group" onclick="router('home')">
                     <svg viewBox="0 0 340 80" class="h-12 w-auto" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -276,7 +245,7 @@
                         <text x="108" y="58" font-family="'Inter', sans-serif" font-weight="600" font-size="14" fill="url(#blueMetallicNav)" letter-spacing="8">GRAPHIX</text>
                     </svg>
                 </div>
-                
+
                 <div class="hidden lg:flex items-center space-x-6">
                     <button onclick="router('home')" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Home</button>
                     <button onclick="router('services')" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Services</button>
@@ -285,16 +254,14 @@
                     <button onclick="router('creative-hub')" class="nav-link text-sm font-bold text-electric-blue hover:text-white transition-colors flex items-center gap-1">
                         <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Creative Hub
                     </button>
-                    
+
                     <div class="flex items-center gap-6 pl-6 border-l border-gray-800">
-                        <!-- Guest Links -->
                         <div id="guest-nav" class="flex items-center gap-4">
                             <button onclick="router('login')" class="text-sm font-bold text-gray-400 hover:text-white transition-colors">Client Portal</button>
                             <button onclick="router('quote')" class="bg-electric-blue text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(8,126,255,0.3)] hover:shadow-[0_0_25px_rgba(8,126,255,0.6)]">
                                 Get a Quote
                             </button>
                         </div>
-                        <!-- User Links -->
                         <div id="user-nav" class="hidden items-center gap-4">
                             <button onclick="router('workspace')" class="text-sm font-bold text-white flex items-center gap-2 hover:text-electric-blue transition-colors">
                                 <i data-lucide="user" class="w-4 h-4"></i> My Workspace
@@ -309,7 +276,6 @@
                 </button>
             </div>
         </div>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-charcoal border-t border-gray-800 p-4 space-y-3">
             <button onclick="router('home')" class="block w-full text-left text-gray-400 hover:text-white py-2">Home</button>
             <button onclick="router('services')" class="block w-full text-left text-gray-400 hover:text-white py-2">Services</button>
@@ -323,37 +289,24 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
     <main id="main-content" class="relative z-10 pt-20 min-h-screen">
 
-        <!-- 1. HOME SECTION -->
+        <!-- HOME -->
         <section id="home" class="page-section active">
-            <!-- HERO SECTION -->
             <div class="w-full relative overflow-hidden py-8 bg-deep-black flex items-center justify-center min-h-[80vh]">
                 <div class="max-w-[1500px] mx-auto px-4 lg:px-8 w-full">
-                    <img 
-                        src="hero-image.jpg" 
-                        alt="EBELTECHS GRAPHIX - Your Vision. Our Creative Expertise." 
-                        class="w-full h-auto rounded-2xl border border-white/10 shadow-[0_0_60px_rgba(8,126,255,0.15)] animate-fade-in object-cover"
-                    >
+                    <img src="hero-image.jpg" alt="EBELTECHS GRAPHIX - Your Vision. Our Creative Expertise." class="w-full h-auto rounded-2xl border border-white/10 shadow-[0_0_60px_rgba(8,126,255,0.15)] animate-fade-in object-cover">
                 </div>
             </div>
 
-            <!-- About / Story Section -->
             <div class="py-24 bg-charcoal/30 relative">
                 <div class="max-w-7xl mx-auto px-6 lg:px-8">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div>
                             <h2 class="text-3xl font-display font-bold mb-6">Our <span class="text-electric-blue">Story</span></h2>
-                            <p class="text-gray-400 text-sm mb-4 leading-relaxed">
-                                Ebeltechs Graphix was established from a passion for creativity, technology and visual communication. What began as an interest in transforming ordinary ideas into attractive designs has grown into a creative brand focused on helping individuals, businesses and organizations communicate their messages professionally.
-                            </p>
-                            <p class="text-gray-400 text-sm mb-4 leading-relaxed">
-                                We recognized that many businesses have great ideas but struggle to present them visually. This inspired us to build a creative agency that bridges the gap between ideas and professional visual communication.
-                            </p>
-                            <p class="text-electric-blue font-bold text-lg mt-6 italic">
-                                "Every great idea deserves a powerful visual identity."
-                            </p>
+                            <p class="text-gray-400 text-sm mb-4 leading-relaxed">Ebeltechs Graphix was established from a passion for creativity, technology and visual communication. What began as an interest in transforming ordinary ideas into attractive designs has grown into a creative brand focused on helping individuals, businesses and organizations communicate their messages professionally.</p>
+                            <p class="text-gray-400 text-sm mb-4 leading-relaxed">We recognized that many businesses have great ideas but struggle to present them visually. This inspired us to build a creative agency that bridges the gap between ideas and professional visual communication.</p>
+                            <p class="text-electric-blue font-bold text-lg mt-6 italic">"Every great idea deserves a powerful visual identity."</p>
                         </div>
                         <div class="grid gap-6">
                             <div class="glass-panel p-6 rounded-xl border-l-4 border-electric-blue">
@@ -369,7 +322,6 @@
                 </div>
             </div>
 
-            <!-- Why Choose Us -->
             <div class="py-24">
                 <div class="max-w-7xl mx-auto px-6 lg:px-8">
                     <h2 class="text-3xl font-display font-bold mb-12 text-center">Why Choose <span class="text-electric-blue">EBELTECHS?</span></h2>
@@ -399,7 +351,7 @@
             </div>
         </section>
 
-        <!-- 2. SERVICES SECTION -->
+        <!-- SERVICES -->
         <section id="services" class="page-section py-24">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center mb-16">
@@ -408,8 +360,6 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Service 1 -->
                     <div class="relative overflow-hidden group glass-panel rounded-2xl hover:border-electric-blue/50 transition-all flex flex-col border border-white/10">
                         <img src="service-graphic.jpg" alt="Graphic Design Background" class="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm z-0 pointer-events-none group-hover:opacity-30 transition-opacity duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
@@ -428,7 +378,6 @@
                         </div>
                     </div>
 
-                    <!-- Service 2 -->
                     <div class="relative overflow-hidden group glass-panel rounded-2xl hover:border-electric-blue/50 transition-all flex flex-col border border-white/10">
                         <img src="service-branding.jpg" alt="Branding Background" class="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm z-0 pointer-events-none group-hover:opacity-30 transition-opacity duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
@@ -447,7 +396,6 @@
                         </div>
                     </div>
 
-                    <!-- Service 3 -->
                     <div class="relative overflow-hidden group glass-panel rounded-2xl hover:border-electric-blue/50 transition-all flex flex-col border border-white/10">
                         <img src="service-web.jpg" alt="Web Design Background" class="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm z-0 pointer-events-none group-hover:opacity-30 transition-opacity duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
@@ -466,7 +414,6 @@
                         </div>
                     </div>
 
-                    <!-- Service 4 -->
                     <div class="relative overflow-hidden group glass-panel rounded-2xl hover:border-electric-blue/50 transition-all flex flex-col border border-white/10">
                         <img src="service-multimedia.jpg" alt="Multimedia Background" class="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm z-0 pointer-events-none group-hover:opacity-30 transition-opacity duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
@@ -485,7 +432,6 @@
                         </div>
                     </div>
 
-                    <!-- Service 5 -->
                     <div class="relative overflow-hidden group glass-panel rounded-2xl hover:border-electric-blue/50 transition-all flex flex-col border border-white/10">
                         <img src="service-digital.jpg" alt="Digital Media Background" class="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm z-0 pointer-events-none group-hover:opacity-30 transition-opacity duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
@@ -504,7 +450,6 @@
                         </div>
                     </div>
 
-                    <!-- Service 6 -->
                     <div class="relative overflow-hidden group glass-panel rounded-2xl hover:border-electric-blue/50 transition-all flex flex-col border border-white/10">
                         <img src="service-merch.jpg" alt="Printing & Merch Background" class="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm z-0 pointer-events-none group-hover:opacity-30 transition-opacity duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
@@ -522,19 +467,16 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </section>
 
-        <!-- 3. WORK / PORTFOLIO SECTION -->
+        <!-- WORK -->
         <section id="work" class="page-section py-24">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Our <span class="text-electric-blue">Creative Work</span></h2>
                     <p class="text-gray-400 mb-8">Browse our portfolio by category.</p>
-                    
-                    <!-- Filters -->
                     <div class="flex flex-wrap justify-center gap-3 mb-12">
                         <button onclick="filterPortfolio('all')" class="filter-btn active px-4 py-2 rounded-full text-sm border border-electric-blue bg-electric-blue text-white transition-all">All</button>
                         <button onclick="filterPortfolio('logo')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Logo Design</button>
@@ -542,15 +484,11 @@
                         <button onclick="filterPortfolio('web')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Web Design</button>
                     </div>
                 </div>
-
-                <!-- Gallery Grid -->
-                <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Items injected via JS -->
-                </div>
+                <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </div>
         </section>
 
-        <!-- 4. SHOP SECTION -->
+        <!-- SHOP -->
         <section id="shop" class="page-section py-24 bg-charcoal/30">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center mb-16">
@@ -559,8 +497,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    
-                    <!-- Product 1: Polo -->
                     <div class="glass-panel rounded-2xl overflow-hidden group">
                         <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
                             <img src="polo.jpg" alt="Polo T-Shirt" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
@@ -580,7 +516,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 2: T-Shirt -->
                     <div class="glass-panel rounded-2xl overflow-hidden group">
                         <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
                             <img src="tshirt.jpg" alt="T-Shirt" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
@@ -600,7 +535,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 3: Turtleneck -->
                     <div class="glass-panel rounded-2xl overflow-hidden group">
                         <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
                             <img src="turtleneck.jpg" alt="Turtleneck" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
@@ -619,7 +553,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 4: Hoodie -->
                     <div class="glass-panel rounded-2xl overflow-hidden group">
                         <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
                             <img src="hoodie.jpg" alt="Hoodie" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
@@ -638,7 +571,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 5: Sweatshirt -->
                     <div class="glass-panel rounded-2xl overflow-hidden group">
                         <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
                             <img src="sweatshirt.jpg" alt="Sweatshirt" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
@@ -657,7 +589,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 6: Zip Jacket -->
                     <div class="glass-panel rounded-2xl overflow-hidden group">
                         <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
                             <img src="zip-jacket.jpg" alt="Zip Jacket" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
@@ -676,7 +607,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 7: Cap -->
                     <div class="glass-panel rounded-2xl overflow-hidden group">
                         <div class="relative h-64 img-zoom-container bg-black flex items-center justify-center">
                             <img src="cap.jpg" alt="Cap" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
@@ -692,25 +622,19 @@
                             </button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- 5. CREATIVE HUB SECTION (FULLY FUNCTIONAL) -->
-        <!-- ========================================== -->
+        <!-- CREATIVE HUB -->
         <section id="creative-hub" class="page-section" style="padding: 0; margin: 0; width: 100%;">
             <div class="flex w-full h-screen overflow-hidden bg-hub-bg">
-                
-                <!-- LEFT SIDEBAR (HUB NAVIGATION) -->
                 <aside class="w-64 bg-hub-panel border-r border-white/5 flex flex-col shrink-0 hidden lg:flex relative z-20">
                     <div class="h-20 flex items-center px-6 border-b border-white/5">
                         <span class="font-display font-bold text-xl text-white tracking-widest flex items-center gap-2">
                             <i data-lucide="hexagon" class="text-hub-blue w-6 h-6"></i> CREATIVE HUB
                         </span>
                     </div>
-                    
                     <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto custom-scroll">
                         <div class="text-xs font-bold text-hub-text uppercase tracking-wider mb-3 px-4">Workspace</div>
                         <div class="hub-nav-item active" onclick="switchHubTab('overview', this)">
@@ -722,7 +646,6 @@
                         <div class="hub-nav-item" onclick="switchHubTab('projects', this)">
                             <i data-lucide="folder-open" class="w-5 h-5"></i> My Projects
                         </div>
-                        
                         <div class="text-xs font-bold text-hub-text uppercase tracking-wider mt-6 mb-3 px-4">Creative Tools</div>
                         <div class="hub-nav-item" onclick="switchHubTab('color-lab', this)">
                             <i data-lucide="palette" class="w-5 h-5"></i> Color Lab
@@ -736,7 +659,6 @@
                         <div class="hub-nav-item" onclick="alert('Mockup Studio interface coming in Phase 4.')">
                             <i data-lucide="shirt" class="w-5 h-5"></i> Mockup Studio
                         </div>
-
                         <div class="text-xs font-bold text-hub-text uppercase tracking-wider mt-6 mb-3 px-4">Resources</div>
                         <div class="hub-nav-item" onclick="switchHubTab('inspiration', this)">
                             <i data-lucide="image" class="w-5 h-5"></i> Inspiration Gallery
@@ -748,7 +670,6 @@
                             <i data-lucide="graduation-cap" class="w-5 h-5"></i> Design Academy
                         </div>
                     </nav>
-
                     <div class="p-4 border-t border-white/5">
                         <button onclick="router('home')" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold text-hub-text hover:text-white hover:bg-white/5 transition-all">
                             <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Website
@@ -756,9 +677,7 @@
                     </div>
                 </aside>
 
-                <!-- MAIN HUB CONTENT AREA -->
                 <main class="flex-1 flex flex-col min-w-0 bg-hub-bg relative">
-                    <!-- Top Header -->
                     <header class="h-20 flex items-center justify-between px-8 border-b border-white/5 shrink-0 bg-hub-bg/80 backdrop-blur-md z-10">
                         <div>
                             <h1 class="text-2xl font-bold text-white flex items-center gap-2" id="hub-page-title">
@@ -767,65 +686,45 @@
                         </div>
                         <div class="flex items-center gap-4">
                             <button class="w-10 h-10 rounded-full bg-hub-panel border border-white/10 flex items-center justify-center text-hub-text hover:text-white transition"><i data-lucide="bell" class="w-5 h-5"></i></button>
-                            <div class="w-10 h-10 rounded-full bg-hub-blue/20 text-hub-blue flex items-center justify-center font-bold border border-hub-blue/30">
-                                E
-                            </div>
+                            <div class="w-10 h-10 rounded-full bg-hub-blue/20 text-hub-blue flex items-center justify-center font-bold border border-hub-blue/30">E</div>
                         </div>
                     </header>
 
-                    <!-- Scrollable Content Area -->
                     <div class="flex-1 overflow-y-auto p-8 custom-scroll relative">
-                        
-                        <!-- ============================================== -->
-                        <!-- TAB 1: OVERVIEW                                -->
-                        <!-- ============================================== -->
                         <div id="hub-tab-overview" class="hub-tab active">
                             <div class="mb-10">
                                 <h2 class="text-3xl font-display font-bold text-white mb-2">Welcome back, Creator.</h2>
                                 <p class="text-hub-text">Here is what's happening in your creative space today.</p>
                             </div>
-
-                            <!-- Quick Tools -->
                             <div class="mb-10">
                                 <h3 class="text-lg font-bold text-white mb-4">Quick Tools</h3>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                     <div onclick="switchHubTab('ai-studio')" class="glass-panel p-6 rounded-2xl cursor-pointer hover:border-hub-blue/50 transition-all group">
-                                        <div class="w-12 h-12 rounded-full bg-hub-blue/10 flex items-center justify-center mb-4 group-hover:bg-hub-blue/20 transition">
-                                            <i data-lucide="wand-2" class="w-6 h-6 text-hub-blue"></i>
-                                        </div>
+                                        <div class="w-12 h-12 rounded-full bg-hub-blue/10 flex items-center justify-center mb-4 group-hover:bg-hub-blue/20 transition"><i data-lucide="wand-2" class="w-6 h-6 text-hub-blue"></i></div>
                                         <h4 class="font-bold text-white mb-1">AI Image Gen</h4>
                                         <p class="text-xs text-hub-text">Create concepts instantly.</p>
                                     </div>
                                     <div onclick="switchHubTab('color-lab')" class="glass-panel p-6 rounded-2xl cursor-pointer hover:border-hub-gold/50 transition-all group">
-                                        <div class="w-12 h-12 rounded-full bg-hub-gold/10 flex items-center justify-center mb-4 group-hover:bg-hub-gold/20 transition">
-                                            <i data-lucide="palette" class="w-6 h-6 text-hub-gold"></i>
-                                        </div>
+                                        <div class="w-12 h-12 rounded-full bg-hub-gold/10 flex items-center justify-center mb-4 group-hover:bg-hub-gold/20 transition"><i data-lucide="palette" class="w-6 h-6 text-hub-gold"></i></div>
                                         <h4 class="font-bold text-white mb-1">Color Lab</h4>
                                         <p class="text-xs text-hub-text">Generate palettes.</p>
                                     </div>
                                     <div onclick="switchHubTab('typo-lab')" class="glass-panel p-6 rounded-2xl cursor-pointer hover:border-purple-500/50 transition-all group">
-                                        <div class="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition">
-                                            <i data-lucide="type" class="w-6 h-6 text-purple-500"></i>
-                                        </div>
+                                        <div class="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition"><i data-lucide="type" class="w-6 h-6 text-purple-500"></i></div>
                                         <h4 class="font-bold text-white mb-1">Font Pairing</h4>
                                         <p class="text-xs text-hub-text">Discover perfect matches.</p>
                                     </div>
                                     <div onclick="switchHubTab('projects')" class="glass-panel p-6 rounded-2xl cursor-pointer hover:border-green-500/50 transition-all group">
-                                        <div class="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition">
-                                            <i data-lucide="folder-open" class="w-6 h-6 text-green-500"></i>
-                                        </div>
+                                        <div class="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition"><i data-lucide="folder-open" class="w-6 h-6 text-green-500"></i></div>
                                         <h4 class="font-bold text-white mb-1">My Projects</h4>
                                         <p class="text-xs text-hub-text">View saved work.</p>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Recent Projects & Inspiration -->
                             <div class="grid lg:grid-cols-2 gap-8">
                                 <div>
                                     <h3 class="text-lg font-bold text-white mb-4">Recent Projects</h3>
                                     <div id="overview-recent-projects" class="glass-panel rounded-2xl p-4 space-y-4 min-h-[150px]">
-                                        <!-- Injected via JS -->
                                         <div class="text-sm text-hub-text text-center py-8">No projects saved yet. Go to AI Studio to create one!</div>
                                     </div>
                                 </div>
@@ -844,20 +743,14 @@
                             </div>
                         </div>
 
-                        <!-- ============================================== -->
-                        <!-- TAB 2: AI STUDIO                               -->
-                        <!-- ============================================== -->
                         <div id="hub-tab-ai-studio" class="hub-tab">
                             <div class="mb-8">
                                 <h2 class="text-3xl font-display font-bold text-white mb-2">AI Studio</h2>
                                 <p class="text-hub-text">Generate high-quality assets using our advanced AI models.</p>
                             </div>
-                            
                             <div class="grid lg:grid-cols-2 gap-8">
-                                <!-- Input Area -->
                                 <div class="glass-panel p-6 rounded-2xl border border-white/5">
                                     <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="wand-2" class="text-hub-blue w-5 h-5"></i> Image Generator</h3>
-                                    
                                     <div class="space-y-4">
                                         <div>
                                             <label class="text-xs font-bold text-hub-text uppercase mb-2 block">Prompt</label>
@@ -878,22 +771,15 @@
                                         <div class="text-xs text-center text-hub-text pt-2">Cost: 1 AI Credit</div>
                                     </div>
                                 </div>
-
-                                <!-- Output Area -->
                                 <div class="glass-panel p-6 rounded-2xl border border-white/5 flex flex-col items-center justify-center min-h-[400px] relative overflow-hidden" id="ai-output-container">
-                                    <!-- Empty State -->
                                     <div id="ai-empty-state" class="text-center text-hub-text">
-                                        <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <i data-lucide="image" class="w-10 h-10 text-white/20"></i>
-                                        </div>
+                                        <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="image" class="w-10 h-10 text-white/20"></i></div>
                                         <p>Your generated image will appear here.</p>
                                     </div>
-                                    <!-- Loading State -->
                                     <div id="ai-loading-state" class="hidden text-center text-hub-blue">
                                         <i data-lucide="loader-2" class="w-12 h-12 animate-spin mx-auto mb-4"></i>
                                         <p class="font-bold animate-pulse">Generating your image...</p>
                                     </div>
-                                    <!-- Result State -->
                                     <div id="ai-result-state" class="hidden w-full h-full absolute inset-0 bg-hub-bg">
                                         <img id="ai-result-img" src="" alt="Generated Result" class="w-full h-full object-cover" crossorigin="anonymous">
                                         <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-hub-bg to-transparent flex justify-between items-center">
@@ -908,30 +794,20 @@
                             </div>
                         </div>
 
-                        <!-- ============================================== -->
-                        <!-- TAB 3: MY PROJECTS                             -->
-                        <!-- ============================================== -->
                         <div id="hub-tab-projects" class="hub-tab">
                             <div class="mb-8">
                                 <h2 class="text-3xl font-display font-bold text-white mb-2">My Projects</h2>
                                 <p class="text-hub-text">View and manage your saved AI generations.</p>
                             </div>
-                            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                <!-- Injected via JS -->
-                            </div>
+                            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                         </div>
 
-                        <!-- ============================================== -->
-                        <!-- TAB 4: COLOR LAB                               -->
-                        <!-- ============================================== -->
                         <div id="hub-tab-color-lab" class="hub-tab">
                             <div class="mb-8">
                                 <h2 class="text-3xl font-display font-bold text-white mb-2">Color Lab</h2>
                                 <p class="text-hub-text">Generate palettes, check contrast, and extract colors.</p>
                             </div>
-                            
                             <div class="grid lg:grid-cols-3 gap-8">
-                                <!-- Generator -->
                                 <div class="glass-panel p-6 rounded-2xl border border-white/5 lg:col-span-2">
                                     <div class="flex justify-between items-center mb-6">
                                         <h3 class="text-lg font-bold text-white">Palette Generator</h3>
@@ -939,17 +815,9 @@
                                             <i data-lucide="refresh-cw" class="w-4 h-4"></i> Randomize
                                         </button>
                                     </div>
-
-                                    <div id="color-palette-container" class="flex h-48 rounded-xl overflow-hidden mb-6 border border-white/10 shadow-xl">
-                                        <!-- Colors injected via JS -->
-                                    </div>
-                                    
-                                    <div class="grid grid-cols-5 gap-2 text-center" id="color-hex-container">
-                                        <!-- Hex codes injected via JS -->
-                                    </div>
+                                    <div id="color-palette-container" class="flex h-48 rounded-xl overflow-hidden mb-6 border border-white/10 shadow-xl"></div>
+                                    <div class="grid grid-cols-5 gap-2 text-center" id="color-hex-container"></div>
                                 </div>
-
-                                <!-- Info -->
                                 <div class="space-y-6">
                                     <div class="glass-panel p-6 rounded-2xl border border-white/5">
                                         <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="pipette" class="text-hub-gold w-5 h-5"></i> Color Extractor</h3>
@@ -962,37 +830,27 @@
                             </div>
                         </div>
 
-                        <!-- ============================================== -->
-                        <!-- TAB 5: TYPOGRAPHY LAB                          -->
-                        <!-- ============================================== -->
                         <div id="hub-tab-typo-lab" class="hub-tab">
                             <div class="mb-8">
                                 <h2 class="text-3xl font-display font-bold text-white mb-2">Typography Lab</h2>
                                 <p class="text-hub-text">Test and pair fonts perfectly for your next project.</p>
                             </div>
-
                             <div class="grid lg:grid-cols-3 gap-8">
-                                <!-- Controls -->
                                 <div class="glass-panel p-6 rounded-2xl border border-white/5">
                                     <h3 class="text-lg font-bold text-white mb-6">Controls</h3>
-                                    
                                     <div class="space-y-6">
                                         <div>
                                             <label class="text-xs font-bold text-hub-text flex justify-between mb-2">
-                                                <span>Font Size</span>
-                                                <span id="val-size" class="text-white">32px</span>
+                                                <span>Font Size</span><span id="val-size" class="text-white">32px</span>
                                             </label>
                                             <input type="range" id="font-size-slider" min="16" max="72" value="32" oninput="updateTypography()">
                                         </div>
-                                        
                                         <div>
                                             <label class="text-xs font-bold text-hub-text flex justify-between mb-2">
-                                                <span>Letter Spacing</span>
-                                                <span id="val-spacing" class="text-white">0px</span>
+                                                <span>Letter Spacing</span><span id="val-spacing" class="text-white">0px</span>
                                             </label>
                                             <input type="range" id="letter-spacing-slider" min="-2" max="10" value="0" oninput="updateTypography()">
                                         </div>
-
                                         <div>
                                             <label class="text-xs font-bold text-hub-text mb-2 block">Font Weight</label>
                                             <select id="font-weight-select" class="w-full bg-hub-bg border border-white/10 rounded-lg p-3 text-white outline-none focus:border-hub-blue" onchange="updateTypography()">
@@ -1004,8 +862,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Preview -->
                                 <div class="glass-panel p-8 rounded-2xl border border-white/5 lg:col-span-2 flex flex-col justify-center bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-hub-bg relative overflow-hidden">
                                     <div class="absolute inset-0 bg-hub-bg/80"></div>
                                     <div class="relative z-10">
@@ -1017,9 +873,6 @@
                             </div>
                         </div>
 
-                        <!-- ============================================== -->
-                        <!-- TAB 6: RESOURCE LIBRARY                        -->
-                        <!-- ============================================== -->
                         <div id="hub-tab-resources" class="hub-tab">
                             <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                                 <div>
@@ -1032,9 +885,7 @@
                                     <button class="px-4 py-2 bg-hub-panel text-hub-text border border-white/10 rounded-lg text-sm font-bold hover:text-white">Mockups</button>
                                 </div>
                             </div>
-
                             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                <!-- Resource Card 1 -->
                                 <div class="glass-panel rounded-2xl overflow-hidden group border border-white/5 hover:border-hub-blue/50 transition-colors">
                                     <div class="h-40 bg-gray-800 relative">
                                         <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
@@ -1048,7 +899,6 @@
                                         </button>
                                     </div>
                                 </div>
-                                <!-- Resource Card 2 -->
                                 <div class="glass-panel rounded-2xl overflow-hidden group border border-white/5 hover:border-hub-blue/50 transition-colors">
                                     <div class="h-40 bg-gray-800 relative">
                                         <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
@@ -1064,22 +914,18 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </main>
             </div>
         </section>
 
-        <!-- 6. GET A QUOTE SECTION -->
+        <!-- QUOTE -->
         <section id="quote" class="page-section py-24">
             <div class="max-w-3xl mx-auto px-6">
-                
-                <!-- Carousel -->
                 <div class="carousel-container">
                     <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Design Workspace" class="carousel-slide active">
                     <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Creative Meeting" class="carousel-slide">
                     <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Branding Presentation" class="carousel-slide">
-                    
                     <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20">
                         <div class="carousel-dot active" onclick="setSlide(0)"></div>
                         <div class="carousel-dot" onclick="setSlide(1)"></div>
@@ -1092,7 +938,7 @@
                         <h2 class="text-3xl font-display font-bold mb-2">Project <span class="text-electric-blue">Quotation</span></h2>
                         <p class="text-gray-400 text-sm">Tell us about your project and we'll get back to you with a custom quote.</p>
                     </div>
-                    
+
                     <form id="quote-form" enctype="multipart/form-data" class="space-y-6">
                         <input type="hidden" name="_subject" value="New Project Quotation from EBELTECHS Website!">
                         <input type="hidden" name="_captcha" value="false">
@@ -1185,14 +1031,13 @@
             </div>
         </section>
 
-        <!-- 7. CLIENT LOGIN -->
+        <!-- LOGIN -->
         <section id="login" class="page-section py-32 flex items-center justify-center min-h-[80vh]">
             <div class="glass-panel p-8 md:p-12 rounded-3xl w-full max-w-md animate-fade-in relative overflow-hidden">
                 <div class="flex border-b border-white/10 mb-8">
                     <button id="tab-login" onclick="toggleAuthTab('login')" class="flex-1 pb-3 text-center font-bold text-electric-blue border-b-2 border-electric-blue transition-all">Login</button>
                     <button id="tab-signup" onclick="toggleAuthTab('signup')" class="flex-1 pb-3 text-center font-bold text-gray-500 hover:text-white border-b-2 border-transparent transition-all">Sign Up</button>
                 </div>
-
                 <div id="form-login">
                     <div class="text-center mb-8">
                         <i data-lucide="lock" class="w-12 h-12 text-electric-blue mx-auto mb-4"></i>
@@ -1212,7 +1057,6 @@
                         </button>
                     </form>
                 </div>
-
                 <div id="form-signup" class="hidden">
                     <div class="text-center mb-8">
                         <i data-lucide="user-plus" class="w-12 h-12 text-neon-purple mx-auto mb-4"></i>
@@ -1239,7 +1083,7 @@
             </div>
         </section>
 
-        <!-- 8. CUSTOMER WORKSPACE -->
+        <!-- WORKSPACE -->
         <section id="workspace" class="page-section" style="padding: 0; margin: 0; width: 100%;">
             <div class="flex w-full h-screen overflow-hidden bg-dash-bg">
                 <aside class="w-64 bg-dash-panel border-r border-dash-border flex flex-col shrink-0 hidden md:flex">
@@ -1274,7 +1118,6 @@
                             </div>
                         </div>
                     </header>
-
                     <div class="flex-1 overflow-y-auto p-8">
                         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
                             <div class="xl:col-span-2 space-y-6">
@@ -1314,25 +1157,18 @@
                 </main>
             </div>
         </section>
-
     </main>
 
-    <!-- Footer with Integrated Image Carousel -->
+    <!-- FOOTER -->
     <footer id="main-footer" class="border-t border-white/10 pt-12 pb-8 relative z-10 bg-deep-black">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            
-            <!-- NEW FOOTER CAROUSEL (ABOVE CONTACTS) -->
+
             <div class="mb-12">
                 <div class="footer-carousel">
-                    <!-- Images -->
                     <img src="hub-preview-1.jpg" alt="Creative Hub Dashboard" class="footer-slide active">
                     <img src="hub-preview-2.jpg" alt="Poster Generation Interface" class="footer-slide">
                     <img src="hub-preview-3.jpg" alt="Analytics Overview" class="footer-slide">
-                    
-                    <!-- Dark Overlay to dim the images -->
                     <div class="footer-overlay"></div>
-                    
-                    <!-- Carousel Indicators -->
                     <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20">
                         <div class="carousel-dot active" onclick="setFooterSlide(0)"></div>
                         <div class="carousel-dot" onclick="setFooterSlide(1)"></div>
@@ -1341,7 +1177,6 @@
                 </div>
             </div>
 
-            <!-- Existing Footer Grid (Contacts, Links, etc.) -->
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <div class="flex items-center mb-4">
@@ -1372,11 +1207,11 @@
                 <div>
                     <h4 class="font-bold mb-4 text-white">Quick Links</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><button onclick="router('home')" class="hover:text-electric-blue">Home</button></li>
-                        <li><button onclick="router('services')" class="hover:text-electric-blue">Services</button></li>
-                        <li><button onclick="router('work')" class="hover:text-electric-blue">Portfolio</button></li>
-                        <li><button onclick="router('shop')" class="hover:text-electric-blue">Shop</button></li>
-                        <li><button onclick="router('creative-hub')" class="hover:text-electric-blue">Creative Hub</button></li>
+                        <li><button onclick="router('home')" class="hover:text-hub-blue transition-colors">Home</button></li>
+                        <li><button onclick="router('services')" class="hover:text-hub-blue transition-colors">Services</button></li>
+                        <li><button onclick="router('work')" class="hover:text-hub-blue transition-colors">Portfolio</button></li>
+                        <li><button onclick="router('shop')" class="hover:text-hub-blue transition-colors">Shop</button></li>
+                        <li><button onclick="router('creative-hub')" class="hover:text-hub-blue transition-colors">Creative Hub</button></li>
                     </ul>
                 </div>
 
@@ -1385,22 +1220,106 @@
                     <ul class="space-y-3 text-sm text-gray-400">
                         <li class="flex items-center gap-2">
                             <i data-lucide="message-circle" class="w-4 h-4 text-green-500"></i>
-                            <a href="https://wa.me/254758992636" target="_blank" class="hover:text-electric-blue">+254 758 992 636</a>
+                            <a href="https://wa.me/254758992636" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">+254 758 992 636</a>
                         </li>
                         <li class="flex items-center gap-2">
                             <i data-lucide="mail" class="w-4 h-4 text-red-400"></i>
-                            <a href="mailto:ebeltravour@gmail.com" class="hover:text-electric-blue">ebeltravour@gmail.com</a>
+                            <a href="mailto:ebeltravour@gmail.com" class="hover:text-hub-blue transition-colors">ebeltravour@gmail.com</a>
                         </li>
                     </ul>
                 </div>
+
+                <!-- SOCIAL MEDIA (NEW — 4th column) -->
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Follow Us</h4>
+                    <ul class="space-y-3 text-sm text-hub-text">
+
+                        <li class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                            <a href="https://www.facebook.com/TravourEbel" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Travour Ebel</a>
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-500">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                            </svg>
+                            <a href="https://instagram.com/Ebeltechs_graphix" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Ebeltechs_graphix</a>
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                            </svg>
+                            <a href="https://tiktok.com/@ebel.ebel5" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">ebel.ebel5</a>
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect width="4" height="12" x="2" y="9"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                            <a href="https://linkedin.com/in/ebel-ebel" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">ebel ebel</a>
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                <path d="M4 4l11.733 16h4.267l-11.733 -16z"/>
+                                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/>
+                            </svg>
+                            <a href="https://x.com/EbeltechsGrafix" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">EbeltechsGrafix</a>
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                                <path d="M16 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                                <path d="M12 16a4 4 0 0 0 4-4H8a4 4 0 0 0 4 4Z"/>
+                                <path d="M18 8a2 2 0 1 1 3-3"/>
+                                <path d="M6 8a2 2 0 1 0-3-3"/>
+                            </svg>
+                            <a href="https://reddit.com/user/Ok3llo_coda" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Ok3llo_coda</a>
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-800">
+                                <path d="M14.5 3.5v4h4v4h-4v5.5c0 1.5 1 2.5 2.5 2.5h2v4h-3c-2.5 0-4.5-2-4.5-4.5v-7.5h-3v-4h3v-4h3Z"/>
+                            </svg>
+                            <a href="https://tumblr.com/ebeltechs-graphix22" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">ebeltechs-graphix22</a>
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                <path d="M12 21a9 9 0 1 1 9-9c0 3-1.5 5-3 6-2 1-4 1-5 0"/>
+                                <path d="M12 15c-1.5 0-3-1.5-3-3s1.5-3 3-3 3 1.5 3 3-1.5 3-3 3Z"/>
+                            </svg>
+                            <a href="https://threads.net/@ebeltechs_graphix" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">@ebeltechs_graphix</a>
+                        </li>
+
+                        <li class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9 9h2l1 3 1-3h2l-2 5 2 5h-2l-1-3-1 3H9l2-5Z"/>
+                            </svg>
+                            <a href="https://quora.com/profile/Ebel-travour" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Ebel travour</a>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
+
             <div class="border-t border-white/5 pt-8 text-center text-xs text-gray-600">
                 © 2026 EBELTECHS GRAPHIX. All Rights Reserved.
             </div>
         </div>
     </footer>
 
-    <!-- M-PESA CHECKOUT MODAL -->
+    <!-- M-PESA MODAL -->
     <div id="mpesa-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
         <div class="glass-panel w-full max-w-md rounded-2xl shadow-2xl relative animate-fade-in my-8 overflow-hidden">
             <div class="bg-mpesa-green p-6 text-center relative">
@@ -1410,7 +1329,6 @@
                 <i data-lucide="smartphone" class="w-10 h-10 mx-auto mb-2 text-white"></i>
                 <h3 class="text-xl font-bold text-white">M-Pesa Checkout</h3>
             </div>
-
             <div class="p-6 space-y-6">
                 <div class="bg-black/30 rounded-lg p-4 border border-white/5">
                     <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Item</p>
@@ -1418,7 +1336,6 @@
                     <p class="text-xs text-gray-400 uppercase tracking-wider mt-3 mb-1">Amount to Pay</p>
                     <p id="modal-item-price" class="text-electric-blue font-bold text-2xl">KSH 1,000</p>
                 </div>
-
                 <div>
                     <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
                         <i data-lucide="info" class="w-4 h-4 text-electric-blue"></i> Payment Instructions
@@ -1431,7 +1348,6 @@
                         <li>Enter your M-Pesa PIN and confirm.</li>
                     </ol>
                 </div>
-
                 <form onsubmit="confirmMpesaOrder(event)" class="space-y-4">
                     <div>
                         <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Your Full Name *</label>
@@ -1441,7 +1357,6 @@
                         <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">M-Pesa Confirmation Code *</label>
                         <input type="text" id="mpesa-code" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-mpesa-green outline-none transition-all uppercase" placeholder="e.g., QAB123XYZ">
                     </div>
-                    
                     <button type="submit" class="w-full bg-mpesa-green text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-500/25 flex items-center justify-center gap-2 mt-4">
                         <i data-lucide="check-circle" class="w-5 h-5"></i> Confirm Order
                     </button>
@@ -1455,15 +1370,12 @@
 
         // --- ROUTER ---
         function router(sectionId) {
-            document.querySelectorAll('.page-section').forEach(el => {
-                el.classList.remove('active');
-            });
-            
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+
             const mainNav = document.getElementById('main-nav');
             const mainFooter = document.getElementById('main-footer');
             const mainContent = document.getElementById('main-content');
 
-            // Hide nav/footer for full screen apps
             if(sectionId === 'workspace' || sectionId === 'creative-hub') {
                 mainNav.style.display = 'none';
                 mainFooter.style.display = 'none';
@@ -1481,7 +1393,7 @@
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             }, 100);
-            
+
             document.getElementById('mobile-menu')?.classList.add('hidden');
         }
 
@@ -1489,30 +1401,15 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // --- CREATIVE HUB INTERACTIVE LOGIC ---
+        // --- CREATIVE HUB ---
         function switchHubTab(tabId, element) {
-            // 1. Hide all tabs
-            document.querySelectorAll('.hub-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // 2. Remove active class from sidebar
-            document.querySelectorAll('.hub-nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
+            document.querySelectorAll('.hub-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.hub-nav-item').forEach(item => item.classList.remove('active'));
 
-            // 3. Show selected tab
             const targetTab = document.getElementById(`hub-tab-${tabId}`);
-            if(targetTab) {
-                targetTab.classList.add('active');
-            }
+            if(targetTab) targetTab.classList.add('active');
+            if(element) element.classList.add('active');
 
-            // 4. Set active class on sidebar
-            if(element) {
-                element.classList.add('active');
-            }
-
-            // 5. Update Page Title
             const titleMap = {
                 'overview': 'Overview <span class="text-hub-blue">Dashboard</span>',
                 'ai-studio': 'AI <span class="text-hub-blue">Studio</span>',
@@ -1522,23 +1419,14 @@
                 'resources': 'Resource <span class="text-hub-blue">Library</span>',
                 'inspiration': 'Inspiration <span class="text-hub-blue">Gallery</span>'
             };
-            if(titleMap[tabId]) {
-                document.getElementById('hub-page-title').innerHTML = titleMap[tabId];
-            }
+            if(titleMap[tabId]) document.getElementById('hub-page-title').innerHTML = titleMap[tabId];
 
-            // Load Projects if switching to Projects tab
-            if(tabId === 'projects' || tabId === 'overview') {
-                loadProjects();
-            }
+            if(tabId === 'projects' || tabId === 'overview') loadProjects();
         }
 
-        // --- AI STUDIO LOGIC (POLLINATIONS API) ---
         function generateAIImage() {
             const prompt = document.getElementById('ai-prompt').value;
-            if(!prompt) {
-                alert("Please enter a prompt first.");
-                return;
-            }
+            if(!prompt) { alert("Please enter a prompt first."); return; }
 
             const emptyState = document.getElementById('ai-empty-state');
             const loadingState = document.getElementById('ai-loading-state');
@@ -1546,22 +1434,18 @@
             const btn = document.getElementById('btn-ai-gen');
             const imgElement = document.getElementById('ai-result-img');
 
-            // Show loading
             emptyState.classList.add('hidden');
             resultState.classList.add('hidden');
             loadingState.classList.remove('hidden');
-            
+
             btn.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Generating...';
             btn.disabled = true;
             lucide.createIcons();
 
-            // Use Pollinations AI for free image generation
             const encodedPrompt = encodeURIComponent(prompt);
             const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=800&height=600&nologo=true&seed=${Math.random()}`;
-
             imgElement.src = imageUrl;
-            
-            // Wait for image to load
+
             imgElement.onload = () => {
                 loadingState.classList.add('hidden');
                 resultState.classList.remove('hidden');
@@ -1569,7 +1453,6 @@
                 btn.disabled = false;
                 lucide.createIcons();
             };
-
             imgElement.onerror = () => {
                 alert("Failed to generate image. Please try a different prompt.");
                 loadingState.classList.add('hidden');
@@ -1583,29 +1466,18 @@
         function saveProject() {
             const imgSrc = document.getElementById('ai-result-img').src;
             const prompt = document.getElementById('ai-prompt').value;
-            
             if(!imgSrc || !prompt) return;
 
             let projects = JSON.parse(localStorage.getItem('ebeltechs_hub_projects')) || [];
-            
-            const newProject = {
-                id: Date.now(),
-                img: imgSrc,
-                prompt: prompt,
-                date: new Date().toLocaleDateString()
-            };
-
-            projects.unshift(newProject);
+            projects.unshift({ id: Date.now(), img: imgSrc, prompt: prompt, date: new Date().toLocaleDateString() });
             localStorage.setItem('ebeltechs_hub_projects', JSON.stringify(projects));
-            
             alert('Project saved successfully! Check "My Projects".');
             loadProjects();
         }
 
         function loadProjects() {
             const projects = JSON.parse(localStorage.getItem('ebeltechs_hub_projects')) || [];
-            
-            // Update My Projects Tab
+
             const projectsGrid = document.getElementById('projects-grid');
             if(projectsGrid) {
                 projectsGrid.innerHTML = '';
@@ -1632,7 +1504,6 @@
                 }
             }
 
-            // Update Overview Recent Projects
             const recentContainer = document.getElementById('overview-recent-projects');
             if(recentContainer) {
                 recentContainer.innerHTML = '';
@@ -1668,13 +1539,10 @@
         async function downloadImage() {
             const imgSrc = document.getElementById('ai-result-img').src;
             if(!imgSrc) return;
-
             try {
-                // Fetch the image to create a blob
                 const response = await fetch(imgSrc);
                 const blob = await response.blob();
                 const url = window.URL.createObjectURL(blob);
-                
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = `ebeltechs-ai-${Date.now()}.jpg`;
@@ -1683,42 +1551,28 @@
                 a.remove();
                 window.URL.revokeObjectURL(url);
             } catch (error) {
-                // Fallback: Open in new tab if CORS blocks fetch
                 window.open(imgSrc, '_blank');
             }
         }
 
-        // --- COLOR LAB LOGIC ---
         function generatePalette() {
             const randomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
-            
             const colors = [randomColor(), randomColor(), randomColor(), randomColor(), randomColor()];
             const container = document.getElementById('color-palette-container');
             const hexContainer = document.getElementById('color-hex-container');
-            
             container.innerHTML = '';
             hexContainer.innerHTML = '';
-
             colors.forEach(color => {
-                // Block
                 const block = document.createElement('div');
                 block.className = 'flex-1 transition-colors duration-500 relative group cursor-pointer';
                 block.style.backgroundColor = color;
                 block.title = `Click to copy ${color}`;
-                block.onclick = () => {
-                    navigator.clipboard.writeText(color);
-                    alert(`Copied ${color} to clipboard!`);
-                };
-                
-                // Hover effect inside block
+                block.onclick = () => { navigator.clipboard.writeText(color); alert(`Copied ${color} to clipboard!`); };
                 const hoverText = document.createElement('div');
                 hoverText.className = 'absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30';
                 hoverText.innerHTML = `<i data-lucide="copy" class="w-5 h-5 text-white"></i>`;
                 block.appendChild(hoverText);
-
                 container.appendChild(block);
-
-                // Hex text
                 const hex = document.createElement('div');
                 hex.className = 'text-xs font-mono text-hub-text bg-hub-panel py-2 rounded-lg border border-white/5';
                 hex.innerText = color;
@@ -1726,26 +1580,20 @@
             });
             lucide.createIcons();
         }
-        
-        // Initialize palette on load
         generatePalette();
 
-        // --- TYPOGRAPHY LAB LOGIC ---
         function updateTypography() {
             const preview = document.getElementById('typo-preview-text');
             const size = document.getElementById('font-size-slider').value;
             const spacing = document.getElementById('letter-spacing-slider').value;
             const weight = document.getElementById('font-weight-select').value;
-
             document.getElementById('val-size').innerText = `${size}px`;
             document.getElementById('val-spacing').innerText = `${spacing}px`;
-
             preview.style.fontSize = `${size}px`;
             preview.style.letterSpacing = `${spacing}px`;
             preview.style.fontWeight = weight;
         }
 
-        // --- RESOURCE LIBRARY LOGIC ---
         function downloadResource(name) {
             const content = `Thank you for downloading ${name} from EBELTECHS GRAPHIX!\n\nThis is a placeholder file. In the full version, this would be a ZIP, PSD, or font file.`;
             const blob = new Blob([content], { type: 'text/plain' });
@@ -1759,13 +1607,12 @@
             window.URL.revokeObjectURL(url);
         }
 
-        // --- AUTHENTICATION LOGIC ---
+        // --- AUTH ---
         function toggleAuthTab(tab) {
             const loginForm = document.getElementById('form-login');
             const signupForm = document.getElementById('form-signup');
             const loginTab = document.getElementById('tab-login');
             const signupTab = document.getElementById('tab-signup');
-
             if (tab === 'login') {
                 loginForm.classList.remove('hidden');
                 signupForm.classList.add('hidden');
@@ -1787,23 +1634,15 @@
             const isLoggedIn = localStorage.getItem('ebeltechs_customer_session');
             const guestNav = document.getElementById('guest-nav');
             const userNav = document.getElementById('user-nav');
-            
             if (isLoggedIn) {
                 if(guestNav) guestNav.classList.add('hidden');
-                if(userNav) {
-                    userNav.classList.remove('hidden');
-                    userNav.classList.add('flex');
-                }
-                
+                if(userNav) { userNav.classList.remove('hidden'); userNav.classList.add('flex'); }
                 const savedName = localStorage.getItem('ebeltechs_customer_name') || 'Valued Client';
                 document.querySelectorAll('#welcome-name, #profile-name').forEach(el => { if(el) el.innerText = savedName; });
                 document.querySelectorAll('#profile-initial').forEach(el => { if(el) el.innerText = savedName.charAt(0).toUpperCase(); });
             } else {
                 if(guestNav) guestNav.classList.remove('hidden');
-                if(userNav) {
-                    userNav.classList.add('hidden');
-                    userNav.classList.remove('flex');
-                }
+                if(userNav) { userNav.classList.add('hidden'); userNav.classList.remove('flex'); }
             }
         }
 
@@ -1812,21 +1651,12 @@
             const name = document.getElementById('signup-name').value;
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
-
             let users = JSON.parse(localStorage.getItem('ebeltechs_users')) || [];
-            
-            if (users.find(u => u.email === email)) {
-                alert('An account with this email already exists. Please log in.');
-                toggleAuthTab('login');
-                return;
-            }
-
+            if (users.find(u => u.email === email)) { alert('An account with this email already exists. Please log in.'); toggleAuthTab('login'); return; }
             users.push({ name, email, password });
             localStorage.setItem('ebeltechs_users', JSON.stringify(users));
-
             localStorage.setItem('ebeltechs_customer_session', 'true');
             localStorage.setItem('ebeltechs_customer_name', name);
-            
             alert('Account created successfully! Welcome to EBELTECHS.');
             checkCustomerAuth();
             router('workspace');
@@ -1836,10 +1666,8 @@
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
-
             let users = JSON.parse(localStorage.getItem('ebeltechs_users')) || [];
             const validUser = users.find(u => u.email === email && u.password === password);
-
             if (validUser) {
                 localStorage.setItem('ebeltechs_customer_session', 'true');
                 localStorage.setItem('ebeltechs_customer_name', validUser.name);
@@ -1857,7 +1685,7 @@
             router('home');
         }
 
-        // --- MAIN CAROUSEL LOGIC ---
+        // --- MAIN CAROUSEL ---
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide');
         const dots = document.querySelectorAll('.carousel-dot');
@@ -1866,59 +1694,32 @@
         function showSlide(index) {
             slides.forEach(slide => slide.classList.remove('active'));
             dots.forEach(dot => dot.classList.remove('active'));
-            
             slides[index].classList.add('active');
             dots[index].classList.add('active');
             currentSlide = index;
         }
+        function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); }
+        function setSlide(index) { clearInterval(slideInterval); showSlide(index); slideInterval = setInterval(nextSlide, 4000); }
+        if (slides.length > 0) slideInterval = setInterval(nextSlide, 4000);
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }
-
-        function setSlide(index) {
-            clearInterval(slideInterval);
-            showSlide(index);
-            slideInterval = setInterval(nextSlide, 4000); 
-        }
-
-        if (slides.length > 0) {
-            slideInterval = setInterval(nextSlide, 4000);
-        }
-
-        // --- FOOTER CAROUSEL LOGIC ---
+        // --- FOOTER CAROUSEL ---
         let currentFooterSlide = 0;
         const footerSlides = document.querySelectorAll('.footer-slide');
-        // Note: The footer dots are separate from the main carousel dots, I'll use the parent container to find them
         const footerDots = document.querySelectorAll('.footer-carousel .carousel-dot');
         let footerSlideInterval;
 
         function showFooterSlide(index) {
             footerSlides.forEach(slide => slide.classList.remove('active'));
             footerDots.forEach(dot => dot.classList.remove('active'));
-            
             footerSlides[index].classList.add('active');
             footerDots[index].classList.add('active');
             currentFooterSlide = index;
         }
+        function nextFooterSlide() { currentFooterSlide = (currentFooterSlide + 1) % footerSlides.length; showFooterSlide(currentFooterSlide); }
+        function setFooterSlide(index) { clearInterval(footerSlideInterval); showFooterSlide(index); footerSlideInterval = setInterval(nextFooterSlide, 5000); }
+        if (footerSlides.length > 0) footerSlideInterval = setInterval(nextFooterSlide, 5000);
 
-        function nextFooterSlide() {
-            currentFooterSlide = (currentFooterSlide + 1) % footerSlides.length;
-            showFooterSlide(currentFooterSlide);
-        }
-
-        function setFooterSlide(index) {
-            clearInterval(footerSlideInterval);
-            showFooterSlide(index);
-            footerSlideInterval = setInterval(nextFooterSlide, 5000); // 5 seconds transition
-        }
-
-        if (footerSlides.length > 0) {
-            footerSlideInterval = setInterval(nextFooterSlide, 5000);
-        }
-
-        // --- PORTFOLIO DATA & FILTERING ---
+        // --- PORTFOLIO ---
         const portfolioItems = [
             { id: 1, cat: 'logo', title: 'TechStart Logo', img: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80' },
             { id: 2, cat: 'poster', title: 'Music Festival', img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80' },
@@ -1928,9 +1729,7 @@
         function renderPortfolio(filter = 'all') {
             const grid = document.getElementById('portfolio-grid');
             grid.innerHTML = '';
-            
             const filtered = filter === 'all' ? portfolioItems : portfolioItems.filter(i => i.cat === filter);
-            
             filtered.forEach((item, index) => {
                 const div = document.createElement('div');
                 div.className = 'group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer border border-white/10 img-zoom-container animate-fade-in';
@@ -1957,40 +1756,24 @@
             });
             renderPortfolio(cat);
         }
-
         renderPortfolio();
 
-        // --- FILE UPLOAD LOGIC ---
+        // --- FILE UPLOAD ---
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('file-input');
         const fileList = document.getElementById('file-list');
-        let selectedFiles = new DataTransfer(); 
+        let selectedFiles = new DataTransfer();
 
         if (dropZone) {
-            dropZone.addEventListener('click', () => {
-                fileInput.click();
-            });
-
-            dropZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dropZone.classList.add('dragover');
-            });
-
-            dropZone.addEventListener('dragleave', (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('dragover');
-            });
-
+            dropZone.addEventListener('click', () => { fileInput.click(); });
+            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+            dropZone.addEventListener('dragleave', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); });
             dropZone.addEventListener('drop', (e) => {
                 e.preventDefault();
                 dropZone.classList.remove('dragover');
-                const files = e.dataTransfer.files;
-                handleFiles(files);
+                handleFiles(e.dataTransfer.files);
             });
-
-            fileInput.addEventListener('change', (e) => {
-                handleFiles(e.target.files);
-            });
+            fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
         }
 
         function handleFiles(files) {
@@ -2034,7 +1817,7 @@
             updateFileList();
         }
 
-        // --- DUAL SUBMISSION LOGIC (QUOTE) ---
+        // --- QUOTE SUBMISSION ---
         function showQuoteSuccess(message) {
             const form = document.getElementById('quote-form');
             const success = document.getElementById('quote-success');
@@ -2072,10 +1855,7 @@
                 msg += `*Note:* I have ${selectedFiles.files.length} reference file(s) to send. I will attach them next.`;
             }
 
-            const phoneNumber = '254758992636'; 
-            const waUrl = `https://wa.me/${phoneNumber}?text=${msg}`;
-            window.open(waUrl, '_blank');
-
+            window.open(`https://wa.me/254758992636?text=${msg}`, '_blank');
             showQuoteSuccess(`Your request has been pre-filled in a new WhatsApp window.<br><br><strong class="text-yellow-400">Important:</strong> If you attached files, please drag and drop them into the WhatsApp chat now before hitting send!`);
         }
 
@@ -2086,14 +1866,11 @@
 
             const btn = document.getElementById('btn-email');
             const originalText = btn.innerHTML;
-            
             btn.innerHTML = 'SENDING... <i class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></i>';
             btn.disabled = true;
 
             const formData = new FormData(form);
-            const endpoint = 'https://formsubmit.co/ajax/ebeltravour@gmail.com';
-
-            fetch(endpoint, {
+            fetch('https://formsubmit.co/ajax/ebeltravour@gmail.com', {
                 method: 'POST',
                 body: formData,
                 headers: { 'Accept': 'application/json' }
@@ -2114,7 +1891,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert("Email delivery failed. (Note: You must activate FormSubmit on first use). Would you like to send via WhatsApp instead?");
+                alert("Email delivery failed. Would you like to send via WhatsApp instead?");
                 btn.innerHTML = originalText;
                 btn.disabled = false;
                 lucide.createIcons();
@@ -2145,33 +1922,30 @@
             msg += `Description: ${desc}\n`;
             msg += `Budget: KSH ${budget || 'Not specified'}\n`;
             msg += `Deadline: ${deadline || 'Not specified'}\n\n`;
-
             if (selectedFiles.files.length > 0) {
                 msg += `Note: I have ${selectedFiles.files.length} reference file(s) to send.`;
             }
 
             navigator.clipboard.writeText(msg).then(() => {
                 window.open('https://ig.me/m/Ebeltechs_graphix', '_blank');
-                showQuoteSuccess(`Your project details have been <strong class="text-white">copied to your clipboard</strong>.<br><br><strong class="text-pink-400">Important:</strong> We have opened our Instagram DM for you. Simply <strong>Paste (Ctrl+V / Cmd+V)</strong> the message into the chat and hit send! You can also attach your reference files directly there.`);
+                showQuoteSuccess(`Your project details have been <strong class="text-white">copied to your clipboard</strong>.<br><br><strong class="text-pink-400">Important:</strong> We have opened our Instagram DM for you. Simply <strong>Paste (Ctrl+V / Cmd+V)</strong> the message into the chat and hit send!`);
             }).catch(err => {
                 console.error('Failed to copy text: ', err);
                 alert('Failed to copy text automatically. Please copy your details manually and send to @Ebeltechs_graphix');
             });
         }
 
-        // --- M-PESA CHECKOUT LOGIC ---
+        // --- M-PESA CHECKOUT ---
         let currentProduct = { name: '', price: 0 };
 
         function openCheckout(productName, price) {
             currentProduct.name = productName;
             currentProduct.price = price;
-
             document.getElementById('modal-item-name').innerText = productName;
             document.getElementById('modal-item-price').innerText = `KSH ${price.toLocaleString()}`;
             document.getElementById('modal-instruction-amount').innerText = price.toLocaleString();
             document.getElementById('mpesa-name').value = '';
             document.getElementById('mpesa-code').value = '';
-
             const modal = document.getElementById('mpesa-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
@@ -2187,7 +1961,6 @@
 
         function confirmMpesaOrder(e) {
             e.preventDefault();
-            
             const customerName = document.getElementById('mpesa-name').value;
             const mpesaCode = document.getElementById('mpesa-code').value.toUpperCase();
 
@@ -2198,21 +1971,13 @@
             msg += `*M-Pesa Code:* ${mpesaCode}%0A%0A`;
             msg += `Please verify the payment and confirm my order.`;
 
-            const phoneNumber = '254758992636'; 
-            const waUrl = `https://wa.me/${phoneNumber}?text=${msg}`;
-            
-            window.open(waUrl, '_blank');
-            
+            window.open(`https://wa.me/254758992636?text=${msg}`, '_blank');
             closeCheckout();
             alert(`Thank you, ${customerName}! Your order details have been sent to our team for verification. We will process your order once the M-Pesa code (${mpesaCode}) is confirmed.`);
         }
 
-        // --- INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            checkCustomerAuth();
-            loadProjects();
-            lucide.createIcons();
-        });
+        // --- INIT ---
+        document.addEventListener('DOMContentLoaded', () => { checkCustomerAuth(); });
     </script>
 </body>
 </html>
