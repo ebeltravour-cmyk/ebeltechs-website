@@ -255,57 +255,22 @@
 
         <!-- 1. HOME SECTION -->
         <section id="home" class="page-section active">
-            <!-- Hero -->
-            <div class="min-h-[90vh] flex items-center relative overflow-hidden">
-                <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8 animate-fade-in text-center lg:text-left">
-                        
-                        <div class="flex justify-center lg:justify-start mb-4">
-                            <svg viewBox="0 0 340 80" class="w-full max-w-[420px] h-auto animate-pulse-glow" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="blueMetallicHero" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#087EFF" />
-                                        <stop offset="40%" stop-color="#00D4FF" />
-                                        <stop offset="100%" stop-color="#C9D0D8" />
-                                    </linearGradient>
-                                    <linearGradient id="silverMetallicHero" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#FFFFFF" />
-                                        <stop offset="100%" stop-color="#8A95A5" />
-                                    </linearGradient>
-                                    <filter id="glowHero" x="-20%" y="-20%" width="140%" height="140%">
-                                        <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#087EFF" flood-opacity="0.8"/>
-                                    </filter>
-                                </defs>
-                                <g transform="translate(10, 5)">
-                                    <path d="M 15 25 L 50 5 L 85 25 L 70 25 L 50 14 L 30 25 Z" fill="url(#blueMetallicHero)" filter="url(#glowHero)"/>
-                                    <path d="M 15 45 L 50 65 L 85 45 L 70 45 L 50 56 L 30 45 Z" fill="url(#silverMetallicHero)" filter="url(#glowHero)"/>
-                                    <path d="M 40 30 L 50 25 L 60 30 L 50 35 Z" fill="url(#blueMetallicHero)" />
-                                </g>
-                                <text x="105" y="38" font-family="'Outfit', sans-serif" font-weight="800" font-size="26" fill="url(#silverMetallicHero)" filter="url(#glowHero)" letter-spacing="2">EBELTECHS</text>
-                                <text x="108" y="58" font-family="'Inter', sans-serif" font-weight="600" font-size="14" fill="url(#blueMetallicHero)" letter-spacing="8">GRAPHIX</text>
-                            </svg>
-                        </div>
-                        
-                        <h1 class="text-5xl lg:text-7xl font-display font-bold leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">
-                            WHERE INNOVATION<br><span class="text-electric-blue">MEETS DESIGN.</span>
-                        </h1>
-                        <p class="text-gray-400 text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                            Ebeltechs Graphix is a creative design and digital solutions agency dedicated to transforming ideas into powerful visual experiences. We combine creativity, technology, and strategic thinking to bring your ideas to life.
-                        </p>
-                        <div class="flex flex-wrap justify-center lg:justify-start gap-4">
-                            <button onclick="router('services')" class="bg-electric-blue text-white px-8 py-4 rounded-full font-bold hover:bg-blue-600 transition-all shadow-lg shadow-electric-blue/25 flex items-center gap-2">
-                                Explore Our Services <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                            <button onclick="router('work')" class="px-8 py-4 rounded-full font-bold border border-white/20 hover:bg-white/10 transition-all text-white">
-                                View Our Work
-                            </button>
-                        </div>
-                    </div>
-                    <div class="relative hidden lg:block animate-fade-in" style="animation-delay: 0.2s">
-                        <div class="relative w-full aspect-square max-w-md mx-auto img-zoom-container rounded-2xl border border-white/10 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creative Workspace" class="w-full h-full object-cover">
-                        </div>
-                    </div>
+            
+            <!-- ========================================== -->
+            <!-- NEW HERO SECTION WITH YOUR IMAGE           -->
+            <!-- ========================================== -->
+            <div class="w-full relative overflow-hidden py-8 bg-deep-black flex items-center justify-center min-h-[80vh]">
+                <div class="max-w-[1500px] mx-auto px-4 lg:px-8 w-full">
+                    <!-- 
+                        IMPORTANT: Make sure your image is named exactly "hero-image.png" 
+                        and is placed in the same folder as this HTML file.
+                        If you saved it as a .jpg, change the src below to "hero-image.jpg"
+                    -->
+                    <img 
+                        src="hero-image.png" 
+                        alt="EBELTECHS GRAPHIX - Your Vision. Our Creative Expertise." 
+                        class="w-full h-auto rounded-2xl border border-white/10 shadow-[0_0_60px_rgba(8,126,255,0.15)] animate-fade-in object-cover"
+                    >
                 </div>
             </div>
 
