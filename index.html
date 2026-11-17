@@ -197,6 +197,43 @@
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%; height: 4px; cursor: pointer; background: #1A1C23; border-radius: 2px;
         }
+
+        /* --- FOOTER CAROUSEL SPECIFIC STYLES --- */
+        .footer-carousel {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 0 40px rgba(8, 123, 255, 0.1);
+        }
+        @media (min-width: 768px) {
+            .footer-carousel { height: 350px; }
+        }
+        .footer-slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 6s linear;
+            object-fit: cover;
+            /* Dim the images slightly and add contrast */
+            filter: brightness(0.6) contrast(1.1);
+            transform: scale(1);
+        }
+        .footer-slide.active {
+            opacity: 1;
+            z-index: 10;
+            transform: scale(1.05); /* Slow zoom effect */
+        }
+        /* Dark gradient overlay to ensure it blends with the dark theme */
+        .footer-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #050505 0%, transparent 50%, rgba(5,5,5,0.5) 100%);
+            z-index: 15;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-electric-blue selection:text-white">
@@ -661,7 +698,7 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- 5. CREATIVE HUB SECTION (MASTER PROMPT)    -->
+        <!-- 5. CREATIVE HUB SECTION (FULLY FUNCTIONAL) -->
         <!-- ========================================== -->
         <section id="creative-hub" class="page-section" style="padding: 0; margin: 0; width: 100%;">
             <div class="flex w-full h-screen overflow-hidden bg-hub-bg">
@@ -773,12 +810,12 @@
                                         <h4 class="font-bold text-white mb-1">Font Pairing</h4>
                                         <p class="text-xs text-hub-text">Discover perfect matches.</p>
                                     </div>
-                                    <div class="glass-panel p-6 rounded-2xl cursor-pointer hover:border-green-500/50 transition-all group">
+                                    <div onclick="switchHubTab('projects')" class="glass-panel p-6 rounded-2xl cursor-pointer hover:border-green-500/50 transition-all group">
                                         <div class="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition">
-                                            <i data-lucide="upload-cloud" class="w-6 h-6 text-green-500"></i>
+                                            <i data-lucide="folder-open" class="w-6 h-6 text-green-500"></i>
                                         </div>
-                                        <h4 class="font-bold text-white mb-1">Mockup Studio</h4>
-                                        <p class="text-xs text-hub-text">Preview your designs.</p>
+                                        <h4 class="font-bold text-white mb-1">My Projects</h4>
+                                        <p class="text-xs text-hub-text">View saved work.</p>
                                     </div>
                                 </div>
                             </div>
@@ -787,16 +824,9 @@
                             <div class="grid lg:grid-cols-2 gap-8">
                                 <div>
                                     <h3 class="text-lg font-bold text-white mb-4">Recent Projects</h3>
-                                    <div class="glass-panel rounded-2xl p-4 space-y-4">
-                                        <div class="flex items-center gap-4 bg-hub-bg/50 p-3 rounded-xl border border-white/5 hover:border-hub-blue/30 transition cursor-pointer">
-                                            <div class="w-16 h-12 bg-gray-800 rounded-lg overflow-hidden flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=100&q=80" class="w-full h-full object-cover">
-                                            </div>
-                                            <div>
-                                                <h4 class="text-sm font-bold text-white">TechStart Branding</h4>
-                                                <p class="text-xs text-hub-text">Edited 2 hours ago</p>
-                                            </div>
-                                        </div>
+                                    <div id="overview-recent-projects" class="glass-panel rounded-2xl p-4 space-y-4 min-h-[150px]">
+                                        <!-- Injected via JS -->
+                                        <div class="text-sm text-hub-text text-center py-8">No projects saved yet. Go to AI Studio to create one!</div>
                                     </div>
                                 </div>
                                 <div>
@@ -861,16 +891,16 @@
                                     <!-- Loading State -->
                                     <div id="ai-loading-state" class="hidden text-center text-hub-blue">
                                         <i data-lucide="loader-2" class="w-12 h-12 animate-spin mx-auto mb-4"></i>
-                                        <p class="font-bold animate-pulse">Processing your prompt...</p>
+                                        <p class="font-bold animate-pulse">Generating your image...</p>
                                     </div>
                                     <!-- Result State -->
                                     <div id="ai-result-state" class="hidden w-full h-full absolute inset-0 bg-hub-bg">
-                                        <img id="ai-result-img" src="" alt="Generated Result" class="w-full h-full object-cover">
+                                        <img id="ai-result-img" src="" alt="Generated Result" class="w-full h-full object-cover" crossorigin="anonymous">
                                         <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-hub-bg to-transparent flex justify-between items-center">
                                             <span class="text-white font-bold text-sm">Generated Concept</span>
                                             <div class="flex gap-2">
-                                                <button class="p-2 bg-white/10 rounded-lg hover:bg-hub-blue transition text-white" title="Save to Project"><i data-lucide="save" class="w-4 h-4"></i></button>
-                                                <button onclick="downloadImage()" class="p-2 bg-white/10 rounded-lg hover:bg-hub-blue transition text-white" title="Download"><i data-lucide="download" class="w-4 h-4"></i></button>
+                                                <button onclick="saveProject()" class="p-2 bg-white/10 rounded-lg hover:bg-hub-blue transition text-white flex items-center gap-2 text-xs font-bold" title="Save to Projects"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
+                                                <button onclick="downloadImage()" class="p-2 bg-white/10 rounded-lg hover:bg-hub-blue transition text-white flex items-center gap-2 text-xs font-bold" title="Download"><i data-lucide="download" class="w-4 h-4"></i> Download</button>
                                             </div>
                                         </div>
                                     </div>
@@ -879,7 +909,20 @@
                         </div>
 
                         <!-- ============================================== -->
-                        <!-- TAB 3: COLOR LAB                               -->
+                        <!-- TAB 3: MY PROJECTS                             -->
+                        <!-- ============================================== -->
+                        <div id="hub-tab-projects" class="hub-tab">
+                            <div class="mb-8">
+                                <h2 class="text-3xl font-display font-bold text-white mb-2">My Projects</h2>
+                                <p class="text-hub-text">View and manage your saved AI generations.</p>
+                            </div>
+                            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <!-- Injected via JS -->
+                            </div>
+                        </div>
+
+                        <!-- ============================================== -->
+                        <!-- TAB 4: COLOR LAB                               -->
                         <!-- ============================================== -->
                         <div id="hub-tab-color-lab" class="hub-tab">
                             <div class="mb-8">
@@ -920,7 +963,7 @@
                         </div>
 
                         <!-- ============================================== -->
-                        <!-- TAB 4: TYPOGRAPHY LAB                          -->
+                        <!-- TAB 5: TYPOGRAPHY LAB                          -->
                         <!-- ============================================== -->
                         <div id="hub-tab-typo-lab" class="hub-tab">
                             <div class="mb-8">
@@ -975,7 +1018,7 @@
                         </div>
 
                         <!-- ============================================== -->
-                        <!-- TAB 5: RESOURCE LIBRARY                        -->
+                        <!-- TAB 6: RESOURCE LIBRARY                        -->
                         <!-- ============================================== -->
                         <div id="hub-tab-resources" class="hub-tab">
                             <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -987,7 +1030,6 @@
                                     <button class="px-4 py-2 bg-hub-blue text-white rounded-lg text-sm font-bold">All</button>
                                     <button class="px-4 py-2 bg-hub-panel text-hub-text border border-white/10 rounded-lg text-sm font-bold hover:text-white">Fonts</button>
                                     <button class="px-4 py-2 bg-hub-panel text-hub-text border border-white/10 rounded-lg text-sm font-bold hover:text-white">Mockups</button>
-                                    <button class="px-4 py-2 bg-hub-panel text-hub-text border border-white/10 rounded-lg text-sm font-bold hover:text-white">Icons</button>
                                 </div>
                             </div>
 
@@ -1001,7 +1043,7 @@
                                     <div class="p-4">
                                         <h4 class="font-bold text-white mb-1">Modern Logo Pack</h4>
                                         <p class="text-xs text-hub-text mb-3">12 Vector Files (SVG, AI)</p>
-                                        <button class="w-full py-2 bg-white/5 hover:bg-hub-blue text-white rounded-lg text-sm font-bold transition flex items-center justify-center gap-2">
+                                        <button onclick="downloadResource('Modern Logo Pack')" class="w-full py-2 bg-white/5 hover:bg-hub-blue text-white rounded-lg text-sm font-bold transition flex items-center justify-center gap-2">
                                             <i data-lucide="download" class="w-4 h-4"></i> Download
                                         </button>
                                     </div>
@@ -1015,7 +1057,7 @@
                                     <div class="p-4">
                                         <h4 class="font-bold text-white mb-1">Social Media Kit</h4>
                                         <p class="text-xs text-hub-text mb-3">24 PSD Templates</p>
-                                        <button class="w-full py-2 bg-white/5 hover:bg-hub-blue text-white rounded-lg text-sm font-bold transition flex items-center justify-center gap-2">
+                                        <button onclick="downloadResource('Social Media Kit')" class="w-full py-2 bg-white/5 hover:bg-hub-blue text-white rounded-lg text-sm font-bold transition flex items-center justify-center gap-2">
                                             <i data-lucide="download" class="w-4 h-4"></i> Download
                                         </button>
                                     </div>
@@ -1275,9 +1317,31 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer id="main-footer" class="border-t border-white/10 py-12 relative z-10 bg-deep-black">
+    <!-- Footer with Integrated Image Carousel -->
+    <footer id="main-footer" class="border-t border-white/10 pt-12 pb-8 relative z-10 bg-deep-black">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            <!-- NEW FOOTER CAROUSEL (ABOVE CONTACTS) -->
+            <div class="mb-12">
+                <div class="footer-carousel">
+                    <!-- Images -->
+                    <img src="hub-preview-1.jpg" alt="Creative Hub Dashboard" class="footer-slide active">
+                    <img src="hub-preview-2.jpg" alt="Poster Generation Interface" class="footer-slide">
+                    <img src="hub-preview-3.jpg" alt="Analytics Overview" class="footer-slide">
+                    
+                    <!-- Dark Overlay to dim the images -->
+                    <div class="footer-overlay"></div>
+                    
+                    <!-- Carousel Indicators -->
+                    <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20">
+                        <div class="carousel-dot active" onclick="setFooterSlide(0)"></div>
+                        <div class="carousel-dot" onclick="setFooterSlide(1)"></div>
+                        <div class="carousel-dot" onclick="setFooterSlide(2)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Existing Footer Grid (Contacts, Links, etc.) -->
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <div class="flex items-center mb-4">
@@ -1461,9 +1525,14 @@
             if(titleMap[tabId]) {
                 document.getElementById('hub-page-title').innerHTML = titleMap[tabId];
             }
+
+            // Load Projects if switching to Projects tab
+            if(tabId === 'projects' || tabId === 'overview') {
+                loadProjects();
+            }
         }
 
-        // AI Studio Mock Logic
+        // --- AI STUDIO LOGIC (POLLINATIONS API) ---
         function generateAIImage() {
             const prompt = document.getElementById('ai-prompt').value;
             if(!prompt) {
@@ -1475,6 +1544,7 @@
             const loadingState = document.getElementById('ai-loading-state');
             const resultState = document.getElementById('ai-result-state');
             const btn = document.getElementById('btn-ai-gen');
+            const imgElement = document.getElementById('ai-result-img');
 
             // Show loading
             emptyState.classList.add('hidden');
@@ -1485,26 +1555,140 @@
             btn.disabled = true;
             lucide.createIcons();
 
-            // Simulate API delay (Front-end mockup only)
-            setTimeout(() => {
+            // Use Pollinations AI for free image generation
+            const encodedPrompt = encodeURIComponent(prompt);
+            const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=800&height=600&nologo=true&seed=${Math.random()}`;
+
+            imgElement.src = imageUrl;
+            
+            // Wait for image to load
+            imgElement.onload = () => {
                 loadingState.classList.add('hidden');
                 resultState.classList.remove('hidden');
-                
-                // Use a random Unsplash image as mock result
-                const randomImg = `https://source.unsplash.com/random/800x600/?${encodeURIComponent(prompt.split(' ')[0])},abstract&sig=${Math.random()}`;
-                document.getElementById('ai-result-img').src = randomImg;
-
                 btn.innerHTML = '<i data-lucide="sparkles" class="w-5 h-5"></i> Generate Image';
                 btn.disabled = false;
                 lucide.createIcons();
-            }, 2500);
+            };
+
+            imgElement.onerror = () => {
+                alert("Failed to generate image. Please try a different prompt.");
+                loadingState.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                btn.innerHTML = '<i data-lucide="sparkles" class="w-5 h-5"></i> Generate Image';
+                btn.disabled = false;
+                lucide.createIcons();
+            };
         }
 
-        function downloadImage() {
-            alert("Download function ready. (Requires backend integration to fetch real image blob).");
+        function saveProject() {
+            const imgSrc = document.getElementById('ai-result-img').src;
+            const prompt = document.getElementById('ai-prompt').value;
+            
+            if(!imgSrc || !prompt) return;
+
+            let projects = JSON.parse(localStorage.getItem('ebeltechs_hub_projects')) || [];
+            
+            const newProject = {
+                id: Date.now(),
+                img: imgSrc,
+                prompt: prompt,
+                date: new Date().toLocaleDateString()
+            };
+
+            projects.unshift(newProject);
+            localStorage.setItem('ebeltechs_hub_projects', JSON.stringify(projects));
+            
+            alert('Project saved successfully! Check "My Projects".');
+            loadProjects();
         }
 
-        // Color Lab Logic
+        function loadProjects() {
+            const projects = JSON.parse(localStorage.getItem('ebeltechs_hub_projects')) || [];
+            
+            // Update My Projects Tab
+            const projectsGrid = document.getElementById('projects-grid');
+            if(projectsGrid) {
+                projectsGrid.innerHTML = '';
+                if(projects.length === 0) {
+                    projectsGrid.innerHTML = '<div class="col-span-full text-center text-hub-text py-10">No projects saved yet. Go to AI Studio to create one!</div>';
+                } else {
+                    projects.forEach(p => {
+                        projectsGrid.innerHTML += `
+                            <div class="glass-panel rounded-2xl overflow-hidden border border-white/5 group">
+                                <div class="h-48 bg-black relative">
+                                    <img src="${p.img}" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+                                        <button onclick="window.open('${p.img}', '_blank')" class="p-2 bg-hub-blue text-white rounded-lg"><i data-lucide="eye" class="w-5 h-5"></i></button>
+                                        <button onclick="deleteProject(${p.id})" class="p-2 bg-red-500 text-white rounded-lg"><i data-lucide="trash-2" class="w-5 h-5"></i></button>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <p class="text-xs text-hub-text mb-1">${p.date}</p>
+                                    <h4 class="text-sm font-bold text-white truncate">${p.prompt}</h4>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            // Update Overview Recent Projects
+            const recentContainer = document.getElementById('overview-recent-projects');
+            if(recentContainer) {
+                recentContainer.innerHTML = '';
+                if(projects.length === 0) {
+                    recentContainer.innerHTML = '<div class="text-sm text-hub-text text-center py-8">No projects saved yet. Go to AI Studio to create one!</div>';
+                } else {
+                    projects.slice(0, 3).forEach(p => {
+                        recentContainer.innerHTML += `
+                            <div class="flex items-center gap-4 bg-hub-bg/50 p-3 rounded-xl border border-white/5 hover:border-hub-blue/30 transition cursor-pointer">
+                                <div class="w-16 h-12 bg-gray-800 rounded-lg overflow-hidden flex-shrink-0">
+                                    <img src="${p.img}" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden">
+                                    <h4 class="text-sm font-bold text-white truncate">${p.prompt}</h4>
+                                    <p class="text-xs text-hub-text">${p.date}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+            lucide.createIcons();
+        }
+
+        function deleteProject(id) {
+            if(!confirm('Are you sure you want to delete this project?')) return;
+            let projects = JSON.parse(localStorage.getItem('ebeltechs_hub_projects')) || [];
+            projects = projects.filter(p => p.id !== id);
+            localStorage.setItem('ebeltechs_hub_projects', JSON.stringify(projects));
+            loadProjects();
+        }
+
+        async function downloadImage() {
+            const imgSrc = document.getElementById('ai-result-img').src;
+            if(!imgSrc) return;
+
+            try {
+                // Fetch the image to create a blob
+                const response = await fetch(imgSrc);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ebeltechs-ai-${Date.now()}.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                // Fallback: Open in new tab if CORS blocks fetch
+                window.open(imgSrc, '_blank');
+            }
+        }
+
+        // --- COLOR LAB LOGIC ---
         function generatePalette() {
             const randomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
             
@@ -1546,7 +1730,7 @@
         // Initialize palette on load
         generatePalette();
 
-        // Typography Lab Logic
+        // --- TYPOGRAPHY LAB LOGIC ---
         function updateTypography() {
             const preview = document.getElementById('typo-preview-text');
             const size = document.getElementById('font-size-slider').value;
@@ -1559,6 +1743,20 @@
             preview.style.fontSize = `${size}px`;
             preview.style.letterSpacing = `${spacing}px`;
             preview.style.fontWeight = weight;
+        }
+
+        // --- RESOURCE LIBRARY LOGIC ---
+        function downloadResource(name) {
+            const content = `Thank you for downloading ${name} from EBELTECHS GRAPHIX!\n\nThis is a placeholder file. In the full version, this would be a ZIP, PSD, or font file.`;
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${name.replace(/\s+/g, '_')}_Placeholder.txt`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
         }
 
         // --- AUTHENTICATION LOGIC ---
@@ -1659,7 +1857,7 @@
             router('home');
         }
 
-        // --- CAROUSEL LOGIC ---
+        // --- MAIN CAROUSEL LOGIC ---
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide');
         const dots = document.querySelectorAll('.carousel-dot');
@@ -1687,6 +1885,37 @@
 
         if (slides.length > 0) {
             slideInterval = setInterval(nextSlide, 4000);
+        }
+
+        // --- FOOTER CAROUSEL LOGIC ---
+        let currentFooterSlide = 0;
+        const footerSlides = document.querySelectorAll('.footer-slide');
+        // Note: The footer dots are separate from the main carousel dots, I'll use the parent container to find them
+        const footerDots = document.querySelectorAll('.footer-carousel .carousel-dot');
+        let footerSlideInterval;
+
+        function showFooterSlide(index) {
+            footerSlides.forEach(slide => slide.classList.remove('active'));
+            footerDots.forEach(dot => dot.classList.remove('active'));
+            
+            footerSlides[index].classList.add('active');
+            footerDots[index].classList.add('active');
+            currentFooterSlide = index;
+        }
+
+        function nextFooterSlide() {
+            currentFooterSlide = (currentFooterSlide + 1) % footerSlides.length;
+            showFooterSlide(currentFooterSlide);
+        }
+
+        function setFooterSlide(index) {
+            clearInterval(footerSlideInterval);
+            showFooterSlide(index);
+            footerSlideInterval = setInterval(nextFooterSlide, 5000); // 5 seconds transition
+        }
+
+        if (footerSlides.length > 0) {
+            footerSlideInterval = setInterval(nextFooterSlide, 5000);
         }
 
         // --- PORTFOLIO DATA & FILTERING ---
@@ -1981,6 +2210,7 @@
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             checkCustomerAuth();
+            loadProjects();
             lucide.createIcons();
         });
     </script>
