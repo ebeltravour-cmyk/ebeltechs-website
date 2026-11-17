@@ -210,16 +210,19 @@
                     </svg>
                 </div>
                 
-                <div class="hidden md:flex items-center space-x-8">
+                <div class="hidden lg:flex items-center space-x-6">
                     <button onclick="router('home')" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Home</button>
                     <button onclick="router('services')" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Services</button>
                     <button onclick="router('work')" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Work</button>
                     <button onclick="router('shop')" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Shop</button>
+                    <button onclick="router('creative-hub')" class="nav-link text-sm font-bold text-electric-blue hover:text-white transition-colors flex items-center gap-1">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> Creative Hub
+                    </button>
                     
                     <div class="flex items-center gap-6 pl-6 border-l border-gray-800">
                         <!-- Guest Links -->
                         <div id="guest-nav" class="flex items-center gap-4">
-                            <button onclick="router('login')" class="text-sm font-bold text-electric-blue hover:text-white transition-colors">Client Portal</button>
+                            <button onclick="router('login')" class="text-sm font-bold text-gray-400 hover:text-white transition-colors">Client Portal</button>
                             <button onclick="router('quote')" class="bg-electric-blue text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(8,126,255,0.3)] hover:shadow-[0_0_25px_rgba(8,126,255,0.6)]">
                                 Get a Quote
                             </button>
@@ -234,18 +237,21 @@
                     </div>
                 </div>
 
-                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                <button class="lg:hidden text-white" onclick="toggleMobileMenu()">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-charcoal border-t border-gray-800 p-4 space-y-3">
+        <div id="mobile-menu" class="hidden lg:hidden bg-charcoal border-t border-gray-800 p-4 space-y-3">
             <button onclick="router('home')" class="block w-full text-left text-gray-400 hover:text-white py-2">Home</button>
             <button onclick="router('services')" class="block w-full text-left text-gray-400 hover:text-white py-2">Services</button>
             <button onclick="router('work')" class="block w-full text-left text-gray-400 hover:text-white py-2">Work</button>
             <button onclick="router('shop')" class="block w-full text-left text-gray-400 hover:text-white py-2">Shop</button>
-            <button onclick="router('login')" class="block w-full text-left text-electric-blue font-bold py-2">Client Portal</button>
+            <button onclick="router('creative-hub')" class="block w-full text-left text-electric-blue font-bold py-2 flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4"></i> Creative Hub
+            </button>
+            <button onclick="router('login')" class="block w-full text-left text-gray-400 hover:text-white py-2 border-t border-gray-800 mt-2 pt-2">Client Portal</button>
             <button onclick="router('quote')" class="block w-full text-left text-electric-blue font-bold py-2">Get a Quote</button>
         </div>
     </nav>
@@ -255,7 +261,6 @@
 
         <!-- 1. HOME SECTION -->
         <section id="home" class="page-section active">
-            
             <!-- HERO SECTION -->
             <div class="w-full relative overflow-hidden py-8 bg-deep-black flex items-center justify-center min-h-[80vh]">
                 <div class="max-w-[1500px] mx-auto px-4 lg:px-8 w-full">
@@ -625,7 +630,211 @@
             </div>
         </section>
 
-        <!-- 5. GET A QUOTE SECTION -->
+        <!-- ========================================== -->
+        <!-- 5. CREATIVE HUB SECTION (NEW)              -->
+        <!-- ========================================== -->
+        <section id="creative-hub" class="page-section py-24 relative overflow-hidden">
+            <!-- Background Glow specific to this section -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-64 bg-electric-blue/10 blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Creative <span class="text-electric-blue">Hub</span></h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Your ultimate resource center. Generate ideas, download assets, master new skills, and leverage AI tools.</p>
+                </div>
+
+                <!-- Glowing Toolbar (Mimicking dashboard) -->
+                <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-20">
+                    <!-- Tool 1 -->
+                    <div class="flex flex-col items-center gap-3 group cursor-pointer">
+                        <div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center border border-white/10 group-hover:border-electric-blue group-hover:shadow-[0_0_20px_rgba(8,126,255,0.4)] transition-all">
+                            <i data-lucide="palette" class="w-6 h-6 text-gray-300 group-hover:text-electric-blue transition-colors"></i>
+                        </div>
+                        <span class="text-xs font-medium text-gray-400 group-hover:text-white">Palette Gen</span>
+                    </div>
+                    <!-- Tool 2 -->
+                    <div class="flex flex-col items-center gap-3 group cursor-pointer">
+                        <div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center border border-white/10 group-hover:border-neon-purple group-hover:shadow-[0_0_20px_rgba(112,0,255,0.4)] transition-all">
+                            <i data-lucide="type" class="w-6 h-6 text-gray-300 group-hover:text-neon-purple transition-colors"></i>
+                        </div>
+                        <span class="text-xs font-medium text-gray-400 group-hover:text-white">Font Pairing</span>
+                    </div>
+                    <!-- Tool 3 -->
+                    <div class="flex flex-col items-center gap-3 group cursor-pointer">
+                        <div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center border border-white/10 group-hover:border-yellow-500 group-hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] transition-all">
+                            <i data-lucide="download-cloud" class="w-6 h-6 text-gray-300 group-hover:text-yellow-500 transition-colors"></i>
+                        </div>
+                        <span class="text-xs font-medium text-gray-400 group-hover:text-white">Free Assets</span>
+                    </div>
+                    <!-- Tool 4 -->
+                    <div class="flex flex-col items-center gap-3 group cursor-pointer">
+                        <div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center border border-white/10 group-hover:border-green-500 group-hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] transition-all">
+                            <i data-lucide="play-circle" class="w-6 h-6 text-gray-300 group-hover:text-green-500 transition-colors"></i>
+                        </div>
+                        <span class="text-xs font-medium text-gray-400 group-hover:text-white">Tutorials</span>
+                    </div>
+                    <!-- Tool 5 -->
+                    <div class="flex flex-col items-center gap-3 group cursor-pointer">
+                        <div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center border border-white/10 group-hover:border-pink-500 group-hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] transition-all">
+                            <i data-lucide="bot" class="w-6 h-6 text-gray-300 group-hover:text-pink-500 transition-colors"></i>
+                        </div>
+                        <span class="text-xs font-medium text-gray-400 group-hover:text-white">AI Tools</span>
+                    </div>
+                </div>
+
+                <!-- Main Hub Content Grid -->
+                <div class="grid lg:grid-cols-3 gap-8">
+                    
+                    <!-- Left Column: Color Generator & AI Tools -->
+                    <div class="space-y-8">
+                        <!-- Color Palette Generator -->
+                        <div class="glass-panel p-8 rounded-2xl border border-white/10 relative overflow-hidden group">
+                            <h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="palette" class="w-5 h-5 text-electric-blue"></i> Color Generator
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-6">Instantly generate a beautiful color palette for your next project.</p>
+                            
+                            <div id="color-palette-container" class="flex h-24 rounded-xl overflow-hidden mb-6 border border-white/10">
+                                <div class="flex-1 bg-[#087EFF] transition-colors duration-500" data-color-hex="#087EFF"></div>
+                                <div class="flex-1 bg-[#00D4FF] transition-colors duration-500" data-color-hex="#00D4FF"></div>
+                                <div class="flex-1 bg-[#050505] transition-colors duration-500" data-color-hex="#050505"></div>
+                                <div class="flex-1 bg-[#C9D0D8] transition-colors duration-500" data-color-hex="#C9D0D8"></div>
+                                <div class="flex-1 bg-[#7000FF] transition-colors duration-500" data-color-hex="#7000FF"></div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center text-xs font-mono text-gray-400 mb-6 px-1" id="color-hex-container">
+                                <span>#087EFF</span>
+                                <span>#00D4FF</span>
+                                <span>#050505</span>
+                                <span>#C9D0D8</span>
+                                <span>#7000FF</span>
+                            </div>
+
+                            <button onclick="generatePalette()" class="w-full bg-white/10 hover:bg-white/20 text-white py-3 rounded-lg font-bold transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="refresh-cw" class="w-4 h-4"></i> Generate New Palette
+                            </button>
+                        </div>
+
+                        <!-- AI-Assisted Creative Tools -->
+                        <div class="glass-panel p-8 rounded-2xl border border-white/10 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-pink-500/10 blur-3xl pointer-events-none"></div>
+                            <h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="sparkles" class="w-5 h-5 text-pink-500"></i> AI Image Prompt
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-6">Describe your idea and let AI generate a visual concept.</p>
+                            
+                            <div class="space-y-4">
+                                <input type="text" id="ai-prompt-input" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-pink-500 outline-none transition-all" placeholder="e.g., Futuristic cyberpunk workspace...">
+                                <button onclick="generateAIImage()" id="ai-btn" class="w-full bg-gradient-to-r from-pink-500 to-neon-purple text-white py-3 rounded-lg font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                                    <i data-lucide="wand-2" class="w-4 h-4"></i> Generate Concept
+                                </button>
+                            </div>
+                            
+                            <!-- Mock Result Area -->
+                            <div id="ai-result" class="hidden mt-6 rounded-lg overflow-hidden border border-white/10">
+                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="AI Generated" class="w-full h-48 object-cover">
+                                <div class="p-3 bg-black/60 text-xs text-center text-gray-400">AI Generated Concept</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Middle Column: Tutorials & Inspiration -->
+                    <div class="space-y-8">
+                        <!-- Design Tutorials -->
+                        <div class="glass-panel p-8 rounded-2xl border border-white/10">
+                            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                                <i data-lucide="play-circle" class="w-5 h-5 text-green-500"></i> Design Tutorials
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 group cursor-pointer">
+                                    <div class="w-24 h-16 rounded-lg bg-gray-800 overflow-hidden relative flex-shrink-0">
+                                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=200&q=80" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity">
+                                        <div class="absolute inset-0 flex items-center justify-center"><i data-lucide="play" class="w-6 h-6 text-white"></i></div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-white group-hover:text-electric-blue transition-colors">Logo Design Masterclass</h4>
+                                        <p class="text-xs text-gray-400 mt-1">1h 45m • 12 lessons</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 group cursor-pointer">
+                                    <div class="w-24 h-16 rounded-lg bg-gray-800 overflow-hidden relative flex-shrink-0">
+                                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&q=80" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity">
+                                        <div class="absolute inset-0 flex items-center justify-center"><i data-lucide="play" class="w-6 h-6 text-white"></i></div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-white group-hover:text-electric-blue transition-colors">Mastering Color Theory</h4>
+                                        <p class="text-xs text-gray-400 mt-1">45m • 8 lessons</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Font Pairing Suggestions -->
+                        <div class="glass-panel p-8 rounded-2xl border border-white/10">
+                            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                                <i data-lucide="type" class="w-5 h-5 text-neon-purple"></i> Font Pairing
+                            </h3>
+                            <div class="bg-black/40 rounded-xl p-6 border border-white/5">
+                                <h1 class="font-display font-bold text-3xl text-white mb-2">Outfit</h1>
+                                <p class="font-sans text-sm text-gray-400 mb-4">Inter — The quick brown fox jumps over the lazy dog.</p>
+                                <div class="flex gap-2 flex-wrap">
+                                    <span class="text-xs bg-neon-purple/20 text-neon-purple px-2 py-1 rounded">Display</span>
+                                    <span class="text-xs bg-electric-blue/20 text-electric-blue px-2 py-1 rounded">Body</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Inspiration & Downloads -->
+                    <div class="space-y-8">
+                        <!-- Design Inspiration -->
+                        <div class="glass-panel p-8 rounded-2xl border border-white/10">
+                            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                                <i data-lucide="image" class="w-5 h-5 text-yellow-500"></i> Design Inspiration
+                            </h3>
+                            <div class="grid grid-cols-2 gap-3">
+                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80" class="rounded-lg h-24 w-full object-cover hover:opacity-80 cursor-pointer transition-opacity">
+                                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&q=80" class="rounded-lg h-24 w-full object-cover hover:opacity-80 cursor-pointer transition-opacity">
+                                <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=400&q=80" class="rounded-lg h-24 w-full object-cover hover:opacity-80 cursor-pointer transition-opacity">
+                                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&q=80" class="rounded-lg h-24 w-full object-cover hover:opacity-80 cursor-pointer transition-opacity">
+                            </div>
+                        </div>
+
+                        <!-- Free Downloadable Resources -->
+                        <div class="glass-panel p-8 rounded-2xl border border-white/10 bg-gradient-to-br from-charcoal to-deep-black">
+                            <h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="download" class="w-5 h-5 text-electric-blue"></i> Free Resources
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-6">Download our premium mockups and assets for free.</p>
+                            
+                            <ul class="space-y-3">
+                                <li>
+                                    <a href="#" class="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 transition-all group">
+                                        <div class="flex items-center gap-3">
+                                            <i data-lucide="file-box" class="w-5 h-5 text-gray-400 group-hover:text-electric-blue"></i>
+                                            <span class="text-sm font-medium text-gray-300 group-hover:text-white">Logo Mockup Pack</span>
+                                        </div>
+                                        <i data-lucide="download" class="w-4 h-4 text-gray-500 group-hover:text-white"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 transition-all group">
+                                        <div class="flex items-center gap-3">
+                                            <i data-lucide="layout-template" class="w-5 h-5 text-gray-400 group-hover:text-electric-blue"></i>
+                                            <span class="text-sm font-medium text-gray-300 group-hover:text-white">Social Media Templates</span>
+                                        </div>
+                                        <i data-lucide="download" class="w-4 h-4 text-gray-500 group-hover:text-white"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. GET A QUOTE SECTION -->
         <section id="quote" class="page-section py-24">
             <div class="max-w-3xl mx-auto px-6">
                 
@@ -740,7 +949,7 @@
             </div>
         </section>
 
-        <!-- 6. CLIENT LOGIN -->
+        <!-- 7. CLIENT LOGIN -->
         <section id="login" class="page-section py-32 flex items-center justify-center min-h-[80vh]">
             <div class="glass-panel p-8 md:p-12 rounded-3xl w-full max-w-md animate-fade-in relative overflow-hidden">
                 <div class="flex border-b border-white/10 mb-8">
@@ -794,7 +1003,7 @@
             </div>
         </section>
 
-        <!-- 7. CUSTOMER WORKSPACE -->
+        <!-- 8. CUSTOMER WORKSPACE -->
         <section id="workspace" class="page-section" style="padding: 0; margin: 0; width: 100%;">
             <div class="flex w-full h-screen overflow-hidden bg-dash-bg">
                 <aside class="w-64 bg-dash-panel border-r border-dash-border flex flex-col shrink-0 hidden md:flex">
@@ -909,6 +1118,7 @@
                         <li><button onclick="router('services')" class="hover:text-electric-blue">Services</button></li>
                         <li><button onclick="router('work')" class="hover:text-electric-blue">Portfolio</button></li>
                         <li><button onclick="router('shop')" class="hover:text-electric-blue">Shop</button></li>
+                        <li><button onclick="router('creative-hub')" class="hover:text-electric-blue">Creative Hub</button></li>
                     </ul>
                 </div>
 
@@ -1018,6 +1228,50 @@
 
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // --- CREATIVE HUB INTERACTIVE LOGIC ---
+        function generatePalette() {
+            // Generate random hex colors
+            const randomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
+            
+            const paletteColors = [randomColor(), randomColor(), randomColor(), randomColor(), randomColor()];
+            const colorBlocks = document.querySelectorAll('#color-palette-container > div');
+            const hexTexts = document.querySelectorAll('#color-hex-container > span');
+
+            colorBlocks.forEach((block, index) => {
+                block.style.backgroundColor = paletteColors[index];
+                block.setAttribute('data-color-hex', paletteColors[index]);
+            });
+
+            hexTexts.forEach((text, index) => {
+                text.innerText = paletteColors[index];
+            });
+        }
+
+        function generateAIImage() {
+            const input = document.getElementById('ai-prompt-input').value;
+            const btn = document.getElementById('ai-btn');
+            const resultArea = document.getElementById('ai-result');
+            
+            if(!input) {
+                alert("Please enter a prompt first.");
+                return;
+            }
+
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></i> Generating...';
+            btn.disabled = true;
+
+            // Simulate AI delay
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                resultArea.classList.remove('hidden');
+                // Use a random image from unsplash for the mockup
+                const randomImgId = Math.floor(Math.random() * 1000);
+                resultArea.querySelector('img').src = `https://source.unsplash.com/random/600x400/?abstract,cyberpunk&sig=${randomImgId}`;
+            }, 2000);
         }
 
         // --- AUTHENTICATION LOGIC ---
