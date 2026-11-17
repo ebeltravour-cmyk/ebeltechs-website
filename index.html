@@ -163,13 +163,19 @@
         .hub-tab { display: none; }
         .hub-tab.active { display: block; animation: fadeIn 0.3s ease-out forwards; }
 
-        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; background: transparent; }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
             background: #087BFF; cursor: pointer; margin-top: -6px;
             box-shadow: 0 0 10px rgba(8, 123, 255, 0.5);
         }
         input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px; cursor: pointer; background: #1A1C23; border-radius: 2px;
+        }
+        input[type=range]::-moz-range-thumb {
+            height: 16px; width: 16px; border: none; border-radius: 50%; background: #087BFF; cursor: pointer;
+        }
+        input[type=range]::-moz-range-track {
             width: 100%; height: 4px; cursor: pointer; background: #1A1C23; border-radius: 2px;
         }
 
@@ -205,6 +211,10 @@
             background: linear-gradient(to top, #050505 0%, transparent 50%, rgba(5,5,5,0.5) 100%);
             z-index: 15;
             pointer-events: none;
+        }
+
+        .hub-stage {
+            background: radial-gradient(circle at 30% 20%, #141a26 0%, #080b11 100%);
         }
     </style>
 </head>
@@ -346,8 +356,99 @@
                             <h4 class="font-bold mb-2">Affordable Solutions</h4>
                             <p class="text-gray-400 text-xs">We aim to provide creative services that offer value to different budgets.</p>
                         </div>
+                        <div class="glass-panel p-6 rounded-xl hover:border-electric-blue/50 transition-all">
+                            <i data-lucide="users" class="w-8 h-8 text-electric-blue mb-4"></i>
+                            <h4 class="font-bold mb-2">Client-Centred Approach</h4>
+                            <p class="text-gray-400 text-xs">Your ideas, objectives and preferences guide our creative process.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl hover:border-electric-blue/50 transition-all">
+                            <i data-lucide="cpu" class="w-8 h-8 text-electric-blue mb-4"></i>
+                            <h4 class="font-bold mb-2">Modern Technology</h4>
+                            <p class="text-gray-400 text-xs">We embrace current design tools and digital technologies.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl hover:border-electric-blue/50 transition-all">
+                            <i data-lucide="clock" class="w-8 h-8 text-electric-blue mb-4"></i>
+                            <h4 class="font-bold mb-2">Reliable Delivery</h4>
+                            <p class="text-gray-400 text-xs">We work towards agreed timelines and clear communication.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl hover:border-electric-blue/50 transition-all">
+                            <i data-lucide="heart-handshake" class="w-8 h-8 text-electric-blue mb-4"></i>
+                            <h4 class="font-bold mb-2">Long-Term Support</h4>
+                            <p class="text-gray-400 text-xs">We aim to build lasting relationships beyond individual projects.</p>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="py-24 bg-charcoal/30">
+                <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                    <h2 class="text-3xl font-display font-bold mb-12 text-center">Our Core <span class="text-electric-blue">Values</span></h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="glass-panel p-6 rounded-xl border-t-2 border-electric-blue">
+                            <h3 class="font-bold text-lg mb-2">Creativity</h3>
+                            <p class="text-gray-400 text-sm">We embrace originality and fresh ideas, creating unique designs that capture attention.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-t-2 border-neon-purple">
+                            <h3 class="font-bold text-lg mb-2">Innovation</h3>
+                            <p class="text-gray-400 text-sm">We continuously explore modern technologies and creative techniques for forward-thinking solutions.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-t-2 border-green-500">
+                            <h3 class="font-bold text-lg mb-2">Integrity</h3>
+                            <p class="text-gray-400 text-sm">We believe in honesty, transparency, professionalism and keeping our commitments.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-t-2 border-yellow-500">
+                            <h3 class="font-bold text-lg mb-2">Excellence</h3>
+                            <p class="text-gray-400 text-sm">We pay attention to detail and strive to deliver outstanding results in every project.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-t-2 border-blue-500">
+                            <h3 class="font-bold text-lg mb-2">Reliability</h3>
+                            <p class="text-gray-400 text-sm">We value our clients' time and work hard to deliver dependable, consistent, and timely services.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-t-2 border-pink-500">
+                            <h3 class="font-bold text-lg mb-2">Customer Satisfaction</h3>
+                            <p class="text-gray-400 text-sm">Our clients are at the centre of everything we do. We work towards exceeding expectations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                    <h2 class="text-3xl font-display font-bold mb-12 text-center">Our Creative <span class="text-electric-blue">Process</span></h2>
+                    <div class="grid md:grid-cols-5 gap-4 text-center">
+                        <div class="relative p-4">
+                            <div class="w-12 h-12 bg-electric-blue text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+                            <h4 class="font-bold text-sm mb-2">Understanding</h4>
+                            <p class="text-gray-400 text-xs">Discussing ideas, goals, and requirements.</p>
+                        </div>
+                        <div class="relative p-4">
+                            <div class="w-12 h-12 bg-electric-blue/50 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+                            <h4 class="font-bold text-sm mb-2">Research</h4>
+                            <p class="text-gray-400 text-xs">Exploring creative directions and best approaches.</p>
+                        </div>
+                        <div class="relative p-4">
+                            <div class="w-12 h-12 bg-electric-blue/50 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+                            <h4 class="font-bold text-sm mb-2">Creation</h4>
+                            <p class="text-gray-400 text-xs">Transforming ideas into professional designs.</p>
+                        </div>
+                        <div class="relative p-4">
+                            <div class="w-12 h-12 bg-electric-blue/50 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">4</div>
+                            <h4 class="font-bold text-sm mb-2">Refinement</h4>
+                            <p class="text-gray-400 text-xs">Receiving feedback and making adjustments.</p>
+                        </div>
+                        <div class="relative p-4">
+                            <div class="w-12 h-12 bg-electric-blue/50 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">5</div>
+                            <h4 class="font-bold text-sm mb-2">Delivery</h4>
+                            <p class="text-gray-400 text-xs">Providing the completed project in required formats.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24 text-center bg-charcoal/30">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Let's Create Something <span class="text-electric-blue">Extraordinary.</span></h2>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">Your vision deserves creativity, professionalism and attention to detail. Partner with Ebeltechs Graphix and let us bring your ideas to life.</p>
+                <button onclick="router('quote')" class="bg-electric-blue text-white px-10 py-4 rounded-full font-bold hover:bg-blue-600 transition-all shadow-lg shadow-electric-blue/25">Start Your Project</button>
             </div>
         </section>
 
@@ -368,9 +469,14 @@
                             <h3 class="text-xl font-bold mb-4">01. Graphic Design</h3>
                             <p class="text-gray-300 text-sm mb-4">Professional and visually appealing designs that communicate ideas and promote products.</p>
                             <ul class="space-y-2 text-gray-300 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Logo Design & Brand Identity</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Flyers, Posters & Brochures</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Business Cards & Stationery</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Logo Design &amp; Brand Identity</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Flyers, Posters &amp; Brochures</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Business Cards &amp; Stationery</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Banners &amp; Billboards</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Social Media Graphics</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Presentation &amp; Certificate Design</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Packaging &amp; Label Design</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Photo Editing &amp; Retouching</li>
                             </ul>
                             <div class="mt-auto pt-4">
                                 <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white shadow-lg">Request Service</button>
@@ -383,12 +489,16 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
                         <div class="relative z-10 p-8 flex flex-col h-full">
                             <div class="w-14 h-14 bg-electric-blue/20 backdrop-blur-md rounded-xl flex items-center justify-center text-2xl mb-6">🏢</div>
-                            <h3 class="text-xl font-bold mb-4">02. Branding & Identity</h3>
+                            <h3 class="text-xl font-bold mb-4">02. Branding &amp; Identity</h3>
                             <p class="text-gray-300 text-sm mb-4">Strong, consistent and recognizable identities that communicate your brand's personality.</p>
                             <ul class="space-y-2 text-gray-300 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
                                 <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Corporate Identity Development</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Brand Colour & Typography</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Brand Colour &amp; Typography</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Brand Guidelines &amp; Manuals</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Letterheads &amp; Envelopes</li>
                                 <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Company Profiles</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Brand Strategy &amp; Positioning</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Rebranding &amp; Modernization</li>
                             </ul>
                             <div class="mt-auto pt-4">
                                 <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white shadow-lg">Request Service</button>
@@ -401,12 +511,16 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
                         <div class="relative z-10 p-8 flex flex-col h-full">
                             <div class="w-14 h-14 bg-electric-blue/20 backdrop-blur-md rounded-xl flex items-center justify-center text-2xl mb-6">💻</div>
-                            <h3 class="text-xl font-bold mb-4">03. Web Design & Dev</h3>
+                            <h3 class="text-xl font-bold mb-4">03. Web Design &amp; Dev</h3>
                             <p class="text-gray-300 text-sm mb-4">Modern, responsive and user-friendly websites to establish a professional online presence.</p>
                             <ul class="space-y-2 text-gray-300 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Business & Portfolio Websites</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Business &amp; Portfolio Websites</li>
                                 <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> E-commerce Websites</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Landing Pages</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Website Redesign</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Responsive Web Design</li>
                                 <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> UI/UX Design</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Website Maintenance &amp; SEO</li>
                             </ul>
                             <div class="mt-auto pt-4">
                                 <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white shadow-lg">Request Service</button>
@@ -422,9 +536,13 @@
                             <h3 class="text-xl font-bold mb-4">04. Multimedia Production</h3>
                             <p class="text-gray-300 text-sm mb-4">Engaging visual and audio content to help brands communicate effectively.</p>
                             <ul class="space-y-2 text-gray-300 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Video Editing & Post-Production</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Video Editing &amp; Post-Production</li>
                                 <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Promotional Videos</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Motion Graphics & Animation</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Motion Graphics &amp; Animation</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Logo Animation &amp; Intros</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Social Media Reels</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Lyric Videos &amp; Visualizers</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Event Highlight Videos</li>
                             </ul>
                             <div class="mt-auto pt-4">
                                 <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white shadow-lg">Request Service</button>
@@ -437,12 +555,16 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
                         <div class="relative z-10 p-8 flex flex-col h-full">
                             <div class="w-14 h-14 bg-electric-blue/20 backdrop-blur-md rounded-xl flex items-center justify-center text-2xl mb-6">📱</div>
-                            <h3 class="text-xl font-bold mb-4">05. Digital & Social Media</h3>
+                            <h3 class="text-xl font-bold mb-4">05. Digital &amp; Social Media</h3>
                             <p class="text-gray-300 text-sm mb-4">Consistent digital presence through creative content and visual marketing materials.</p>
                             <ul class="space-y-2 text-gray-300 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
                                 <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Social Media Page Branding</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Promotional Ads & Campaigns</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Content Planning & Design</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Facebook, IG, TikTok, LinkedIn Designs</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Promotional Ads &amp; Campaigns</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Content Planning &amp; Design</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Product Promotion Graphics</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> YouTube Thumbnails</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Brand Consistency &amp; Templates</li>
                             </ul>
                             <div class="mt-auto pt-4">
                                 <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white shadow-lg">Request Service</button>
@@ -455,12 +577,16 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent z-0"></div>
                         <div class="relative z-10 p-8 flex flex-col h-full">
                             <div class="w-14 h-14 bg-electric-blue/20 backdrop-blur-md rounded-xl flex items-center justify-center text-2xl mb-6">🖨️</div>
-                            <h3 class="text-xl font-bold mb-4">06. Printing & Merch</h3>
+                            <h3 class="text-xl font-bold mb-4">06. Printing &amp; Merch</h3>
                             <p class="text-gray-300 text-sm mb-4">Creative materials intended for physical presentation, promotion and brand visibility.</p>
                             <ul class="space-y-2 text-gray-300 text-sm mb-6 overflow-y-auto max-h-48 custom-scroll pr-2">
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Business Cards & Stationery</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Banners & Roll-up Displays</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Branded T-shirts, Hoodies & Caps</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Business Cards &amp; Stationery</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Flyers, Posters &amp; Brochures</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Banners &amp; Roll-up Displays</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Stickers &amp; Product Labels</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Certificates &amp; Invitations</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Branded T-shirts, Hoodies &amp; Caps</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-3 h-3 text-electric-blue mt-1 shrink-0"></i> Packaging &amp; Presentation Materials</li>
                             </ul>
                             <div class="mt-auto pt-4">
                                 <button onclick="router('quote')" class="w-full text-xs bg-electric-blue px-3 py-2 rounded hover:bg-blue-600 transition-colors font-bold text-white shadow-lg">Request Service</button>
@@ -478,10 +604,12 @@
                     <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Our <span class="text-electric-blue">Creative Work</span></h2>
                     <p class="text-gray-400 mb-8">Browse our portfolio by category.</p>
                     <div class="flex flex-wrap justify-center gap-3 mb-12">
-                        <button onclick="filterPortfolio('all')" class="filter-btn active px-4 py-2 rounded-full text-sm border border-electric-blue bg-electric-blue text-white transition-all">All</button>
-                        <button onclick="filterPortfolio('logo')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Logo Design</button>
-                        <button onclick="filterPortfolio('poster')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Posters</button>
-                        <button onclick="filterPortfolio('web')" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Web Design</button>
+                        <button onclick="filterPortfolio('all', this)" class="filter-btn active px-4 py-2 rounded-full text-sm border border-electric-blue bg-electric-blue text-white transition-all">All</button>
+                        <button onclick="filterPortfolio('logo', this)" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Logo Design</button>
+                        <button onclick="filterPortfolio('poster', this)" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Posters</button>
+                        <button onclick="filterPortfolio('web', this)" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Web Design</button>
+                        <button onclick="filterPortfolio('video', this)" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Video</button>
+                        <button onclick="filterPortfolio('merch', this)" class="filter-btn px-4 py-2 rounded-full text-sm border border-white/20 hover:border-electric-blue transition-all">Merchandise</button>
                     </div>
                 </div>
                 <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -653,10 +781,10 @@
                         <div class="hub-nav-item" onclick="switchHubTab('typo-lab', this)">
                             <i data-lucide="type" class="w-5 h-5"></i> Typography Lab
                         </div>
-                        <div class="hub-nav-item" onclick="alert('Logo Lab interface coming in Phase 4.')">
+                        <div class="hub-nav-item" onclick="switchHubTab('logo', this)">
                             <i data-lucide="pen-tool" class="w-5 h-5"></i> Logo Lab
                         </div>
-                        <div class="hub-nav-item" onclick="alert('Mockup Studio interface coming in Phase 4.')">
+                        <div class="hub-nav-item" onclick="switchHubTab('mockup', this)">
                             <i data-lucide="shirt" class="w-5 h-5"></i> Mockup Studio
                         </div>
                         <div class="text-xs font-bold text-hub-text uppercase tracking-wider mt-6 mb-3 px-4">Resources</div>
@@ -873,6 +1001,149 @@
                             </div>
                         </div>
 
+                        <div id="hub-tab-logo" class="hub-tab">
+                            <div class="mb-8">
+                                <h2 class="text-3xl font-display font-bold text-white mb-2">Logo Lab</h2>
+                                <p class="text-hub-text">Adjust the live logo mark and copy the exact CSS.</p>
+                            </div>
+                            <div class="grid lg:grid-cols-3 gap-8">
+                                <div class="lg:col-span-2">
+                                    <div class="hub-stage rounded-2xl border border-white/10 h-[320px] md:h-[420px] flex items-center justify-center overflow-hidden">
+                                        <div id="logo-transform" style="transform:rotate(0deg) scale(1);filter:hue-rotate(0deg) blur(0px);opacity:1;">
+                                            <svg viewBox="0 0 340 80" class="w-[280px] md:w-[380px] h-auto" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <linearGradient id="blueMetallicHub" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                        <stop offset="0%" stop-color="#087EFF"/><stop offset="40%" stop-color="#00D4FF"/><stop offset="100%" stop-color="#C9D0D8"/>
+                                                    </linearGradient>
+                                                    <linearGradient id="silverMetallicHub" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                        <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#8A95A5"/>
+                                                    </linearGradient>
+                                                    <filter id="glowHub" x="-20%" y="-20%" width="140%" height="140%">
+                                                        <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#087BFF" flood-opacity="0.7"/>
+                                                    </filter>
+                                                </defs>
+                                                <g transform="translate(10,5)">
+                                                    <path d="M 15 25 L 50 5 L 85 25 L 70 25 L 50 14 L 30 25 Z" fill="url(#blueMetallicHub)" filter="url(#glowHub)"/>
+                                                    <path d="M 15 45 L 50 65 L 85 45 L 70 45 L 50 56 L 30 45 Z" fill="url(#silverMetallicHub)" filter="url(#glowHub)"/>
+                                                    <path d="M 40 30 L 50 25 L 60 30 L 50 35 Z" fill="url(#blueMetallicHub)"/>
+                                                </g>
+                                                <text x="105" y="38" font-family="'Outfit',sans-serif" font-weight="800" font-size="26" fill="url(#silverMetallicHub)" filter="url(#glowHub)" letter-spacing="2">EBELTECHS</text>
+                                                <text x="108" y="58" font-family="'Inter',sans-serif" font-weight="600" font-size="14" fill="url(#blueMetallicHub)" letter-spacing="8">GRAPHIX</text>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="glass-panel rounded-2xl p-5 space-y-5">
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-2">
+                                            <span class="text-hub-text font-bold uppercase tracking-wider">Rotation</span>
+                                            <span id="lbl-rot" class="text-hub-blue font-bold">0°</span>
+                                        </div>
+                                        <input type="range" min="-180" max="180" value="0" oninput="updateLogo('rot', this.value)">
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-2">
+                                            <span class="text-hub-text font-bold uppercase tracking-wider">Scale</span>
+                                            <span id="lbl-scale" class="text-hub-blue font-bold">100%</span>
+                                        </div>
+                                        <input type="range" min="40" max="160" value="100" oninput="updateLogo('scale', this.value)">
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-2">
+                                            <span class="text-hub-text font-bold uppercase tracking-wider">Hue Shift</span>
+                                            <span id="lbl-hue" class="text-hub-blue font-bold">0°</span>
+                                        </div>
+                                        <input type="range" min="0" max="360" value="0" oninput="updateLogo('hue', this.value)">
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-2">
+                                            <span class="text-hub-text font-bold uppercase tracking-wider">Blur</span>
+                                            <span id="lbl-blur" class="text-hub-blue font-bold">0px</span>
+                                        </div>
+                                        <input type="range" min="0" max="10" value="0" oninput="updateLogo('blur', this.value)">
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-2">
+                                            <span class="text-hub-text font-bold uppercase tracking-wider">Opacity</span>
+                                            <span id="lbl-op" class="text-hub-blue font-bold">100%</span>
+                                        </div>
+                                        <input type="range" min="10" max="100" value="100" oninput="updateLogo('op', this.value)">
+                                    </div>
+                                    <div class="pt-3 border-t border-white/10 flex gap-2">
+                                        <button onclick="resetLogo()" class="flex-1 bg-white/5 border border-white/10 py-2 rounded-lg text-xs font-bold hover:bg-white/10 transition">Reset</button>
+                                        <button onclick="copyLogoCSS()" class="flex-1 bg-hub-blue text-white py-2 rounded-lg text-xs font-bold hover:bg-blue-600 transition">Copy CSS</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="hub-tab-mockup" class="hub-tab">
+                            <div class="mb-8">
+                                <h2 class="text-3xl font-display font-bold text-white mb-2">Mockup Studio</h2>
+                                <p class="text-hub-text">Compose a poster preview with live typography and colour controls.</p>
+                            </div>
+                            <div class="grid lg:grid-cols-3 gap-8">
+                                <div class="lg:col-span-2">
+                                    <div class="hub-stage rounded-2xl border border-white/10 h-[420px] md:h-[520px] flex items-center justify-center p-6 overflow-hidden">
+                                        <div id="poster-preview" class="relative w-[260px] h-[360px] md:w-[320px] md:h-[440px] rounded-xl overflow-hidden shadow-2xl" style="filter:hue-rotate(0deg);">
+                                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Poster background" class="absolute inset-0 w-full h-full object-cover">
+                                            <div id="poster-overlay" class="absolute inset-0 bg-black" style="opacity:.55;"></div>
+                                            <div class="absolute inset-0 flex flex-col justify-end p-6">
+                                                <h3 id="poster-title" class="font-display font-extrabold leading-tight text-white" style="font-size:28px;">MUSIC<br>FESTIVAL</h3>
+                                                <p class="text-hub-silver text-[10px] tracking-[4px] mt-2">EBELTECHS GRAPHIX</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="glass-panel rounded-2xl p-5 space-y-5">
+                                    <div>
+                                        <label class="text-xs text-hub-text font-bold uppercase tracking-wider mb-2 block">Poster Title</label>
+                                        <input id="poster-input" type="text" value="MUSIC FESTIVAL" oninput="updatePosterTitle(this.value)" class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white text-sm focus:border-hub-blue outline-none">
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-2">
+                                            <span class="text-hub-text font-bold uppercase tracking-wider">Title Size</span>
+                                            <span id="lbl-ptitle" class="text-hub-blue font-bold">28px</span>
+                                        </div>
+                                        <input type="range" min="16" max="64" value="28" oninput="updatePoster('title', this.value)">
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-2">
+                                            <span class="text-hub-text font-bold uppercase tracking-wider">Overlay</span>
+                                            <span id="lbl-poverlay" class="text-hub-blue font-bold">55%</span>
+                                        </div>
+                                        <input type="range" min="0" max="100" value="55" oninput="updatePoster('overlay', this.value)">
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-2">
+                                            <span class="text-hub-text font-bold uppercase tracking-wider">Hue Shift</span>
+                                            <span id="lbl-phue" class="text-hub-blue font-bold">0°</span>
+                                        </div>
+                                        <input type="range" min="0" max="360" value="0" oninput="updatePoster('hue', this.value)">
+                                    </div>
+                                    <div class="pt-3 border-t border-white/10 flex gap-2">
+                                        <button onclick="resetPoster()" class="flex-1 bg-white/5 border border-white/10 py-2 rounded-lg text-xs font-bold hover:bg-white/10 transition">Reset</button>
+                                        <button onclick="sendConceptToQuote()" class="flex-1 bg-hub-blue text-white py-2 rounded-lg text-xs font-bold hover:bg-blue-600 transition">Request Design</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="hub-tab-inspiration" class="hub-tab">
+                            <div class="mb-8">
+                                <h2 class="text-3xl font-display font-bold text-white mb-2">Inspiration Gallery</h2>
+                                <p class="text-hub-text">A curated collection of design references to spark your next idea.</p>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <div class="img-zoom-container rounded-xl overflow-hidden border border-white/10 h-48"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" class="w-full h-full object-cover"></div>
+                                <div class="img-zoom-container rounded-xl overflow-hidden border border-white/10 h-48"><img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80" class="w-full h-full object-cover"></div>
+                                <div class="img-zoom-container rounded-xl overflow-hidden border border-white/10 h-48"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" class="w-full h-full object-cover"></div>
+                                <div class="img-zoom-container rounded-xl overflow-hidden border border-white/10 h-48"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80" class="w-full h-full object-cover"></div>
+                                <div class="img-zoom-container rounded-xl overflow-hidden border border-white/10 h-48"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&q=80" class="w-full h-full object-cover"></div>
+                                <div class="img-zoom-container rounded-xl overflow-hidden border border-white/10 h-48"><img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=600&q=80" class="w-full h-full object-cover"></div>
+                            </div>
+                        </div>
+
                         <div id="hub-tab-resources" class="hub-tab">
                             <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                                 <div>
@@ -908,6 +1179,32 @@
                                         <h4 class="font-bold text-white mb-1">Social Media Kit</h4>
                                         <p class="text-xs text-hub-text mb-3">24 PSD Templates</p>
                                         <button onclick="downloadResource('Social Media Kit')" class="w-full py-2 bg-white/5 hover:bg-hub-blue text-white rounded-lg text-sm font-bold transition flex items-center justify-center gap-2">
+                                            <i data-lucide="download" class="w-4 h-4"></i> Download
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="glass-panel rounded-2xl overflow-hidden group border border-white/5 hover:border-hub-blue/50 transition-colors">
+                                    <div class="h-40 bg-gray-800 relative">
+                                        <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=400&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                                        <span class="absolute top-2 right-2 bg-hub-gold text-black text-xs font-bold px-2 py-1 rounded">PRO</span>
+                                    </div>
+                                    <div class="p-4">
+                                        <h4 class="font-bold text-white mb-1">Brand Presentation</h4>
+                                        <p class="text-xs text-hub-text mb-3">30 Slide Templates</p>
+                                        <button onclick="downloadResource('Brand Presentation')" class="w-full py-2 bg-white/5 hover:bg-hub-blue text-white rounded-lg text-sm font-bold transition flex items-center justify-center gap-2">
+                                            <i data-lucide="download" class="w-4 h-4"></i> Download
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="glass-panel rounded-2xl overflow-hidden group border border-white/5 hover:border-hub-blue/50 transition-colors">
+                                    <div class="h-40 bg-gray-800 relative">
+                                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                                        <span class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">FREE</span>
+                                    </div>
+                                    <div class="p-4">
+                                        <h4 class="font-bold text-white mb-1">Print Mockup Pack</h4>
+                                        <p class="text-xs text-hub-text mb-3">8 Photorealistic PSDs</p>
+                                        <button onclick="downloadResource('Print Mockup Pack')" class="w-full py-2 bg-white/5 hover:bg-hub-blue text-white rounded-lg text-sm font-bold transition flex items-center justify-center gap-2">
                                             <i data-lucide="download" class="w-4 h-4"></i> Download
                                         </button>
                                     </div>
@@ -1099,6 +1396,9 @@
                         <button onclick="router('quote')" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-dash-text hover:text-white hover:bg-[#2C2E36] transition-all">
                             <i data-lucide="plus-circle" class="w-5 h-5"></i> New Project
                         </button>
+                        <button onclick="router('creative-hub')" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-dash-text hover:text-white hover:bg-[#2C2E36] transition-all">
+                            <i data-lucide="wand-2" class="w-5 h-5"></i> Creative Hub
+                        </button>
                     </nav>
                     <div class="p-4 border-t border-dash-border">
                         <button onclick="logoutCustomer()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 transition-all">
@@ -1229,86 +1529,45 @@
                     </ul>
                 </div>
 
-                <!-- SOCIAL MEDIA (NEW — 4th column) -->
                 <div>
                     <h4 class="font-bold mb-4 text-white">Follow Us</h4>
                     <ul class="space-y-3 text-sm text-hub-text">
-
                         <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
-                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                             <a href="https://www.facebook.com/TravourEbel" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Travour Ebel</a>
                         </li>
-
                         <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-500">
-                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-500"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                             <a href="https://instagram.com/Ebeltechs_graphix" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Ebeltechs_graphix</a>
                         </li>
-
                         <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
                             <a href="https://tiktok.com/@ebel.ebel5" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">ebel.ebel5</a>
                         </li>
-
                         <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect width="4" height="12" x="2" y="9"/>
-                                <circle cx="4" cy="4" r="2"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                             <a href="https://linkedin.com/in/ebel-ebel" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">ebel ebel</a>
                         </li>
-
                         <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                                <path d="M4 4l11.733 16h4.267l-11.733 -16z"/>
-                                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
                             <a href="https://x.com/EbeltechsGrafix" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">EbeltechsGrafix</a>
                         </li>
-
                         <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M8 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
-                                <path d="M16 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
-                                <path d="M12 16a4 4 0 0 0 4-4H8a4 4 0 0 0 4 4Z"/>
-                                <path d="M18 8a2 2 0 1 1 3-3"/>
-                                <path d="M6 8a2 2 0 1 0-3-3"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><circle cx="12" cy="12" r="10"/><path d="M8 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M16 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 16a4 4 0 0 0 4-4H8a4 4 0 0 0 4 4Z"/><path d="M18 8a2 2 0 1 1 3-3"/><path d="M6 8a2 2 0 1 0-3-3"/></svg>
                             <a href="https://reddit.com/user/Ok3llo_coda" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Ok3llo_coda</a>
                         </li>
-
                         <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-800">
-                                <path d="M14.5 3.5v4h4v4h-4v5.5c0 1.5 1 2.5 2.5 2.5h2v4h-3c-2.5 0-4.5-2-4.5-4.5v-7.5h-3v-4h3v-4h3Z"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-800"><path d="M14.5 3.5v4h4v4h-4v5.5c0 1.5 1 2.5 2.5 2.5h2v4h-3c-2.5 0-4.5-2-4.5-4.5v-7.5h-3v-4h3v-4h3Z"/></svg>
                             <a href="https://tumblr.com/ebeltechs-graphix22" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">ebeltechs-graphix22</a>
                         </li>
-
                         <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                                <path d="M12 21a9 9 0 1 1 9-9c0 3-1.5 5-3 6-2 1-4 1-5 0"/>
-                                <path d="M12 15c-1.5 0-3-1.5-3-3s1.5-3 3-3 3 1.5 3 3-1.5 3-3 3Z"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 21a9 9 0 1 1 9-9c0 3-1.5 5-3 6-2 1-4 1-5 0"/><path d="M12 15c-1.5 0-3-1.5-3-3s1.5-3 3-3 3 1.5 3 3-1.5 3-3 3Z"/></svg>
                             <a href="https://threads.net/@ebeltechs_graphix" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">@ebeltechs_graphix</a>
                         </li>
-
                         <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M9 9h2l1 3 1-3h2l-2 5 2 5h-2l-1-3-1 3H9l2-5Z"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600"><circle cx="12" cy="12" r="10"/><path d="M9 9h2l1 3 1-3h2l-2 5 2 5h-2l-1-3-1 3H9l2-5Z"/></svg>
                             <a href="https://quora.com/profile/Ebel-travour" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Ebel travour</a>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -1342,7 +1601,7 @@
                     </h4>
                     <ol class="text-sm text-gray-400 space-y-2 list-decimal list-inside bg-white/5 p-4 rounded-lg">
                         <li>Go to <strong>M-Pesa</strong> on your phone.</li>
-                        <li>Select <strong>Lipa na M-Pesa</strong> > <strong>Buy Goods & Services</strong>.</li>
+                        <li>Select <strong>Lipa na M-Pesa</strong> &gt; <strong>Buy Goods &amp; Services</strong>.</li>
                         <li>Enter Till Number: <strong class="text-white select-all">123456</strong> <em>(Update with your actual Till)</em></li>
                         <li>Enter Amount: <strong id="modal-instruction-amount" class="text-white">1,000</strong>.</li>
                         <li>Enter your M-Pesa PIN and confirm.</li>
@@ -1368,7 +1627,9 @@
     <script>
         lucide.createIcons();
 
-        // --- ROUTER ---
+        /* =========================================================
+           ROUTER
+        ========================================================= */
         function router(sectionId) {
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
 
@@ -1376,7 +1637,7 @@
             const mainFooter = document.getElementById('main-footer');
             const mainContent = document.getElementById('main-content');
 
-            if(sectionId === 'workspace' || sectionId === 'creative-hub') {
+            if (sectionId === 'workspace' || sectionId === 'creative-hub') {
                 mainNav.style.display = 'none';
                 mainFooter.style.display = 'none';
                 mainContent.classList.remove('pt-20');
@@ -1388,7 +1649,7 @@
 
             setTimeout(() => {
                 const target = document.getElementById(sectionId);
-                if(target) {
+                if (target) {
                     target.classList.add('active');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
@@ -1401,14 +1662,16 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // --- CREATIVE HUB ---
+        /* =========================================================
+           CREATIVE HUB — TAB SWITCHER
+        ========================================================= */
         function switchHubTab(tabId, element) {
-            document.querySelectorAll('.hub-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.hub-nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('#creative-hub .hub-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('#creative-hub .hub-nav-item').forEach(item => item.classList.remove('active'));
 
-            const targetTab = document.getElementById(`hub-tab-${tabId}`);
-            if(targetTab) targetTab.classList.add('active');
-            if(element) element.classList.add('active');
+            const targetTab = document.getElementById('hub-tab-' + tabId);
+            if (targetTab) targetTab.classList.add('active');
+            if (element) element.classList.add('active');
 
             const titleMap = {
                 'overview': 'Overview <span class="text-hub-blue">Dashboard</span>',
@@ -1416,17 +1679,24 @@
                 'projects': 'My <span class="text-hub-blue">Projects</span>',
                 'color-lab': 'Color <span class="text-hub-blue">Lab</span>',
                 'typo-lab': 'Typography <span class="text-hub-blue">Lab</span>',
-                'resources': 'Resource <span class="text-hub-blue">Library</span>',
-                'inspiration': 'Inspiration <span class="text-hub-blue">Gallery</span>'
+                'logo': 'Logo <span class="text-hub-blue">Lab</span>',
+                'mockup': 'Mockup <span class="text-hub-blue">Studio</span>',
+                'inspiration': 'Inspiration <span class="text-hub-blue">Gallery</span>',
+                'resources': 'Resource <span class="text-hub-blue">Library</span>'
             };
-            if(titleMap[tabId]) document.getElementById('hub-page-title').innerHTML = titleMap[tabId];
+            if (titleMap[tabId]) document.getElementById('hub-page-title').innerHTML = titleMap[tabId];
 
-            if(tabId === 'projects' || tabId === 'overview') loadProjects();
+            if (tabId === 'projects' || tabId === 'overview') loadProjects();
+
+            lucide.createIcons();
         }
 
+        /* =========================================================
+           AI STUDIO
+        ========================================================= */
         function generateAIImage() {
             const prompt = document.getElementById('ai-prompt').value;
-            if(!prompt) { alert("Please enter a prompt first."); return; }
+            if (!prompt) { alert("Please enter a prompt first."); return; }
 
             const emptyState = document.getElementById('ai-empty-state');
             const loadingState = document.getElementById('ai-loading-state');
@@ -1466,7 +1736,7 @@
         function saveProject() {
             const imgSrc = document.getElementById('ai-result-img').src;
             const prompt = document.getElementById('ai-prompt').value;
-            if(!imgSrc || !prompt) return;
+            if (!imgSrc || !prompt) return;
 
             let projects = JSON.parse(localStorage.getItem('ebeltechs_hub_projects')) || [];
             projects.unshift({ id: Date.now(), img: imgSrc, prompt: prompt, date: new Date().toLocaleDateString() });
@@ -1479,9 +1749,9 @@
             const projects = JSON.parse(localStorage.getItem('ebeltechs_hub_projects')) || [];
 
             const projectsGrid = document.getElementById('projects-grid');
-            if(projectsGrid) {
+            if (projectsGrid) {
                 projectsGrid.innerHTML = '';
-                if(projects.length === 0) {
+                if (projects.length === 0) {
                     projectsGrid.innerHTML = '<div class="col-span-full text-center text-hub-text py-10">No projects saved yet. Go to AI Studio to create one!</div>';
                 } else {
                     projects.forEach(p => {
@@ -1505,9 +1775,9 @@
             }
 
             const recentContainer = document.getElementById('overview-recent-projects');
-            if(recentContainer) {
+            if (recentContainer) {
                 recentContainer.innerHTML = '';
-                if(projects.length === 0) {
+                if (projects.length === 0) {
                     recentContainer.innerHTML = '<div class="text-sm text-hub-text text-center py-8">No projects saved yet. Go to AI Studio to create one!</div>';
                 } else {
                     projects.slice(0, 3).forEach(p => {
@@ -1529,7 +1799,7 @@
         }
 
         function deleteProject(id) {
-            if(!confirm('Are you sure you want to delete this project?')) return;
+            if (!confirm('Are you sure you want to delete this project?')) return;
             let projects = JSON.parse(localStorage.getItem('ebeltechs_hub_projects')) || [];
             projects = projects.filter(p => p.id !== id);
             localStorage.setItem('ebeltechs_hub_projects', JSON.stringify(projects));
@@ -1538,7 +1808,7 @@
 
         async function downloadImage() {
             const imgSrc = document.getElementById('ai-result-img').src;
-            if(!imgSrc) return;
+            if (!imgSrc) return;
             try {
                 const response = await fetch(imgSrc);
                 const blob = await response.blob();
@@ -1555,11 +1825,15 @@
             }
         }
 
+        /* =========================================================
+           COLOR LAB
+        ========================================================= */
         function generatePalette() {
-            const randomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
+            const randomColor = () => '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase();
             const colors = [randomColor(), randomColor(), randomColor(), randomColor(), randomColor()];
             const container = document.getElementById('color-palette-container');
             const hexContainer = document.getElementById('color-hex-container');
+            if (!container || !hexContainer) return;
             container.innerHTML = '';
             hexContainer.innerHTML = '';
             colors.forEach(color => {
@@ -1580,8 +1854,10 @@
             });
             lucide.createIcons();
         }
-        generatePalette();
 
+        /* =========================================================
+           TYPOGRAPHY LAB
+        ========================================================= */
         function updateTypography() {
             const preview = document.getElementById('typo-preview-text');
             const size = document.getElementById('font-size-slider').value;
@@ -1594,6 +1870,127 @@
             preview.style.fontWeight = weight;
         }
 
+        /* =========================================================
+           LOGO LAB
+        ========================================================= */
+        const logoState = { rot: 0, scale: 100, hue: 0, blur: 0, op: 100 };
+
+        function updateLogo(key, value) {
+            logoState[key] = Number(value);
+            applyLogo();
+        }
+
+        function applyLogo() {
+            const el = document.getElementById('logo-transform');
+            if (!el) return;
+            el.style.transform = `rotate(${logoState.rot}deg) scale(${(logoState.scale / 100).toFixed(2)})`;
+            el.style.filter = `hue-rotate(${logoState.hue}deg) blur(${logoState.blur}px)`;
+            el.style.opacity = (logoState.op / 100).toFixed(2);
+
+            const set = (id, txt) => { const n = document.getElementById(id); if (n) n.innerText = txt; };
+            set('lbl-rot', logoState.rot + '°');
+            set('lbl-scale', logoState.scale + '%');
+            set('lbl-hue', logoState.hue + '°');
+            set('lbl-blur', logoState.blur + 'px');
+            set('lbl-op', logoState.op + '%');
+        }
+
+        function resetLogo() {
+            logoState.rot = 0; logoState.scale = 100; logoState.hue = 0; logoState.blur = 0; logoState.op = 100;
+            document.querySelectorAll('#hub-tab-logo input[type=range]').forEach((input, i) => {
+                input.value = [0, 100, 0, 0, 100][i];
+            });
+            applyLogo();
+        }
+
+        function getLogoCSS() {
+            return `/* EBELTECHS Creative Hub — Logo Transform */
+.logo-mark {
+  transform: rotate(${logoState.rot}deg) scale(${(logoState.scale / 100).toFixed(2)});
+  filter: hue-rotate(${logoState.hue}deg) blur(${logoState.blur}px);
+  opacity: ${(logoState.op / 100).toFixed(2)};
+}`;
+        }
+
+        function copyLogoCSS() {
+            navigator.clipboard.writeText(getLogoCSS())
+                .then(() => alert('Logo CSS copied to clipboard!'))
+                .catch(() => alert('Copy failed — please copy manually.'));
+        }
+
+        /* =========================================================
+           MOCKUP STUDIO (POSTER)
+        ========================================================= */
+        const posterState = { title: 28, overlay: 55, hue: 0, text: 'MUSIC FESTIVAL' };
+
+        function updatePoster(key, value) {
+            posterState[key] = Number(value);
+            applyPoster();
+        }
+
+        function updatePosterTitle(val) {
+            posterState.text = val;
+            applyPoster();
+        }
+
+        function applyPoster() {
+            const preview = document.getElementById('poster-preview');
+            const overlay = document.getElementById('poster-overlay');
+            const title = document.getElementById('poster-title');
+            if (!preview || !overlay || !title) return;
+
+            preview.style.filter = `hue-rotate(${posterState.hue}deg)`;
+            overlay.style.opacity = (posterState.overlay / 100).toFixed(2);
+            title.style.fontSize = posterState.title + 'px';
+
+            const words = (posterState.text || 'POSTER').trim().split(/\s+/);
+            if (words.length > 1) {
+                title.innerHTML = `${words[0]}<br>${words.slice(1).join(' ')}`;
+            } else {
+                title.textContent = words[0];
+            }
+
+            const set = (id, txt) => { const n = document.getElementById(id); if (n) n.innerText = txt; };
+            set('lbl-ptitle', posterState.title + 'px');
+            set('lbl-poverlay', posterState.overlay + '%');
+            set('lbl-phue', posterState.hue + '°');
+        }
+
+        function resetPoster() {
+            posterState.title = 28; posterState.overlay = 55; posterState.hue = 0; posterState.text = 'MUSIC FESTIVAL';
+            const input = document.getElementById('poster-input');
+            if (input) input.value = posterState.text;
+            document.querySelectorAll('#hub-tab-mockup input[type=range]').forEach((input, i) => {
+                input.value = [28, 55, 0][i];
+            });
+            applyPoster();
+        }
+
+        function sendConceptToQuote() {
+            router('quote');
+            setTimeout(() => {
+                const desc = document.getElementById('q-desc');
+                const service = document.getElementById('q-service');
+                const title = document.getElementById('q-title');
+
+                if (desc) {
+                    desc.value = `I created a poster concept in the Creative Hub Mockup Studio and would like it produced professionally.
+
+Poster title: "${posterState.text}"
+Title size: ${posterState.title}px
+Overlay: ${posterState.overlay}%
+Hue shift: ${posterState.hue}°
+
+Logo settings: rotation ${logoState.rot}°, scale ${logoState.scale}%, hue ${logoState.hue}°, blur ${logoState.blur}px, opacity ${logoState.op}%`;
+                }
+                if (service) service.value = 'Graphic Design';
+                if (title && !title.value) title.value = 'Creative Hub Poster Concept';
+            }, 350);
+        }
+
+        /* =========================================================
+           RESOURCES
+        ========================================================= */
         function downloadResource(name) {
             const content = `Thank you for downloading ${name} from EBELTECHS GRAPHIX!\n\nThis is a placeholder file. In the full version, this would be a ZIP, PSD, or font file.`;
             const blob = new Blob([content], { type: 'text/plain' });
@@ -1607,7 +2004,9 @@
             window.URL.revokeObjectURL(url);
         }
 
-        // --- AUTH ---
+        /* =========================================================
+           AUTH
+        ========================================================= */
         function toggleAuthTab(tab) {
             const loginForm = document.getElementById('form-login');
             const signupForm = document.getElementById('form-signup');
@@ -1635,14 +2034,14 @@
             const guestNav = document.getElementById('guest-nav');
             const userNav = document.getElementById('user-nav');
             if (isLoggedIn) {
-                if(guestNav) guestNav.classList.add('hidden');
-                if(userNav) { userNav.classList.remove('hidden'); userNav.classList.add('flex'); }
+                if (guestNav) guestNav.classList.add('hidden');
+                if (userNav) { userNav.classList.remove('hidden'); userNav.classList.add('flex'); }
                 const savedName = localStorage.getItem('ebeltechs_customer_name') || 'Valued Client';
-                document.querySelectorAll('#welcome-name, #profile-name').forEach(el => { if(el) el.innerText = savedName; });
-                document.querySelectorAll('#profile-initial').forEach(el => { if(el) el.innerText = savedName.charAt(0).toUpperCase(); });
+                document.querySelectorAll('#welcome-name, #profile-name').forEach(el => { if (el) el.innerText = savedName; });
+                document.querySelectorAll('#profile-initial').forEach(el => { if (el) el.innerText = savedName.charAt(0).toUpperCase(); });
             } else {
-                if(guestNav) guestNav.classList.remove('hidden');
-                if(userNav) { userNav.classList.add('hidden'); userNav.classList.remove('flex'); }
+                if (guestNav) guestNav.classList.remove('hidden');
+                if (userNav) { userNav.classList.add('hidden'); userNav.classList.remove('flex'); }
             }
         }
 
@@ -1685,10 +2084,12 @@
             router('home');
         }
 
-        // --- MAIN CAROUSEL ---
+        /* =========================================================
+           QUOTE CAROUSEL
+        ========================================================= */
         let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const dots = document.querySelectorAll('.carousel-dot');
+        const slides = document.querySelectorAll('.carousel-container .carousel-slide');
+        const dots = document.querySelectorAll('.carousel-container .carousel-dot');
         let slideInterval;
 
         function showSlide(index) {
@@ -1702,7 +2103,9 @@
         function setSlide(index) { clearInterval(slideInterval); showSlide(index); slideInterval = setInterval(nextSlide, 4000); }
         if (slides.length > 0) slideInterval = setInterval(nextSlide, 4000);
 
-        // --- FOOTER CAROUSEL ---
+        /* =========================================================
+           FOOTER CAROUSEL
+        ========================================================= */
         let currentFooterSlide = 0;
         const footerSlides = document.querySelectorAll('.footer-slide');
         const footerDots = document.querySelectorAll('.footer-carousel .carousel-dot');
@@ -1719,17 +2122,24 @@
         function setFooterSlide(index) { clearInterval(footerSlideInterval); showFooterSlide(index); footerSlideInterval = setInterval(nextFooterSlide, 5000); }
         if (footerSlides.length > 0) footerSlideInterval = setInterval(nextFooterSlide, 5000);
 
-        // --- PORTFOLIO ---
+        /* =========================================================
+           PORTFOLIO
+        ========================================================= */
         const portfolioItems = [
             { id: 1, cat: 'logo', title: 'TechStart Logo', img: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80' },
             { id: 2, cat: 'poster', title: 'Music Festival', img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80' },
-            { id: 3, cat: 'web', title: 'E-Commerce Site', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80' }
+            { id: 3, cat: 'web', title: 'E-Commerce Site', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80' },
+            { id: 4, cat: 'video', title: 'Lyrics Video', img: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80' },
+            { id: 5, cat: 'merch', title: 'Brand Hoodie', img: 'https://images.unsplash.com/photo-1556821840-3a63f9565ba0?w=600&q=80' },
+            { id: 6, cat: 'logo', title: 'Church Brand', img: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?w=600&q=80' }
         ];
 
         function renderPortfolio(filter = 'all') {
             const grid = document.getElementById('portfolio-grid');
+            if (!grid) return;
             grid.innerHTML = '';
             const filtered = filter === 'all' ? portfolioItems : portfolioItems.filter(i => i.cat === filter);
+
             filtered.forEach((item, index) => {
                 const div = document.createElement('div');
                 div.className = 'group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer border border-white/10 img-zoom-container animate-fade-in';
@@ -1745,29 +2155,36 @@
             });
         }
 
-        function filterPortfolio(cat) {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('bg-electric-blue', 'text-white', 'border-electric-blue');
-                btn.classList.add('border-white/20');
-                if(btn.textContent.toLowerCase().includes(cat === 'all' ? 'all' : cat.substring(0,4))) {
-                    btn.classList.add('bg-electric-blue', 'text-white', 'border-electric-blue');
-                    btn.classList.remove('border-white/20');
-                }
+        function filterPortfolio(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-electric-blue', 'text-white', 'border-electric-blue');
+                b.classList.add('border-white/20');
             });
+            if (btn) {
+                btn.classList.add('bg-electric-blue', 'text-white', 'border-electric-blue');
+                btn.classList.remove('border-white/20');
+            }
             renderPortfolio(cat);
         }
-        renderPortfolio();
 
-        // --- FILE UPLOAD ---
+        /* =========================================================
+           FILE UPLOAD
+        ========================================================= */
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('file-input');
         const fileList = document.getElementById('file-list');
         let selectedFiles = new DataTransfer();
 
         if (dropZone) {
-            dropZone.addEventListener('click', () => { fileInput.click(); });
-            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
-            dropZone.addEventListener('dragleave', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); });
+            dropZone.addEventListener('click', () => fileInput.click());
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+            dropZone.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+            });
             dropZone.addEventListener('drop', (e) => {
                 e.preventDefault();
                 dropZone.classList.remove('dragover');
@@ -1796,7 +2213,7 @@
                 div.innerHTML = `
                     <span class="truncate pr-2 flex items-center gap-2">
                         <i data-lucide="file" class="w-4 h-4 text-electric-blue"></i>
-                        ${file.name} <span class="text-xs text-gray-500">(${(file.size/1024/1024).toFixed(2)} MB)</span>
+                        ${file.name} <span class="text-xs text-gray-500">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
                     </span>
                     <button type="button" onclick="removeFile(${index})" class="text-red-400 hover:text-red-300 p-1">
                         <i data-lucide="x" class="w-4 h-4"></i>
@@ -1811,13 +2228,15 @@
             const dt = new DataTransfer();
             const files = Array.from(selectedFiles.files);
             files.splice(index, 1);
-            files.forEach(file => dt.items.add(file));
+            files.forEach(f => dt.items.add(f));
             selectedFiles = dt;
             fileInput.files = selectedFiles.files;
             updateFileList();
         }
 
-        // --- QUOTE SUBMISSION ---
+        /* =========================================================
+           QUOTE SUBMISSION
+        ========================================================= */
         function showQuoteSuccess(message) {
             const form = document.getElementById('quote-form');
             const success = document.getElementById('quote-success');
@@ -1856,6 +2275,7 @@
             }
 
             window.open(`https://wa.me/254758992636?text=${msg}`, '_blank');
+
             showQuoteSuccess(`Your request has been pre-filled in a new WhatsApp window.<br><br><strong class="text-yellow-400">Important:</strong> If you attached files, please drag and drop them into the WhatsApp chat now before hitting send!`);
         }
 
@@ -1866,10 +2286,12 @@
 
             const btn = document.getElementById('btn-email');
             const originalText = btn.innerHTML;
+
             btn.innerHTML = 'SENDING... <i class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></i>';
             btn.disabled = true;
 
             const formData = new FormData(form);
+
             fetch('https://formsubmit.co/ajax/ebeltravour@gmail.com', {
                 method: 'POST',
                 body: formData,
@@ -1891,7 +2313,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert("Email delivery failed. Would you like to send via WhatsApp instead?");
+                alert("Email delivery failed. (Note: You must activate FormSubmit on first use). Would you like to send via WhatsApp instead?");
                 btn.innerHTML = originalText;
                 btn.disabled = false;
                 lucide.createIcons();
@@ -1922,30 +2344,35 @@
             msg += `Description: ${desc}\n`;
             msg += `Budget: KSH ${budget || 'Not specified'}\n`;
             msg += `Deadline: ${deadline || 'Not specified'}\n\n`;
+
             if (selectedFiles.files.length > 0) {
                 msg += `Note: I have ${selectedFiles.files.length} reference file(s) to send.`;
             }
 
             navigator.clipboard.writeText(msg).then(() => {
                 window.open('https://ig.me/m/Ebeltechs_graphix', '_blank');
-                showQuoteSuccess(`Your project details have been <strong class="text-white">copied to your clipboard</strong>.<br><br><strong class="text-pink-400">Important:</strong> We have opened our Instagram DM for you. Simply <strong>Paste (Ctrl+V / Cmd+V)</strong> the message into the chat and hit send!`);
+                showQuoteSuccess(`Your project details have been <strong class="text-white">copied to your clipboard</strong>.<br><br><strong class="text-pink-400">Important:</strong> We have opened our Instagram DM for you. Simply <strong>Paste (Ctrl+V / Cmd+V)</strong> the message into the chat and hit send! You can also attach your reference files directly there.`);
             }).catch(err => {
                 console.error('Failed to copy text: ', err);
                 alert('Failed to copy text automatically. Please copy your details manually and send to @Ebeltechs_graphix');
             });
         }
 
-        // --- M-PESA CHECKOUT ---
+        /* =========================================================
+           M-PESA CHECKOUT
+        ========================================================= */
         let currentProduct = { name: '', price: 0 };
 
         function openCheckout(productName, price) {
             currentProduct.name = productName;
             currentProduct.price = price;
+
             document.getElementById('modal-item-name').innerText = productName;
             document.getElementById('modal-item-price').innerText = `KSH ${price.toLocaleString()}`;
             document.getElementById('modal-instruction-amount').innerText = price.toLocaleString();
             document.getElementById('mpesa-name').value = '';
             document.getElementById('mpesa-code').value = '';
+
             const modal = document.getElementById('mpesa-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
@@ -1972,12 +2399,24 @@
             msg += `Please verify the payment and confirm my order.`;
 
             window.open(`https://wa.me/254758992636?text=${msg}`, '_blank');
+
             closeCheckout();
             alert(`Thank you, ${customerName}! Your order details have been sent to our team for verification. We will process your order once the M-Pesa code (${mpesaCode}) is confirmed.`);
         }
 
-        // --- INIT ---
-        document.addEventListener('DOMContentLoaded', () => { checkCustomerAuth(); });
+        /* =========================================================
+           INIT
+        ========================================================= */
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            checkCustomerAuth();
+            loadProjects();
+            generatePalette();
+            updateTypography();
+            applyLogo();
+            applyPoster();
+            renderPortfolio();
+        });
     </script>
 </body>
 </html>
