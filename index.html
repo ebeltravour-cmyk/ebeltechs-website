@@ -26,7 +26,12 @@
                         'electric-blue': '#087EFF',
                         'metallic-silver': '#C9D0D8',
                         'neon-purple': '#7000FF',
-                        'mpesa-green': '#25D366'
+                        'mpesa-green': '#25D366',
+                        /* New Dashboard Colors */
+                        'dash-bg': '#0D0E12',
+                        'dash-panel': '#1A1C23',
+                        'dash-border': '#2C2E36',
+                        'dash-text': '#8B8D98'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -94,6 +99,16 @@
             display: block; opacity: 1; transform: translateY(0); 
             animation: fadeIn 0.5s ease-out forwards;
         }
+        
+        /* Specific override for workspace to make it full screen */
+        #workspace.active {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            animation: none;
+            transform: none;
+            opacity: 1;
+        }
 
         /* Image Hover Zoom */
         .img-zoom-container { overflow: hidden; }
@@ -152,13 +167,6 @@
             border-color: #087EFF !important;
             background-color: rgba(8, 126, 255, 0.05) !important;
         }
-
-        /* Workspace Sidebar Active State */
-        .workspace-nav-btn.active {
-            background-color: rgba(8, 126, 255, 0.1);
-            border-left-color: #087EFF;
-            color: #087EFF;
-        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-electric-blue selection:text-white">
@@ -170,8 +178,8 @@
         <div class="orb w-96 h-96 bg-neon-purple/10 bottom-0 right-1/4 animate-blob" style="animation-delay: 2s"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-40 top-0 glass-panel border-b-0 border-white/5">
+    <!-- Navigation (ID added for toggling) -->
+    <nav id="main-nav" class="fixed w-full z-40 top-0 glass-panel border-b-0 border-white/5">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 
@@ -242,8 +250,8 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
-    <main class="relative z-10 pt-20 min-h-screen">
+    <!-- MAIN CONTENT (ID added for toggling padding) -->
+    <main id="main-content" class="relative z-10 pt-20 min-h-screen">
 
         <!-- 1. HOME SECTION -->
         <section id="home" class="page-section active">
@@ -938,148 +946,128 @@
             </div>
         </section>
 
-        <!-- 7. CUSTOMER WORKSPACE (NEW) -->
-        <section id="workspace" class="page-section py-24">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row gap-8">
+        <!-- 7. CUSTOMER WORKSPACE (NEW DASHBOARD LAYOUT) -->
+        <section id="workspace" class="page-section" style="padding: 0; margin: 0; width: 100%;">
+            <div class="flex w-full h-screen overflow-hidden bg-dash-bg">
+                
+                <!-- LEFT SIDEBAR -->
+                <aside class="w-64 bg-dash-panel border-r border-dash-border flex flex-col shrink-0 hidden md:flex">
+                    <div class="h-20 flex items-center px-6 border-b border-dash-border">
+                        <span class="font-display font-bold text-xl text-white tracking-widest flex items-center gap-2">
+                            <i data-lucide="hexagon" class="text-electric-blue w-6 h-6"></i> CLIENT PORTAL
+                        </span>
+                    </div>
+                    <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+                        <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-white bg-[#2C2E36] transition-all">
+                            <i data-lucide="layout-dashboard" class="w-5 h-5 text-electric-blue"></i> Dashboard
+                        </button>
+                        <button onclick="router('quote')" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-dash-text hover:text-white hover:bg-[#2C2E36] transition-all">
+                            <i data-lucide="plus-circle" class="w-5 h-5"></i> New Project
+                        </button>
+                        <a href="https://wa.me/254758992636" target="_blank" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-dash-text hover:text-white hover:bg-[#2C2E36] transition-all">
+                            <i data-lucide="headphones" class="w-5 h-5"></i> Contact Support
+                        </a>
+                    </nav>
+                    <div class="p-4 border-t border-dash-border">
+                        <button onclick="logoutCustomer()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 transition-all">
+                            <i data-lucide="log-out" class="w-5 h-5"></i> Logout
+                        </button>
+                    </div>
+                </aside>
+
+                <!-- MAIN CONTENT -->
+                <main class="flex-1 flex flex-col min-w-0 bg-dash-bg">
                     
-                    <!-- Sidebar Navigation -->
-                    <div class="w-full md:w-64 shrink-0">
-                        <div class="glass-panel rounded-2xl p-4 sticky top-24">
-                            <div class="text-center pb-4 border-b border-white/10 mb-4">
-                                <div class="w-16 h-16 bg-electric-blue/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <span class="text-2xl font-bold text-electric-blue" id="profile-initial">C</span>
+                    <!-- Top Header -->
+                    <header class="h-20 flex items-center justify-between px-8 border-b border-dash-border shrink-0 bg-dash-bg">
+                        <div>
+                            <h1 class="text-2xl font-bold text-white">Good morning, <span id="welcome-name" class="text-electric-blue">Client</span>!</h1>
+                            <p class="text-sm text-dash-text">Here is an overview of your recent activity.</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <button class="w-10 h-10 rounded-full bg-dash-panel border border-dash-border flex items-center justify-center text-dash-text hover:text-white transition"><i data-lucide="bell" class="w-5 h-5"></i></button>
+                            <div class="w-10 h-10 rounded-full bg-electric-blue/20 text-electric-blue flex items-center justify-center font-bold">
+                                <span id="profile-initial">C</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- Scrollable Content Area -->
+                    <div class="flex-1 overflow-y-auto p-8">
+                        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                            
+                            <!-- Center: Timeline & Stats -->
+                            <div class="xl:col-span-2 space-y-6">
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div class="glass-panel p-4 rounded-xl border-l-4 border-electric-blue bg-dash-panel">
+                                        <p class="text-xs text-dash-text mb-1">Total Projects</p><h3 class="text-xl font-bold text-white">1</h3>
+                                    </div>
+                                    <div class="glass-panel p-4 rounded-xl border-l-4 border-yellow-500 bg-dash-panel">
+                                        <p class="text-xs text-dash-text mb-1">Active</p><h3 class="text-xl font-bold text-white">1</h3>
+                                    </div>
+                                    <div class="glass-panel p-4 rounded-xl border-l-4 border-green-500 bg-dash-panel">
+                                        <p class="text-xs text-dash-text mb-1">Completed</p><h3 class="text-xl font-bold text-white">0</h3>
+                                    </div>
                                 </div>
-                                <h3 class="font-bold text-white" id="profile-name">Client Name</h3>
-                                <p class="text-xs text-gray-400">Premium Member</p>
+
+                                <!-- Gantt Timeline -->
+                                <div class="glass-panel rounded-2xl p-6 bg-dash-panel border-dash-border">
+                                    <div class="flex justify-between items-center mb-6">
+                                        <h3 class="text-lg font-bold text-white">Project Timeline: TechStart Branding</h3>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="flex items-center gap-4 text-xs text-dash-text">
+                                            <div class="w-24 text-right">Phase 1</div>
+                                            <div class="flex-1 h-8 bg-dash-bg rounded relative border border-dash-border">
+                                                <div class="absolute top-1 bottom-1 left-[10%] w-[30%] bg-green-400/20 border-l-2 border-green-400 rounded-r text-green-400 flex items-center px-2 font-bold">Completed</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-4 text-xs text-dash-text">
+                                            <div class="w-24 text-right">Phase 2</div>
+                                            <div class="flex-1 h-8 bg-dash-bg rounded relative border border-dash-border">
+                                                <div class="absolute top-1 bottom-1 left-[35%] w-[35%] bg-electric-blue/20 border-l-2 border-electric-blue rounded-r text-electric-blue flex items-center px-2 font-bold animate-pulse">In Progress</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Recent Invoices -->
+                                <div class="glass-panel rounded-2xl p-6 bg-dash-panel border-dash-border">
+                                    <h3 class="text-lg font-bold text-white mb-4">Recent Invoices</h3>
+                                    <div class="bg-dash-bg p-4 rounded-xl border border-dash-border flex justify-between items-center">
+                                        <div>
+                                            <p class="text-sm font-bold text-white">Invoice #INV-2026-045</p>
+                                            <p class="text-xs text-dash-text">Due: 15 Oct 2026</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-sm font-bold text-green-500">PAID</p>
+                                            <p class="text-xs font-bold text-white">KES 45,000</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <nav class="space-y-1">
-                                <button class="workspace-nav-btn active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
-                                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
-                                </button>
-                                <button onclick="router('quote')" class="workspace-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all border-l-2 border-transparent">
-                                    <i data-lucide="plus-circle" class="w-4 h-4"></i> New Project
-                                </button>
-                                <button onclick="logoutCustomer()" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-red-400 hover:text-red-300 transition-all">
-                                    <i data-lucide="log-out" class="w-4 h-4"></i> Logout
-                                </button>
-                            </nav>
+
+                            <!-- Right Sidebar (Tasks & Actions) -->
+                            <div class="space-y-6">
+                                <div class="glass-panel rounded-2xl p-6 border-l-4 border-yellow-400 bg-dash-panel border-dash-border">
+                                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="alert-circle" class="w-5 h-5 text-yellow-400"></i> Action Required</h3>
+                                    <div class="bg-dash-bg p-4 rounded-xl border border-dash-border">
+                                        <p class="text-sm text-white font-bold mb-1">Review Logo Concepts</p>
+                                        <p class="text-xs text-dash-text mb-3">Please review the 3 logo options sent to your email.</p>
+                                        <button class="bg-dash-panel border border-dash-border text-white px-3 py-1.5 rounded-lg text-xs font-bold w-full hover:bg-[#2C2E36] transition">Review Now</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Main Content Area -->
-                    <div class="flex-1">
-                        <div class="mb-8">
-                            <h2 class="text-3xl font-bold mb-2">Welcome back, <span class="text-electric-blue" id="welcome-name">Client</span>!</h2>
-                            <p class="text-gray-400">Here is an overview of your recent activity.</p>
-                        </div>
-
-                        <!-- Stats -->
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                            <div class="glass-panel p-4 rounded-xl border-l-4 border-electric-blue">
-                                <p class="text-xs text-gray-400 mb-1">Total Projects</p>
-                                <h3 class="text-2xl font-bold text-white">0</h3>
-                            </div>
-                            <div class="glass-panel p-4 rounded-xl border-l-4 border-yellow-500">
-                                <p class="text-xs text-gray-400 mb-1">Active Projects</p>
-                                <h3 class="text-2xl font-bold text-white">0</h3>
-                            </div>
-                            <div class="glass-panel p-4 rounded-xl border-l-4 border-green-500">
-                                <p class="text-xs text-gray-400 mb-1">Completed</p>
-                                <h3 class="text-2xl font-bold text-white">0</h3>
-                            </div>
-                            <div class="glass-panel p-4 rounded-xl border-l-4 border-red-500">
-                                <p class="text-xs text-gray-400 mb-1">Pending Payments</p>
-                                <h3 class="text-2xl font-bold text-white">0</h3>
-                            </div>
-                        </div>
-
-                        <!-- Quick Actions -->
-                        <h3 class="text-lg font-bold mb-4">Quick Actions</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                            <button onclick="router('quote')" class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors text-center group">
-                                <i data-lucide="pen-tool" class="w-8 h-8 text-electric-blue mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                                <span class="text-sm font-bold text-white">Request Service</span>
-                            </button>
-                            <a href="https://wa.me/254758992636" target="_blank" class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors text-center group">
-                                <i data-lucide="headphones" class="w-8 h-8 text-yellow-500 mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
-                                <span class="text-sm font-bold text-white">Contact Support</span>
-                            </a>
-                        </div>
-
-                        <div class="glass-panel p-8 rounded-xl text-center text-gray-400">
-                            <i data-lucide="inbox" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
-                            <p>You don't have any active projects yet.</p>
-                            <button onclick="router('quote')" class="text-electric-blue font-bold hover:underline mt-2">Start your first project</button>
-                        </div>
-                    </div>
-                </div>
+                </main>
             </div>
         </section>
 
     </main>
 
-    <!-- ========================================== -->
-    <!-- M-PESA CHECKOUT MODAL                      -->
-    <!-- ========================================== -->
-    <div id="mpesa-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-        <div class="glass-panel w-full max-w-md rounded-2xl shadow-2xl relative animate-fade-in my-8 overflow-hidden">
-            
-            <!-- Header -->
-            <div class="bg-mpesa-green p-6 text-center relative">
-                <button onclick="closeCheckout()" class="absolute top-4 right-4 text-white hover:text-gray-200 bg-black/20 p-1 rounded-full">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-                <i data-lucide="smartphone" class="w-10 h-10 mx-auto mb-2 text-white"></i>
-                <h3 class="text-xl font-bold text-white">M-Pesa Checkout</h3>
-                <p class="text-white/80 text-sm mt-1">Secure payment via Safaricom</p>
-            </div>
-
-            <div class="p-6 space-y-6">
-                <!-- Order Summary -->
-                <div class="bg-black/30 rounded-lg p-4 border border-white/5">
-                    <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Item</p>
-                    <p id="modal-item-name" class="text-white font-bold text-lg">EBELTECHS Polo</p>
-                    <p class="text-xs text-gray-400 uppercase tracking-wider mt-3 mb-1">Amount to Pay</p>
-                    <p id="modal-item-price" class="text-electric-blue font-bold text-2xl">KSH 1,000</p>
-                </div>
-
-                <!-- Instructions -->
-                <div>
-                    <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
-                        <i data-lucide="info" class="w-4 h-4 text-electric-blue"></i> Payment Instructions
-                    </h4>
-                    <ol class="text-sm text-gray-400 space-y-2 list-decimal list-inside bg-white/5 p-4 rounded-lg">
-                        <li>Go to <strong>M-Pesa</strong> on your phone.</li>
-                        <li>Select <strong>Lipa na M-Pesa</strong> > <strong>Buy Goods & Services</strong>.</li>
-                        <li>Enter Till Number: <strong class="text-white select-all">123456</strong> <em>(Update with your actual Till)</em></li>
-                        <li>Enter Amount: <strong id="modal-instruction-amount" class="text-white">1,000</strong>.</li>
-                        <li>Enter your M-Pesa PIN and confirm.</li>
-                    </ol>
-                </div>
-
-                <!-- Form to collect details -->
-                <form onsubmit="confirmMpesaOrder(event)" class="space-y-4">
-                    <div>
-                        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Your Full Name *</label>
-                        <input type="text" id="mpesa-name" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-mpesa-green outline-none transition-all" placeholder="John Doe">
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">M-Pesa Confirmation Code *</label>
-                        <input type="text" id="mpesa-code" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-mpesa-green outline-none transition-all uppercase" placeholder="e.g., QAB123XYZ">
-                        <p class="text-xs text-gray-500 mt-1">Check your SMS for the confirmation code.</p>
-                    </div>
-                    
-                    <button type="submit" class="w-full bg-mpesa-green text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-500/25 flex items-center justify-center gap-2 mt-4">
-                        <i data-lucide="check-circle" class="w-5 h-5"></i> Confirm Order
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="border-t border-white/10 py-12 relative z-10 bg-deep-black">
+    <!-- Footer (ID added for toggling) -->
+    <footer id="main-footer" class="border-t border-white/10 py-12 relative z-10 bg-deep-black">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 
@@ -1199,15 +1187,91 @@
         </div>
     </footer>
 
+    <!-- ========================================== -->
+    <!-- M-PESA CHECKOUT MODAL                      -->
+    <!-- ========================================== -->
+    <div id="mpesa-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="glass-panel w-full max-w-md rounded-2xl shadow-2xl relative animate-fade-in my-8 overflow-hidden">
+            
+            <!-- Header -->
+            <div class="bg-mpesa-green p-6 text-center relative">
+                <button onclick="closeCheckout()" class="absolute top-4 right-4 text-white hover:text-gray-200 bg-black/20 p-1 rounded-full">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                <i data-lucide="smartphone" class="w-10 h-10 mx-auto mb-2 text-white"></i>
+                <h3 class="text-xl font-bold text-white">M-Pesa Checkout</h3>
+                <p class="text-white/80 text-sm mt-1">Secure payment via Safaricom</p>
+            </div>
+
+            <div class="p-6 space-y-6">
+                <!-- Order Summary -->
+                <div class="bg-black/30 rounded-lg p-4 border border-white/5">
+                    <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Item</p>
+                    <p id="modal-item-name" class="text-white font-bold text-lg">EBELTECHS Polo</p>
+                    <p class="text-xs text-gray-400 uppercase tracking-wider mt-3 mb-1">Amount to Pay</p>
+                    <p id="modal-item-price" class="text-electric-blue font-bold text-2xl">KSH 1,000</p>
+                </div>
+
+                <!-- Instructions -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                        <i data-lucide="info" class="w-4 h-4 text-electric-blue"></i> Payment Instructions
+                    </h4>
+                    <ol class="text-sm text-gray-400 space-y-2 list-decimal list-inside bg-white/5 p-4 rounded-lg">
+                        <li>Go to <strong>M-Pesa</strong> on your phone.</li>
+                        <li>Select <strong>Lipa na M-Pesa</strong> > <strong>Buy Goods & Services</strong>.</li>
+                        <li>Enter Till Number: <strong class="text-white select-all">123456</strong> <em>(Update with your actual Till)</em></li>
+                        <li>Enter Amount: <strong id="modal-instruction-amount" class="text-white">1,000</strong>.</li>
+                        <li>Enter your M-Pesa PIN and confirm.</li>
+                    </ol>
+                </div>
+
+                <!-- Form to collect details -->
+                <form onsubmit="confirmMpesaOrder(event)" class="space-y-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Your Full Name *</label>
+                        <input type="text" id="mpesa-name" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-mpesa-green outline-none transition-all" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">M-Pesa Confirmation Code *</label>
+                        <input type="text" id="mpesa-code" required class="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-mpesa-green outline-none transition-all uppercase" placeholder="e.g., QAB123XYZ">
+                        <p class="text-xs text-gray-500 mt-1">Check your SMS for the confirmation code.</p>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-mpesa-green text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-500/25 flex items-center justify-center gap-2 mt-4">
+                        <i data-lucide="check-circle" class="w-5 h-5"></i> Confirm Order
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         lucide.createIcons();
 
         // --- ROUTER & TRANSITIONS ---
         function router(sectionId) {
+            // Hide all sections
             document.querySelectorAll('.page-section').forEach(el => {
                 el.classList.remove('active');
             });
             
+            // Manage main nav and footer visibility
+            const mainNav = document.getElementById('main-nav');
+            const mainFooter = document.getElementById('main-footer');
+            const mainContent = document.getElementById('main-content');
+
+            if(sectionId === 'workspace') {
+                mainNav.style.display = 'none';
+                mainFooter.style.display = 'none';
+                mainContent.classList.remove('pt-20'); // Remove top padding for full screen app
+            } else {
+                mainNav.style.display = 'block';
+                mainFooter.style.display = 'block';
+                mainContent.classList.add('pt-20');
+            }
+
+            // Show target section after slight delay for smooth transition
             setTimeout(() => {
                 const target = document.getElementById(sectionId);
                 if(target) {
@@ -1223,7 +1287,7 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // --- AUTHENTICATION LOGIC (NEW) ---
+        // --- AUTHENTICATION LOGIC ---
         function toggleAuthTab(tab) {
             const loginForm = document.getElementById('form-login');
             const signupForm = document.getElementById('form-signup');
@@ -1288,7 +1352,6 @@
             users.push({ name, email, password });
             localStorage.setItem('ebeltechs_users', JSON.stringify(users));
 
-            // Auto login after signup
             localStorage.setItem('ebeltechs_customer_session', 'true');
             localStorage.setItem('ebeltechs_customer_name', name);
             
