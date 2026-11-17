@@ -216,6 +216,20 @@
         .hub-stage {
             background: radial-gradient(circle at 30% 20%, #141a26 0%, #080b11 100%);
         }
+
+        /* --- NEW STORY BACKGROUND SLIDER --- */
+        .story-bg-slider {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            z-index: 0;
+        }
+        .story-bg-slider.active {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-electric-blue selection:text-white">
@@ -309,23 +323,34 @@
                 </div>
             </div>
 
-            <div class="py-24 bg-charcoal/30 relative">
-                <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- STORY SECTION WITH NEW DYNAMIC BACKGROUND -->
+            <div class="py-24 relative overflow-hidden">
+                <!-- Background Image Slides -->
+                <div class="story-bg-slider active" style="background-image: url('images/story-bg-1.jpg');"></div>
+                <div class="story-bg-slider" style="background-image: url('images/story-bg-2.jpg');"></div>
+                <div class="story-bg-slider" style="background-image: url('images/story-bg-3.jpg');"></div>
+                <div class="story-bg-slider" style="background-image: url('images/story-bg-4.jpg');"></div>
+
+                <!-- Dark Overlay -->
+                <div class="absolute inset-0 bg-deep-black/85 z-10"></div>
+
+                <!-- Content Container -->
+                <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 class="text-3xl font-display font-bold mb-6">Our <span class="text-electric-blue">Story</span></h2>
-                            <p class="text-gray-400 text-sm mb-4 leading-relaxed">Ebeltechs Graphix was established from a passion for creativity, technology and visual communication. What began as an interest in transforming ordinary ideas into attractive designs has grown into a creative brand focused on helping individuals, businesses and organizations communicate their messages professionally.</p>
-                            <p class="text-gray-400 text-sm mb-4 leading-relaxed">We recognized that many businesses have great ideas but struggle to present them visually. This inspired us to build a creative agency that bridges the gap between ideas and professional visual communication.</p>
+                            <h2 class="text-3xl font-display font-bold mb-6 text-white">Our <span class="text-electric-blue">Story</span></h2>
+                            <p class="text-gray-300 text-sm mb-4 leading-relaxed">Ebeltechs Graphix was established from a passion for creativity, technology and visual communication. What began as an interest in transforming ordinary ideas into attractive designs has grown into a creative brand focused on helping individuals, businesses and organizations communicate their messages professionally.</p>
+                            <p class="text-gray-300 text-sm mb-4 leading-relaxed">We recognized that many businesses have great ideas but struggle to present them visually. This inspired us to build a creative agency that bridges the gap between ideas and professional visual communication.</p>
                             <p class="text-electric-blue font-bold text-lg mt-6 italic">"Every great idea deserves a powerful visual identity."</p>
                         </div>
                         <div class="grid gap-6">
-                            <div class="glass-panel p-6 rounded-xl border-l-4 border-electric-blue">
-                                <h3 class="text-xl font-bold mb-2 flex items-center gap-2"><i data-lucide="target" class="w-5 h-5 text-electric-blue"></i> Our Mission</h3>
-                                <p class="text-gray-400 text-sm">To provide innovative, professional and accessible creative solutions that empower individuals, businesses and organizations to communicate their ideas visually.</p>
+                            <div class="glass-panel p-6 rounded-xl border-l-4 border-electric-blue bg-black/40">
+                                <h3 class="text-xl font-bold mb-2 flex items-center gap-2 text-white"><i data-lucide="target" class="w-5 h-5 text-electric-blue"></i> Our Mission</h3>
+                                <p class="text-gray-300 text-sm">To provide innovative, professional and accessible creative solutions that empower individuals, businesses and organizations to communicate their ideas visually.</p>
                             </div>
-                            <div class="glass-panel p-6 rounded-xl border-l-4 border-neon-purple">
-                                <h3 class="text-xl font-bold mb-2 flex items-center gap-2"><i data-lucide="eye" class="w-5 h-5 text-neon-purple"></i> Our Vision</h3>
-                                <p class="text-gray-400 text-sm">To become a trusted creative and digital solutions brand recognized for innovation, quality and meaningful visual storytelling.</p>
+                            <div class="glass-panel p-6 rounded-xl border-l-4 border-neon-purple bg-black/40">
+                                <h3 class="text-xl font-bold mb-2 flex items-center gap-2 text-white"><i data-lucide="eye" class="w-5 h-5 text-neon-purple"></i> Our Vision</h3>
+                                <p class="text-gray-300 text-sm">To become a trusted creative and digital solutions brand recognized for innovation, quality and meaningful visual storytelling.</p>
                             </div>
                         </div>
                     </div>
@@ -2121,6 +2146,19 @@ Logo settings: rotation ${logoState.rot}°, scale ${logoState.scale}%, hue ${log
         function nextFooterSlide() { currentFooterSlide = (currentFooterSlide + 1) % footerSlides.length; showFooterSlide(currentFooterSlide); }
         function setFooterSlide(index) { clearInterval(footerSlideInterval); showFooterSlide(index); footerSlideInterval = setInterval(nextFooterSlide, 5000); }
         if (footerSlides.length > 0) footerSlideInterval = setInterval(nextFooterSlide, 5000);
+
+        /* =========================================================
+           NEW: STORY BACKGROUND CAROUSEL
+        ========================================================= */
+        let currentStoryBg = 0;
+        const storyBgs = document.querySelectorAll('.story-bg-slider');
+        if (storyBgs.length > 0) {
+            setInterval(() => {
+                storyBgs[currentStoryBg].classList.remove('active');
+                currentStoryBg = (currentStoryBg + 1) % storyBgs.length;
+                storyBgs[currentStoryBg].classList.add('active');
+            }, 5000); // Changes every 5 seconds
+        }
 
         /* =========================================================
            PORTFOLIO
