@@ -217,7 +217,7 @@
             background: radial-gradient(circle at 30% 20%, #141a26 0%, #080b11 100%);
         }
 
-        /* --- NEW STORY BACKGROUND SLIDER --- */
+        /* --- STORY BACKGROUND SLIDER --- */
         .story-bg-slider {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -317,9 +317,41 @@
 
         <!-- HOME -->
         <section id="home" class="page-section active">
-            <div class="w-full relative overflow-hidden py-8 bg-deep-black flex items-center justify-center min-h-[80vh]">
-                <div class="max-w-[1500px] mx-auto px-4 lg:px-8 w-full">
-                    <img src="hero-image.jpg" alt="EBELTECHS GRAPHIX - Your Vision. Our Creative Expertise." class="w-full h-auto rounded-2xl border border-white/10 shadow-[0_0_60px_rgba(8,126,255,0.15)] animate-fade-in object-cover">
+            
+            <!-- UPDATED HERO SECTION WITH GRADIENT OVERLAY, INTRO & BUTTONS -->
+            <div class="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-deep-black">
+                <!-- Hero Image -->
+                <img src="hero-image.jpg" alt="EBELTECHS GRAPHIX Hero" class="absolute inset-0 w-full h-full object-cover opacity-70">
+                
+                <!-- Gradient Overlays (Bottom-up and Left-to-right for perfect text readability) -->
+                <div class="absolute inset-0 bg-gradient-to-t from-deep-black via-deep-black/60 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-deep-black/90 via-deep-black/40 to-transparent"></div>
+
+                <!-- Hero Content -->
+                <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-20">
+                    <div class="max-w-2xl animate-fade-in">
+                        <h1 class="text-5xl md:text-7xl font-display font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                            Where Innovation <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-electric-blue to-cyan-400">Meets Design.</span>
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed drop-shadow-md">
+                            Ebeltechs Graphix is a creative design and digital solutions agency dedicated to transforming ideas into powerful visual experiences. We combine creativity, technology, and strategic thinking to bring your ideas to life.
+                        </p>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap gap-4">
+                            <!-- Get Started Button -->
+                            <button onclick="router('services')" class="group bg-electric-blue text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(8,126,255,0.4)] hover:shadow-[0_0_30px_rgba(8,126,255,0.7)] flex items-center gap-3">
+                                <i data-lucide="rocket" class="w-5 h-5 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+                                Get Started
+                            </button>
+                            
+                            <!-- Contact Us Button -->
+                            <button onclick="openContactModal()" class="group bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center gap-3">
+                                <i data-lucide="message-circle" class="w-5 h-5 text-green-400 group-hover:scale-110 transition-transform"></i>
+                                Contact Us
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1577,22 +1609,6 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
                             <a href="https://x.com/EbeltechsGrafix" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">EbeltechsGrafix</a>
                         </li>
-                        <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><circle cx="12" cy="12" r="10"/><path d="M8 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M16 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 16a4 4 0 0 0 4-4H8a4 4 0 0 0 4 4Z"/><path d="M18 8a2 2 0 1 1 3-3"/><path d="M6 8a2 2 0 1 0-3-3"/></svg>
-                            <a href="https://reddit.com/user/Ok3llo_coda" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Ok3llo_coda</a>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-800"><path d="M14.5 3.5v4h4v4h-4v5.5c0 1.5 1 2.5 2.5 2.5h2v4h-3c-2.5 0-4.5-2-4.5-4.5v-7.5h-3v-4h3v-4h3Z"/></svg>
-                            <a href="https://tumblr.com/ebeltechs-graphix22" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">ebeltechs-graphix22</a>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 21a9 9 0 1 1 9-9c0 3-1.5 5-3 6-2 1-4 1-5 0"/><path d="M12 15c-1.5 0-3-1.5-3-3s1.5-3 3-3 3 1.5 3 3-1.5 3-3 3Z"/></svg>
-                            <a href="https://threads.net/@ebeltechs_graphix" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">@ebeltechs_graphix</a>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600"><circle cx="12" cy="12" r="10"/><path d="M9 9h2l1 3 1-3h2l-2 5 2 5h-2l-1-3-1 3H9l2-5Z"/></svg>
-                            <a href="https://quora.com/profile/Ebel-travour" target="_blank" rel="noopener" class="hover:text-hub-blue transition-colors">Ebel travour</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -1602,6 +1618,75 @@
             </div>
         </div>
     </footer>
+
+    <!-- ========================================== -->
+    <!-- NEW CONTACT MODAL                          -->
+    <!-- ========================================== -->
+    <div id="contact-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="glass-panel w-full max-w-lg rounded-3xl shadow-2xl relative animate-fade-in my-8 overflow-hidden border border-white/10">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-electric-blue to-neon-purple p-6 text-center relative">
+                <button onclick="closeContactModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 bg-black/20 p-1 rounded-full">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                <i data-lucide="headphones" class="w-10 h-10 mx-auto mb-2 text-white"></i>
+                <h3 class="text-2xl font-bold text-white font-display">Get in Touch</h3>
+                <p class="text-white/80 text-sm mt-1">We'd love to hear from you.</p>
+            </div>
+            
+            <!-- Content -->
+            <div class="p-6 md:p-8 space-y-6">
+                <!-- Direct Contact -->
+                <div class="space-y-4">
+                    <a href="https://wa.me/254758992636" target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-green-500/50 hover:bg-green-500/10 transition-colors group">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                            <i data-lucide="message-circle" class="w-5 h-5 text-green-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">WhatsApp</p>
+                            <p class="text-white font-bold group-hover:text-green-400 transition-colors">+254 758 992 636</p>
+                        </div>
+                    </a>
+                    <a href="mailto:ebeltravour@gmail.com" class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-electric-blue/50 hover:bg-electric-blue/10 transition-colors group">
+                        <div class="w-10 h-10 rounded-full bg-electric-blue/20 flex items-center justify-center">
+                            <i data-lucide="mail" class="w-5 h-5 text-electric-blue"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Email</p>
+                            <p class="text-white font-bold group-hover:text-electric-blue transition-colors">ebeltravour@gmail.com</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Socials -->
+                <div>
+                    <h4 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Follow Our Socials</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://www.facebook.com/TravourEbel" target="_blank" class="flex items-center gap-2 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-sm text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                            Facebook
+                        </a>
+                        <a href="https://instagram.com/Ebeltechs_graphix" target="_blank" class="flex items-center gap-2 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-sm text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-500"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                            Instagram
+                        </a>
+                        <a href="https://tiktok.com/@ebel.ebel5" target="_blank" class="flex items-center gap-2 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-sm text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                            TikTok
+                        </a>
+                        <a href="https://x.com/EbeltechsGrafix" target="_blank" class="flex items-center gap-2 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-sm text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+                            X (Twitter)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pt-2 text-center">
+                    <button onclick="closeContactModal()" class="text-sm text-gray-400 hover:text-white underline underline-offset-4 transition">Close Window</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- M-PESA MODAL -->
     <div id="mpesa-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
@@ -1685,6 +1770,23 @@
 
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        /* =========================================================
+           NEW: CONTACT MODAL LOGIC
+        ========================================================= */
+        function openContactModal() {
+            const modal = document.getElementById('contact-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactModal() {
+            const modal = document.getElementById('contact-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
         }
 
         /* =========================================================
@@ -2148,7 +2250,7 @@ Logo settings: rotation ${logoState.rot}°, scale ${logoState.scale}%, hue ${log
         if (footerSlides.length > 0) footerSlideInterval = setInterval(nextFooterSlide, 5000);
 
         /* =========================================================
-           NEW: STORY BACKGROUND CAROUSEL
+           STORY BACKGROUND CAROUSEL
         ========================================================= */
         let currentStoryBg = 0;
         const storyBgs = document.querySelectorAll('.story-bg-slider');
